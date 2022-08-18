@@ -8,7 +8,11 @@ namespace Fung.DAL.EtitiesConfiguration
     {
         public void Configure(EntityTypeBuilder<FuelTank> builder)
         {
-            throw new NotImplementedException();
+            builder.HasMany<LevelIndicatorTransactions>()
+                .WithOne();
+
+            builder.HasMany<RemainingTransactions>()
+                .WithOne();
         }
     }
 }

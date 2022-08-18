@@ -10,6 +10,9 @@ namespace Fung.DAL.EtitiesConfiguration
         {
             builder.HasIndex(u => u.Email)
                 .IsUnique();
+
+            builder.HasMany<Station>()
+                .WithOne();
         }
     }
 }
