@@ -4,7 +4,8 @@
 
 ```mermaid
 erDiagram
-  User {
+User ||--o{ Station : Id_UserId
+User {
   Id int PK
   Email string
   Password string
@@ -13,12 +14,15 @@ erDiagram
   CreatedAt datetime
 }
 
+Station ||--o{ FuelTank : Id_StationId
 Station {
   Id int PK
   Name string
   UserId int 
 }
 
+FuelTank ||--o{ LevelIndicator_Transactions : Id_FuelTankId
+FuelTank ||--o{ Remaining_Transactions : Id_FuelTankId
 FuelTank {
   Id int PK
   Name string
