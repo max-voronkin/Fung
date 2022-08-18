@@ -15,6 +15,10 @@ namespace Fung.DAL
         {
             modelBuilder.UseSerialColumns();
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new StationConfiguration());
+            modelBuilder.ApplyConfiguration(new RemainingTransactionsConfiguration());
+            modelBuilder.ApplyConfiguration(new LevelIndicatorTransactionsConfiguration());
+            modelBuilder.ApplyConfiguration(new FuelTankConfiguration());
         }
 
         public DbSet<User> Users { get; set; } = null!;
