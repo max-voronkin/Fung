@@ -8,7 +8,7 @@ namespace Fung.DAL.EtitiesConfiguration
     {
         public void Configure(EntityTypeBuilder<RemainingTransactions> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(t => t.Id);
         }
     }
 }
