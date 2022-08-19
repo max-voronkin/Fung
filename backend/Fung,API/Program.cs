@@ -1,5 +1,7 @@
 using Fung.DAL;
+using Fung_API.Middleware;
 using Microsoft.EntityFrameworkCore;
+using NLog.Extensions.Logging;
 
 namespace Fung_API
 {
@@ -12,6 +14,10 @@ namespace Fung_API
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            builder.Logging.ClearProviders();
+            builder.Logging.AddNLog();
+
 
             builder.Services.AddDbContext<DataContext>(
                 o => o.UseNpgsql(builder.Configuration.GetConnectionString("TasqueDb"),
@@ -34,6 +40,8 @@ namespace Fung_API
             }
 
             // Configure the HTTP request pipeline.
+            app.UseMiddleware<LogerMiddleware>(app.Logger);
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
