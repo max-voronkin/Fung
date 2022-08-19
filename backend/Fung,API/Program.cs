@@ -15,7 +15,7 @@ namespace Fung_API
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.RegisterServices();
+            builder.Services.RegisterServices(builder.Configuration);
             builder.Services.RegisterAutoMapper();
 
             //Logger
@@ -24,7 +24,7 @@ namespace Fung_API
 
             //DB
             builder.Services.AddDbContext<DataContext>(
-                o => o.UseNpgsql(builder.Configuration.GetConnectionString("TasqueDb"),
+                o => o.UseNpgsql(builder.Configuration.GetConnectionString("FungDb"),
                 b => b.MigrationsAssembly(typeof(DataContext).Assembly.FullName))
                     .EnableDetailedErrors());
 

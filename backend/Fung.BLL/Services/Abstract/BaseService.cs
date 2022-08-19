@@ -5,8 +5,8 @@ namespace Fung.BLL.Services.Abstract
 {
     public abstract class BaseService
     {
-        private readonly DataContext context;
-        private readonly IMapper mapper;
+        protected readonly DataContext context;
+        protected readonly IMapper mapper;
 
         public BaseService(DataContext context, IMapper mapper)
         {

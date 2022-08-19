@@ -1,4 +1,5 @@
 ﻿using Fung.BLL.Services;
+using Fung.COMMON.DTO.Auth;
 using Fung.COMMON.DTO.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,11 @@ namespace Fung_API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AuthService authService;
-        public AuthController(AuthService service)
+        private readonly UserService userService;
+        public AuthController(AuthService authService, UserService userService)
         {
-            authService = service;
+            this.authService = authService;
+            this.userService = userService;
         }
 
         // api/auth/login
@@ -25,9 +28,15 @@ namespace Fung_API.Controllers
 
         // api/auth/register
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserRegisterDTO registerDTO)
+        public async Task<AuthUserDTO> Register([FromBody] UserRegisterDTO registerDTO)
         {
-            throw new NotImplementedException();
+            var createdUser = await userService.CreateUser(registerDTO);
+            var token = authService.GenerateAccessToken(createdUser.Id, createdUser.Email);
+            return new AuthUserDTO
+            {
+                User = createdUser,
+                Token = token
+            };
         }
     }
 }
