@@ -21,5 +21,10 @@ namespace Fung.COMMON.Security
             )
         );
 
+        public static bool ValidatePassword(string password, string hasedPassword, string salt)
+        {
+            return HashPassword(password, Convert.FromBase64String(salt)) == hasedPassword;
+        }
+
     }
 }
