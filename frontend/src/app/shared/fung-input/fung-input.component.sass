@@ -1,0 +1,23 @@
+@import 'src/colors.sass'
+    
+.input-container
+    margin: 5px
+
+.input
+    width: 100%
+    background-color: color(white-1)
+    color: color(gray-2)
+    border-radius: 10px
+    border-color: color(gray-1)
+    outline-color: color(violet-2)
+    &:hover
+        cursor: pointer
+        border-color: color(violet-1)
+        box-shadow: 0 0 5px color(violet-1)
+    &:focus
+        border-color: color(violet-2)
+
+.error
+    color: color(red-2)
+    text-align: center
+    word-wrap: break-word
