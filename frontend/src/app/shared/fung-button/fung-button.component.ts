@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'fung-button',
@@ -8,10 +9,19 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FungButtonComponent implements OnInit {
 
   @Input() public width = '100%';
-  @Input() public height = '35px';
+  @Input() public height = '55px';
+  @Input() public label = 'Button';
+  @Input() public iconName?: IconDefinition = undefined;
+  @Input() public class = '';
+
+  @Output() onButtonClick = new EventEmitter();
+  
   constructor() { }
 
   ngOnInit(): void {
+  }
+  onClick(): void {
+    this.onButtonClick.emit();
   }
 
 }
