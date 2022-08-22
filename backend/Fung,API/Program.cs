@@ -1,4 +1,5 @@
 using Fung.DAL;
+using Fung_API.ConfigurationExtensions;
 using Fung_API.Middleware;
 using Microsoft.EntityFrameworkCore;
 using NLog.Extensions.Logging;
@@ -14,13 +15,16 @@ namespace Fung_API
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.RegisterServices(builder.Configuration);
+            builder.Services.RegisterAutoMapper();
 
+            //Logger
             builder.Logging.ClearProviders();
             builder.Logging.AddNLog();
 
-
+            //DB
             builder.Services.AddDbContext<DataContext>(
-                o => o.UseNpgsql(builder.Configuration.GetConnectionString("TasqueDb"),
+                o => o.UseNpgsql(builder.Configuration.GetConnectionString("FungDb"),
                 b => b.MigrationsAssembly(typeof(DataContext).Assembly.FullName))
                     .EnableDetailedErrors());
 
@@ -30,6 +34,7 @@ namespace Fung_API
 
             var app = builder.Build();
 
+            //DB
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<DataContext>();

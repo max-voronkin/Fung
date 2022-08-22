@@ -26,6 +26,7 @@ namespace Fung_API.Middleware
             {
                 switch (exception)
                 {
+                    // there is should be my custom exceptions 
                     default:
                         await HandleAnyException(httpContext, exception);
                         break;
