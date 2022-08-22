@@ -1,0 +1,10 @@
+@use 'sass:map'
+    
+$colorscheme: ( violet-1: #6E11F5, violet-2: #4F00B5, violet-3: #291965, white-1: #FBFFFF, black-1: #242424)
+
+@function colorscheme($color) 
+    @if map-has-key($colorscheme, $color) 
+        @return map-get($colorscheme, $color)
+    
+    @warn "Unknown `#{$key}` in $colorscheme."
+    @return null

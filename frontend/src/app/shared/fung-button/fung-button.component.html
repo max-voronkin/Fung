@@ -1,0 +1,7 @@
+<button 
+[ngStyle]="{'width': width, 'height': height}"
+class="fung-button {{class}}"
+(click)="onClick()">
+<fa-icon *ngIf="iconName" [icon]="iconName"></fa-icon>
+{{label}}
+</button>
