@@ -1,1 +1,14 @@
-<p>register-page works!</p>
+<div class="register-container">
+    <div class="navigation">
+        <fung-button label="Log In" class="hidden" width="50%" height="45px" [icon]="user" (click)="redirectToLogin()"></fung-button>
+        <fung-button label="Register" width="50%" height="45px" [icon]="userPlus"></fung-button>
+    </div>
+    <div class="form">
+        <fung-input marginTop="20px" label="Email" placeholder="Email" [icon]="email"></fung-input>
+        <fung-input marginTop="15px" label="Password" type="password" placeholder="Password" [icon]="password"></fung-input>
+        <fung-input marginTop="15px" label="Repeat password" type="password" placeholder="Repeat password" [icon]="confirm"></fung-input>
+    </div>
+    <div class="actions">
+        <fung-button label="Register" [icon]="userPlus"></fung-button>
+    </div>
+</div>
