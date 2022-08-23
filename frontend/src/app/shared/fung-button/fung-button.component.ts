@@ -11,7 +11,7 @@ export class FungButtonComponent implements OnInit {
   @Input() public width = '100%';
   @Input() public height = '55px';
   @Input() public label = 'Button';
-  @Input() public iconName?: IconDefinition = undefined;
+  @Input() public icon?: IconDefinition = undefined;
   @Input() public class = '';
 
   @Output() onButtonClick = new EventEmitter();
