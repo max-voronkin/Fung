@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { AuthUserDTO } from 'src/models/DTO/User/user-authDTO';
+import { UserLoginDTO } from 'src/models/DTO/User/user-loginDTO';
 import { UserRegisterDTO } from 'src/models/DTO/User/user-registerDTO';
 import { User } from 'src/models/Entities/user';
 import { HttpService } from './http.service';
@@ -36,5 +37,9 @@ private _setTokens(token: string) {
 
   public register(user: UserRegisterDTO) {
     return this._handleAuthResponse(this.httpService.postFullRequest<AuthUserDTO>(`${this.routePrefix}/register`, user));
+  }
+
+  public login(user: UserLoginDTO) {
+    return this._handleAuthResponse(this.httpService.postFullRequest<AuthUserDTO>(`${this.routePrefix}/login`, user));
   }
 }

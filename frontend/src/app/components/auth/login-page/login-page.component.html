@@ -1,1 +1,13 @@
-<p>login-page works!</p>
+<form class="login-container" [formGroup]="loginForm">
+    <div class="navigation">
+        <fung-button label="Log In"  width="50%" height="45px" [icon]="user" ></fung-button>
+        <fung-button label="Register" class="hidden" width="50%" height="45px" [icon]="userPlus" (click)="redirectToRegister()"></fung-button>
+    </div>
+    <div class="form">
+        <fung-input marginTop="20px" label="Email" placeholder="Email" [icon]="email" [formControl]="emailControl" [errorMessage]="emailError"></fung-input>
+        <fung-input marginTop="15px" label="Password" type="password" placeholder="Password" [icon]="password" [formControl]="passwordControl" [errorMessage]="passwordError"></fung-input>      
+    </div>
+    <div class="actions">
+        <fung-button label="Log In" [icon]="user" (click)="submitForm()"></fung-button>
+    </div>
+</form>
