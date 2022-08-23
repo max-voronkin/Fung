@@ -1,0 +1,14 @@
+<form class="register-container" [formGroup]="registerForm">
+    <div class="navigation">
+        <fung-button label="Log In" class="hidden" width="50%" height="45px" [icon]="user" (click)="redirectToLogin()"></fung-button>
+        <fung-button label="Register" width="50%" height="45px" [icon]="userPlus"></fung-button>
+    </div>
+    <div class="form">
+        <fung-input marginTop="20px" label="Email" placeholder="Email" [icon]="email" [formControl]="emailControl" [errorMessage]="emailError"></fung-input>
+        <fung-input marginTop="15px" label="Password" type="password" placeholder="Password" [icon]="password" [formControl]="passwordControl" [errorMessage]="passwordError"></fung-input>
+        <fung-input marginTop="15px" label="Repeat password" type="password" placeholder="Repeat password" [icon]="confirm" [formControl]="confirmPasswordControl" [errorMessage]="confirmPasswordError"></fung-input>
+    </div>
+    <div class="actions">
+        <fung-button label="Register" [icon]="userPlus" (click)="submitForm()"></fung-button>
+    </div>
+</form>

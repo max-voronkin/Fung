@@ -37,13 +37,14 @@ namespace Fung_API.ConfigurationExtensions
 
                     options.Events = new JwtBearerEvents
                     {
+                        
                         OnAuthenticationFailed = context =>
                         {
                             if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
                                 context.Response.Headers.Add("Token-expired", "true");
 
                             return System.Threading.Tasks.Task.CompletedTask;
-                        }
+                        }                      
                     };
                 });
         }

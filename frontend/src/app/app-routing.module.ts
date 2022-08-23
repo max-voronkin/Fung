@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthRoutes } from './components/auth/auth.routes';
 
-const routes: Routes = [];
+const routes: Routes = [
+  ...AuthRoutes,
+  {path: '*', redirectTo: 'auth'}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

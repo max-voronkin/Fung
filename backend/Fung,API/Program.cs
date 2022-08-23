@@ -47,6 +47,12 @@ namespace Fung_API
             // Configure the HTTP request pipeline.
             app.UseMiddleware<LogerMiddleware>(app.Logger);
 
+            app.UseCors(builder =>
+                builder
+                .AllowAnyHeader()
+                .AllowAnyOrigin()
+                .AllowAnyMethod());
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
