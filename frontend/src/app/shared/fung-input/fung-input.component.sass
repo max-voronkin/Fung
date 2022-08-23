@@ -1,7 +1,7 @@
 @import 'src/colors.sass'
     
 .input-container
-    margin: 5px
+    position: relative
 
 .input
     width: 100%
@@ -10,14 +10,34 @@
     border-radius: 10px
     border-color: color(gray-1)
     outline-color: color(violet-2)
+    font-family: Verdana
+    font-size: 18px
     &:hover
         cursor: pointer
         border-color: color(violet-1)
         box-shadow: 0 0 5px color(violet-1)
     &:focus
         border-color: color(violet-2)
+    &.left
+        padding-left: 40px
+        padding-right: 10px
+    &.right
+        padding-right: 40px
 
 .error
     color: color(red-2)
     text-align: center
     word-wrap: break-word
+    font-family: Georgia
+    font-size: 18px
+
+.input-icon
+    max-width: 10px
+    position: absolute
+    top: 11px
+    right: 20px
+    font-size: 18px
+    color: color(gray-2)
+    &.left
+        left: 10px
+            

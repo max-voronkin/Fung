@@ -3,7 +3,10 @@
     <input class="input" 
     type="{{type}}"
     [ngStyle]="{'height': height}"
-    [placeholder]="placeholder">
+    [placeholder]="placeholder"
+    [ngClass]="iconPosition"
+    [value]="value">
+    <fa-icon class="input-icon" *ngIf="icon" [icon]="icon" [ngClass]="iconPosition"></fa-icon>
         <div class="error" 
         *ngIf="errorMessage">{{errorMessage}}</div>
 </div>
