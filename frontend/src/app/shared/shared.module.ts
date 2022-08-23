@@ -5,6 +5,7 @@ import { FungButtonComponent } from './fung-button/fung-button.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FungInputComponent } from './fung-input/fung-input.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,13 +18,15 @@ import { RouterModule } from '@angular/router';
   imports: [
     FontAwesomeModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     RouterModule,
     FungLogoComponent,
     FungButtonComponent,
-    FungInputComponent
+    FungInputComponent,
+    FormsModule
   ]
 
 })

@@ -4,6 +4,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,7 +15,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
     LoginPageComponent
   ],
   imports: [
-    CommonModule, SharedModule
+    CommonModule,
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

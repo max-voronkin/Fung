@@ -6,7 +6,9 @@
     [ngStyle]="{'height': height}"
     [placeholder]="placeholder"
     [ngClass]="iconPosition"
-    [value]="value">
+    [(ngModel)]="inputValue"
+    (ngModelChange)="onChange($event)"
+    (blur)="onTouched($event)">
     <fa-icon class="input-icon" *ngIf="icon" [icon]="icon" [ngClass]="iconPosition"></fa-icon>
     <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
 </div>
