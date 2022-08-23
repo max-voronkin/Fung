@@ -10,12 +10,14 @@ export class FungInputComponent implements OnInit {
 
   @Input() public type = 'text';
   @Input() public errorMessage = '';
-  @Input() public width = '300px';
+  @Input() public width = '100%';
   @Input() public height = '40px';
   @Input() public placeholder = 'Enter some...'
   @Input() public icon?: IconDefinition = undefined;
   @Input() public iconPosition = 'right';
   @Input() public value = '';
+  @Input() public marginTop = '';
+  @Input() public label = '';
 
   constructor() { }
 
