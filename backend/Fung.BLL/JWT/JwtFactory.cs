@@ -21,11 +21,11 @@ namespace Fung.BLL.JWT
             {
                  new Claim(JwtRegisteredClaimNames.Email, email),
                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                 new Claim("id", id.ToString())
+                 new Claim("UserId", id.ToString())
              };
 
-            var token = new JwtSecurityToken(options.Issuer,
-                options.Audience,
+            var token = new JwtSecurityToken(null,
+                null,
                 claims,
                 expires: DateTime.Now.AddDays(options.ValidFor),
                 signingCredentials: credentials);
