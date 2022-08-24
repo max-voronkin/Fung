@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
+﻿using Fung.BLL.Exceptions;
+using Newtonsoft.Json;
 using System.Net;
-using System.Net.Mail;
 
 namespace Fung_API.Middleware
 {
@@ -27,6 +26,9 @@ namespace Fung_API.Middleware
                 switch (exception)
                 {
                     // there is should be my custom exceptions 
+                    case InvalidLoginCredentials e:
+                        await HandleInvalidCredentialException(httpContext, e);
+                        break;
                     default:
                         await HandleAnyException(httpContext, exception);
                         break;
@@ -36,8 +38,13 @@ namespace Fung_API.Middleware
 
         private async Task HandleAnyException(HttpContext context, Exception ex)
         {
-            logger.LogError("{ex.Message}", ex.Message);
+            logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
             await CreateExceptionAsync(context);
+        }
+        private async Task HandleInvalidCredentialException(HttpContext context, InvalidLoginCredentials ex)
+        {
+            logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
+            await CreateExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message);
         }
 
         private async Task CreateExceptionAsync(HttpContext context, HttpStatusCode statusCode = HttpStatusCode.InternalServerError,

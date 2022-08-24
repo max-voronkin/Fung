@@ -21,7 +21,7 @@ namespace Fung.BLL.JWT
             {
                  new Claim(JwtRegisteredClaimNames.Email, email),
                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                 new Claim("UserId", id.ToString())
+                 new Claim("userId", id.ToString())
              };
 
             var token = new JwtSecurityToken(null,

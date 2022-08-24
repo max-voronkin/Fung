@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faEnvelope, faKey, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 import { UserLoginDTO } from 'src/models/DTO/User/user-loginDTO';
 import { RegisterFormValidationConstants } from 'src/models/validation-settings/register-form-validation';
 
@@ -63,7 +64,11 @@ export class LoginPageComponent implements OnInit {
       this.loginUser.password = this.passwordControl.value;
       this.authService.login(this.loginUser)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => console.log(response));
+      .subscribe((response) => 
+      {
+        //redirect to main
+        alert('redirect to main');
+      });
     }
   }
 
