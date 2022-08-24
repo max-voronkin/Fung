@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRoutes } from './components/auth/auth.routes';
+import { MainPageRoutes } from './components/main-page/main-page.routes';
 
 const routes: Routes = [
   ...AuthRoutes,
-  {path: '*', redirectTo: 'auth'}
+  ...MainPageRoutes,
+  {path: '**', redirectTo: 'auth'}
 ];
 
 @NgModule({
