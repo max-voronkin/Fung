@@ -9,6 +9,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './components/auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MainPageModule } from './components/main-page/main-page.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     FontAwesomeModule,
     SharedModule,
     AuthModule,
-    HttpClientModule
+    HttpClientModule,
+    MainPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
