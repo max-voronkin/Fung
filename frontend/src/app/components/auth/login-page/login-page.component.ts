@@ -27,7 +27,7 @@ export class LoginPageComponent implements OnInit {
   public emailControl: FormControl;
   public passwordControl: FormControl;
 
-  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private userService: UserService) {
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {
     
     this.emailControl = new FormControl(this.loginUser.email, [
       Validators.required,
@@ -64,9 +64,11 @@ export class LoginPageComponent implements OnInit {
       this.loginUser.password = this.passwordControl.value;
       this.authService.login(this.loginUser)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => console.log(response));
-      
-      console.log(this.userService.getUser());
+      .subscribe((response) => 
+      {
+        //redirect to main
+        alert('redirect to main');
+      });
     }
   }
 
