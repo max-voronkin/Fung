@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/internal/Observable';
 import { AuthUserDTO } from 'src/models/DTO/User/user-authDTO';
 import { UserLoginDTO } from 'src/models/DTO/User/user-loginDTO';
 import { UserRegisterDTO } from 'src/models/DTO/User/user-registerDTO';
-import { User } from 'src/models/Entities/user';
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -13,25 +12,30 @@ import { HttpService } from './http.service';
 })
 export class AuthService {
   public routePrefix = '/api/auth';
-  private user!: User;
 
   constructor(private httpService: HttpService) { }
 
   private _handleAuthResponse(observable: Observable<HttpResponse<AuthUserDTO>>) {
     return observable.pipe(
         map((resp) => {
-          this._setTokens(resp.body!.token);           
-          this.user = resp.body!.user;
-          //this.eventService.userChanged(resp.body.user);
-          return resp.body!.user;
+          if (resp.body)
+          {
+            this._setTokens(resp.body.accessToken, resp.body.refreshToken);  
+            return true;
+          }
+          return false;
         })
     );
 }
 
-private _setTokens(token: string) {
-  if (token) {
-      localStorage.setItem('accessToken', JSON.stringify(token));
-      //this.getUser();
+private _setTokens(access: string, refresh: string) {
+  if (access) 
+  {
+    localStorage.setItem('accessToken', JSON.stringify(access));      
+  }
+  if (refresh)
+  {
+    localStorage.setItem('refreshToken', JSON.stringify(refresh));
   }
 }
 

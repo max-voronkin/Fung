@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faEnvelope, faKey, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 import { UserLoginDTO } from 'src/models/DTO/User/user-loginDTO';
 import { RegisterFormValidationConstants } from 'src/models/validation-settings/register-form-validation';
 
@@ -26,7 +27,7 @@ export class LoginPageComponent implements OnInit {
   public emailControl: FormControl;
   public passwordControl: FormControl;
 
-  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private userService: UserService) {
     
     this.emailControl = new FormControl(this.loginUser.email, [
       Validators.required,
@@ -64,6 +65,8 @@ export class LoginPageComponent implements OnInit {
       this.authService.login(this.loginUser)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((response) => console.log(response));
+      
+      console.log(this.userService.getUser());
     }
   }
 

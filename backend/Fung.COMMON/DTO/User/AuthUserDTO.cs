@@ -1,9 +1,8 @@
-﻿using Fung.COMMON.DTO.Auth;
-
-namespace Fung.COMMON.DTO.User
+﻿namespace Fung.COMMON.DTO.User
 {
     public sealed class AuthUserDTO
     {
-        public AuthTokenDTO Token { get; set; } = null!;
+        public string AccessToken { get; set; } = null!;
+        public string RefreshToken { get; set; } = "refresh";
     }
 }

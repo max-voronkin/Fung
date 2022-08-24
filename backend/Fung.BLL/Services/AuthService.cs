@@ -2,7 +2,6 @@
 using Fung.BLL.Exceptions;
 using Fung.BLL.JWT;
 using Fung.BLL.Services.Abstract;
-using Fung.COMMON.DTO.Auth;
 using Fung.COMMON.DTO.User;
 using Fung.COMMON.Entities;
 using Fung.COMMON.Security;
@@ -19,10 +18,9 @@ namespace Fung.BLL.Services
             this.jwtFactory = jwtFactory;
         }
 
-        public AuthTokenDTO GenerateAccessToken(int id, string email)
+        public string GenerateAccessToken(int id, string email)
         {
-            var token = jwtFactory.GenerateAccessToken(id, email);
-            return new AuthTokenDTO() { Token = token };
+            return jwtFactory.GenerateAccessToken(id, email);           
         }
 
         public async Task<AuthUserDTO> Autorize(UserLoginDTO loginDTO)
@@ -38,7 +36,7 @@ namespace Fung.BLL.Services
 
             return new AuthUserDTO
             {
-                Token = token
+                AccessToken = token
             };
         }
 

@@ -23,7 +23,7 @@ namespace Fung_API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<AuthUserDTO>> Login([FromBody] UserLoginDTO loginDto)
         {
-                return Ok(await authService.Autorize(loginDto));
+            return Ok(await authService.Autorize(loginDto));
         }
 
         // api/auth/register
@@ -34,7 +34,7 @@ namespace Fung_API.Controllers
             var token = authService.GenerateAccessToken(createdUser.Id, createdUser.Email);
             return new AuthUserDTO
             {
-                Token = token
+                AccessToken = token
             };
         }
     }
