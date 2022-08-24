@@ -17,36 +17,50 @@ namespace Fung_API.ConfigurationExtensions
             var secretKey = configuration["JwtIssuerOptions:Key"];
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
-            var jwtOptions = configuration.GetSection("JwtIssuerOptions");
+            var jwtOptions = configuration.GetSection(nameof(JwtIssuerOptions));
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+            // Configure JwtIssuerOptions
+            services.Configure<JwtIssuerOptions>(options =>
+            {
+                options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            });
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+
+                ValidateAudience = false,
+
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = signingKey,
+
+                RequireExpirationTime = false,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(configureOptions =>
+            {
+                configureOptions.TokenValidationParameters = tokenValidationParameters;
+                configureOptions.SaveToken = true;
+
+                configureOptions.Events = new JwtBearerEvents
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters()
+                    OnAuthenticationFailed = context =>
                     {
-                        ValidateIssuer = true,
-                        ValidIssuer = jwtOptions["Issuer"],
-
-                        ValidateAudience = true,
-                        ValidAudience = jwtOptions["Audience"],
-
-                        ValidateIssuerSigningKey = true,
-                        ValidateLifetime = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions["Key"]))
-                    };
-
-                    options.Events = new JwtBearerEvents
-                    {
-                        
-                        OnAuthenticationFailed = context =>
+                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
                         {
-                            if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
-                                context.Response.Headers.Add("Token-expired", "true");
-
-                            return System.Threading.Tasks.Task.CompletedTask;
-                        }                      
-                    };
-                });
+                            context.Response.Headers.Add("Token-Expired", "true");
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+            });      
         }
 
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)

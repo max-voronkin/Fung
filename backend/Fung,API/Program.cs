@@ -47,11 +47,15 @@ namespace Fung_API
             // Configure the HTTP request pipeline.
             app.UseMiddleware<LogerMiddleware>(app.Logger);
 
-            app.UseCors(builder =>
-                builder
+
+            app.UseCors(builder => builder
+                .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowAnyOrigin()
-                .AllowAnyMethod());
+                .WithExposedHeaders("Token-Expired")
+                .AllowCredentials()
+                .WithOrigins("http://localhost:4200"));
+
+
 
             if (app.Environment.IsDevelopment())
             {
@@ -61,6 +65,7 @@ namespace Fung_API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
