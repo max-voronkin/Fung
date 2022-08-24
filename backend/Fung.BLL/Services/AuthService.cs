@@ -28,12 +28,7 @@ namespace Fung.BLL.Services
         public async Task<AuthUserDTO> Autorize(UserLoginDTO loginDTO)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.Email == loginDTO.Email);
-            if (user is null)
-            {
-                throw new NotFoundException(nameof(User));
-            }
-
-            if (!SecurityHelper.ValidatePassword(loginDTO.Password, user.Password, user.Salt))
+            if (user is null || !SecurityHelper.ValidatePassword(loginDTO.Password, user.Password, user.Salt))
             {
                 throw new InvalidLoginCredentials();
             }
@@ -43,7 +38,6 @@ namespace Fung.BLL.Services
 
             return new AuthUserDTO
             {
-                User = userDTO,
                 Token = token
             };
         }
