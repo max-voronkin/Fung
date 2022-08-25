@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="6.0.8" />
+    <Compile Remove="DTO\Auth\**" />
+    <EmbeddedResource Remove="DTO\Auth\**" />
+    <None Remove="DTO\Auth\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\Auth\" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="6.0.8" />
   </ItemGroup>
 
 </Project>

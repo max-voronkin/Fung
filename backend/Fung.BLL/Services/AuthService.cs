@@ -28,15 +28,43 @@ namespace Fung.BLL.Services
             var user = await context.Users.FirstOrDefaultAsync(u => u.Email == loginDTO.Email);
             if (user is null || !SecurityHelper.ValidatePassword(loginDTO.Password, user.Password, user.Salt))
             {
-                throw new InvalidLoginCredentials();
+                throw new InvalidLoginCredentialsException();
             }
 
-            var token = GenerateAccessToken(user.Id, user.Email);
-            var userDTO = mapper.Map<UserDTO>(user);
+            var accessToken = GenerateAccessToken(user.Id, user.Email);
+            var refreshToken = jwtFactory.GenerateRefreshToken();
 
             return new AuthUserDTO
             {
-                AccessToken = token
+                AccessToken = accessToken,
+                RefreshToken = refreshToken
+            };
+        }
+
+        public async Task<AuthUserDTO> RefreshToken(UserRefreshDTO refreshDTO)
+        {
+            // TODO update for refresh token
+            // This should get user from token
+            // Find in db refresh token
+            // verify that it is not expired
+            // generate new access and refresh token
+            // put refresh into db
+
+            var userId = jwtFactory.GetUserIdFromToken(refreshDTO.AccessToken, refreshDTO.SigningKey);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user is null)
+            {
+                throw new NotFoundException(nameof(User), userId);
+            }
+
+            var accessToken = jwtFactory.GenerateAccessToken(user.Id, user.Email);
+            var refreshToken = jwtFactory.GenerateRefreshToken();
+
+            return new AuthUserDTO
+            {
+                AccessToken = accessToken,
+                RefreshToken = refreshToken
             };
         }
 

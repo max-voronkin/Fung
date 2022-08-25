@@ -37,5 +37,12 @@ namespace Fung_API.Controllers
                 AccessToken = token
             };
         }
+
+        // api/auth/refresh
+        [HttpPost("refresh")]
+        public async Task<ActionResult<AuthUserDTO>> Refresh([FromBody] UserRefreshDTO refreshDTO)
+        {
+            return await authService.RefreshToken(refreshDTO);
+        }
     }
 }
