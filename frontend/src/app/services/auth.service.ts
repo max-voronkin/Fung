@@ -46,4 +46,17 @@ private _setTokens(access: string, refresh: string) {
   public login(user: UserLoginDTO) {
     return this._handleAuthResponse(this.httpService.postFullRequest<AuthUserDTO>(`${this.routePrefix}/login`, user));
   }
+
+  public logout () {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+  }
+
+  public isAccessTokenExist() {
+    if (localStorage.getItem('accessToken'))
+    {
+      return true;
+    }
+    return false;
+  }
 }
