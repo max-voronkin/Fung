@@ -20,7 +20,7 @@ export class AuthService {
         map((resp) => {
           if (resp.body)
           {
-            this._setTokens(resp.body.accessToken, resp.body.refreshToken);  
+            this._setTokens(resp.body);  
             return true;
           }
           return false;
@@ -28,14 +28,14 @@ export class AuthService {
     );
 }
 
-private _setTokens(access: string, refresh: string) {
-  if (access) 
+private _setTokens(tokens: AuthUserDTO) {
+  if (tokens.accessToken) 
   {
-    localStorage.setItem('accessToken', JSON.stringify(access));      
+    localStorage.setItem('accessToken', JSON.stringify(tokens.accessToken));      
   }
-  if (refresh)
+  if (tokens.refreshToken)
   {
-    localStorage.setItem('refreshToken', JSON.stringify(refresh));
+    localStorage.setItem('refreshToken', JSON.stringify(tokens.refreshToken));
   }
 }
 
@@ -53,10 +53,23 @@ private _setTokens(access: string, refresh: string) {
   }
 
   public isAccessTokenExist() {
-    if (localStorage.getItem('accessToken'))
+    if (localStorage.getItem('accessToken') && localStorage.getItem('refreshToken'))
     {
       return true;
     }
     return false;
+  }
+
+  public refreshToken() {
+    return this.httpService.postFullRequest<AuthUserDTO>(`${this.routePrefix}/refresh`, {
+      accessToken: JSON.parse(localStorage.getItem('accessToken')!),
+      refreshToken: JSON.parse(localStorage.getItem('refreshToken')!)
+    })
+    .pipe(
+      map((resp) => {
+        this._setTokens(resp.body!);
+        return resp.body!;
+      })
+    );
   }
 }

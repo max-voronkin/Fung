@@ -8,8 +8,10 @@ import { MaterialModule } from './material/material.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './components/auth/auth.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainPageModule } from './components/main-page/main-page.module';
+import { JwtInterceptor } from './services/helpers/jwt.interceptor';
+import { ErrorInterceptor } from './services/helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,10 @@ import { MainPageModule } from './components/main-page/main-page.module';
     HttpClientModule,
     MainPageModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
