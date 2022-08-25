@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 import { MainPageOverlayComponent } from './main-page-overlay/main-page-overlay.component';
 import { StationsPageComponent } from './stations-page/stations-page.component';
 
@@ -7,7 +8,7 @@ export const MainPageRoutes: Routes = [
     path: 'main',
     component: MainPageOverlayComponent,
     children: [
-      { path: 'stations', component: StationsPageComponent}
+      { path: 'stations', component: StationsPageComponent, canActivate: [AuthGuard]}
     ],
   },
 ];

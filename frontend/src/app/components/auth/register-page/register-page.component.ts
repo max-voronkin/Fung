@@ -5,6 +5,7 @@ import { faEnvelope, faKey, faKeyboard, faUser, faUserPlus } from '@fortawesome/
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { EventService } from 'src/app/services/event.service';
 import { UserRegisterDTO } from 'src/models/DTO/User/user-registerDTO';
 import { RegisterFormValidationConstants } from 'src/models/validation-settings/register-form-validation';
 
@@ -31,7 +32,7 @@ export class RegisterPageComponent implements OnInit {
 
   public confirmPassword = '';
 
-  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private eventService: EventService) {
     this.emailControl = new FormControl(this.newUser.email, [
       Validators.required,
       Validators.email,
@@ -72,7 +73,13 @@ export class RegisterPageComponent implements OnInit {
       this.newUser.password = this.passwordControl.value;
       this.authService.register(this.newUser)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => console.log(response));
+      .subscribe((response) => 
+      {
+        if (response)
+        {
+          this.eventService.userLoggedIn();
+        }
+      });
     }
   }
 

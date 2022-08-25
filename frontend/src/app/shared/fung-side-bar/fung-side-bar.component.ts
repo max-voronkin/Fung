@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faArrowRightFromBracket, faBars, faEllipsisVertical, faGears, faHouse, faL } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/services/auth.service';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'fung-side-bar',
@@ -16,13 +18,18 @@ export class FungSideBarComponent implements OnInit {
   dotsIcon = faEllipsisVertical;
   gearsIcon = faGears;
   
-  constructor() { }
+  constructor(private authService: AuthService, private eventService: EventService) { }
 
   ngOnInit(): void {
   }
 
   toggleExpanded() {
     this.expanded = !this.expanded;
+  }
+
+  onLogoutClick() {
+    this.authService.logout();
+    this.eventService.userLoggedOut();
   }
 
 }
