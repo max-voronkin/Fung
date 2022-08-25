@@ -1,0 +1,32 @@
+<div class="sidebar-container">
+    <div class="icons-container">
+        <div class="top-buttons">
+            <div class="icon-block">
+                <div class="icon-wrapper" [ngClass]="{'expanded': expanded}" (click)="toggleExpanded()">
+                    <fa-icon class="icon" [icon]="dotsIcon" *ngIf="expanded"></fa-icon>
+                    <fa-icon class="icon" [icon]="hamburgerMenuIcon" *ngIf="!expanded"></fa-icon>
+                </div>
+            </div>
+        </div>
+        <div class="icon-block">
+            <div class="icon-wrapper">
+                <fa-icon class="icon" [icon]="homeIcon"></fa-icon>
+            </div>
+            <div class="label" *ngIf="expanded">Stations</div>
+        </div>
+        <div class="bottom-buttons">
+            <div class="icon-block">
+                <div class="icon-wrapper">
+                    <fa-icon class="icon" [icon]="gearsIcon"></fa-icon>
+                </div>
+                <div class="label" *ngIf="expanded">Settings</div>
+            </div>
+            <div class="icon-block">
+                <div class="icon-wrapper">
+                    <fa-icon class="icon" [icon]="logoutIcon"></fa-icon>
+                </div>
+                <div class="label" *ngIf="expanded">Log out</div>
+            </div>
+        </div>
+    </div>
+</div>

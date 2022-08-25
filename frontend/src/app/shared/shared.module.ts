@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FungInputComponent } from './fung-input/fung-input.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { FungSideBarComponent } from './fung-side-bar/fung-side-bar.component';
 
 
 
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     FungLogoComponent,
     FungButtonComponent,
-    FungInputComponent
+    FungInputComponent,
+    FungSideBarComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -26,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     FungLogoComponent,
     FungButtonComponent,
     FungInputComponent,
-    FormsModule
+    FormsModule,
+    FungSideBarComponent
   ]
 
 })
