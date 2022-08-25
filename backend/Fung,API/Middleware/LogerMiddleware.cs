@@ -1,4 +1,5 @@
 ﻿using Fung.BLL.Exceptions;
+using Fung.COMMON.Enums;
 using Newtonsoft.Json;
 using System.Net;
 
@@ -26,7 +27,7 @@ namespace Fung_API.Middleware
                 switch (exception)
                 {
                     // there is should be my custom exceptions 
-                    case InvalidLoginCredentials e:
+                    case InvalidLoginCredentialsException e:
                         await HandleInvalidCredentialException(httpContext, e);
                         break;
                     default:
@@ -41,16 +42,16 @@ namespace Fung_API.Middleware
             logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
             await CreateExceptionAsync(context);
         }
-        private async Task HandleInvalidCredentialException(HttpContext context, InvalidLoginCredentials ex)
+        private async Task HandleInvalidCredentialException(HttpContext context, InvalidLoginCredentialsException ex)
         {
             logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
-            await CreateExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message);
+            await CreateExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message, ErrorCode.InvalidLoginCredentials);
         }
 
         private async Task CreateExceptionAsync(HttpContext context, HttpStatusCode statusCode = HttpStatusCode.InternalServerError,
-            object? errorBody = null)
+            string errorMessage = "Not provided", ErrorCode errorCode = ErrorCode.Generic)
         {
-            errorBody ??= new { error = "Unknown error has occurred" };
+            object errorBody = new { error = errorMessage, errorCode = errorCode};
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
             await context.Response.WriteAsync(JsonConvert.SerializeObject(errorBody));
