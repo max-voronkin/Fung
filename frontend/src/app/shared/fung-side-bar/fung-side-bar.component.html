@@ -21,7 +21,7 @@
                 </div>
                 <div class="label" *ngIf="expanded">Settings</div>
             </div>
-            <div class="icon-block">
+            <div class="icon-block" (click)="onLogoutClick()">
                 <div class="icon-wrapper">
                     <fa-icon class="icon" [icon]="logoutIcon"></fa-icon>
                 </div>
