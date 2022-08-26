@@ -18,9 +18,13 @@ namespace Fung.BLL.Services
             this.jwtFactory = jwtFactory;
         }
 
-        public string GenerateAccessToken(int id, string email)
+        public AuthUserDTO GenerateAccessToken(int id, string email)
         {
-            return jwtFactory.GenerateAccessToken(id, email);           
+            return new AuthUserDTO
+            {
+                AccessToken = jwtFactory.GenerateAccessToken(id, email),
+                RefreshToken = jwtFactory.GenerateRefreshToken()
+            };
         }
 
         public async Task<AuthUserDTO> Autorize(UserLoginDTO loginDTO)
@@ -31,14 +35,7 @@ namespace Fung.BLL.Services
                 throw new InvalidLoginCredentialsException();
             }
 
-            var accessToken = GenerateAccessToken(user.Id, user.Email);
-            var refreshToken = jwtFactory.GenerateRefreshToken();
-
-            return new AuthUserDTO
-            {
-                AccessToken = accessToken,
-                RefreshToken = refreshToken
-            };
+            return GenerateAccessToken(user.Id, user.Email);
         }
 
         public async Task<AuthUserDTO> RefreshToken(UserRefreshDTO refreshDTO)
