@@ -28,7 +28,7 @@ namespace Fung_API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<AuthUserDTO>> Register([FromBody] UserRegisterDTO registerDTO)
         {
-            return Ok(await authService.Register(registerDTO));    
+            return Ok(await authService.Register(registerDTO));
         }
 
         // api/auth/refresh
@@ -36,6 +36,14 @@ namespace Fung_API.Controllers
         public async Task<ActionResult<AuthUserDTO>> Refresh([FromBody] UserRefreshDTO refreshDTO)
         {
             return await authService.RefreshToken(refreshDTO);
+        }
+
+        //api/auth/revoke
+        [HttpPost("revoke")]
+        public async Task<IActionResult> Revoke([FromBody] string refreshToken)
+        {
+            await authService.RevokeToken(refreshToken);
+            return Ok();
         }
     }
 }

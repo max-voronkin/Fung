@@ -95,5 +95,15 @@ namespace Fung.BLL.Services
             return userTokens;
         }
 
+        public async Task RevokeToken(string token)
+        {
+            var tokenEntity = await context.RefreshTokens.FirstOrDefaultAsync(t => t.Token == token);
+            if (tokenEntity is not null)
+            {
+                context.RefreshTokens.Remove(tokenEntity);
+                await context.SaveChangesAsync();
+            }
+        }
+
     }
 }
