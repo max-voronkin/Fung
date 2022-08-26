@@ -71,15 +71,10 @@ export class RegisterPageComponent implements OnInit {
     {
       this.newUser.email = this.emailControl.value;
       this.newUser.password = this.passwordControl.value;
+      
       this.authService.register(this.newUser)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => 
-      {
-        if (response)
-        {
-          this.eventService.userLoggedIn();
-        }
-      });
+      .subscribe(() => this.eventService.userLoggedIn());
     }
   }
 
