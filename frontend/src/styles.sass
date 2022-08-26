@@ -1,2 +1,16 @@
+@import 'src/colors.sass'
+    
 *
     box-sizing: border-box
+
+snack-bar-container
+    &.error-snack-bar 
+        background: color(red-1)
+        color: color(white-1)
+        text-align: center
+    &.info-snack-bar
+        background: color(violet-2)
+        color: color(white-1)
+        text-align: center
+    & span 
+        width: 100%

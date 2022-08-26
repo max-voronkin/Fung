@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faEnvelope, faKey, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { ErrorNotificationService } from 'src/app/services/error-notification.service';
 import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
 import { UserLoginDTO } from 'src/models/DTO/User/user-loginDTO';
@@ -28,7 +29,8 @@ export class LoginPageComponent implements OnInit {
   public emailControl: FormControl;
   public passwordControl: FormControl;
 
-  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private eventService: EventService) {
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService,
+    private eventService: EventService) {
     
     this.emailControl = new FormControl(this.loginUser.email, [
       Validators.required,
@@ -63,15 +65,10 @@ export class LoginPageComponent implements OnInit {
     {
       this.loginUser.email = this.emailControl.value;
       this.loginUser.password = this.passwordControl.value;
+
       this.authService.login(this.loginUser)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => 
-      {
-        if (response)
-        {
-           this.eventService.userLoggedIn();
-        }
-      });
+      .subscribe(() => this.eventService.userLoggedIn());
     }
   }
 

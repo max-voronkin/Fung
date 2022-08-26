@@ -9,10 +9,11 @@ import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { ErrorCode } from 'src/models/enums/error-code';
+import { ErrorNotificationService } from '../error-notification.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private router: Router, private authService: AuthService) {}
+    constructor(private router: Router, private authService: AuthService, private errorNotification: ErrorNotificationService) {}
 
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       return next.handle(req).pipe(
@@ -41,6 +42,8 @@ export class ErrorInterceptor implements HttpInterceptor {
           const error = response.error
               ? response.error.error || response.error.message
               : response.message || `${response.status} ${response.statusText}`;
+
+          this.errorNotification.showErrorMessage(error);
 
           return throwError(error);
 

@@ -31,11 +31,7 @@ namespace Fung_API.Controllers
         public async Task<ActionResult<AuthUserDTO>> Register([FromBody] UserRegisterDTO registerDTO)
         {
             var createdUser = await userService.CreateUser(registerDTO);
-            var token = authService.GenerateAccessToken(createdUser.Id, createdUser.Email);
-            return new AuthUserDTO
-            {
-                AccessToken = token
-            };
+            return authService.GenerateAccessToken(createdUser.Id, createdUser.Email);
         }
 
         // api/auth/refresh
