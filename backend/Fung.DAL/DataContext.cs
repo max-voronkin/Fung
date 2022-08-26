@@ -26,6 +26,7 @@ namespace Fung.DAL
         public DbSet<RemainingTransactions> RemainingTransactions { get; set; } = null!;
         public DbSet<LevelIndicatorTransactions> LevelIndicatorTransactions { get; set; } = null!;
         public DbSet<FuelTank> FuelTanks { get; set; } = null!;
+        public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
 
     }
 }
