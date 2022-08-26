@@ -13,9 +13,11 @@ namespace Fung.BLL.Services
     public class AuthService : BaseService
     {
         private readonly JwtFactory jwtFactory;
-        public AuthService(DataContext context, IMapper mapper, JwtFactory jwtFactory) : base(context, mapper)
+        private readonly UserService userService;
+        public AuthService(DataContext context, IMapper mapper, JwtFactory jwtFactory, UserService userService) : base(context, mapper)
         {
             this.jwtFactory = jwtFactory;
+            this.userService = userService;
         }
 
         public AuthUserDTO GenerateAccessToken(int id, string email)
@@ -40,13 +42,6 @@ namespace Fung.BLL.Services
 
         public async Task<AuthUserDTO> RefreshToken(UserRefreshDTO refreshDTO)
         {
-            // TODO update for refresh token
-            // This should get user from token
-            // Find in db refresh token
-            // verify that it is not expired
-            // generate new access and refresh token
-            // put refresh into db
-
             var userId = jwtFactory.GetUserIdFromToken(refreshDTO.AccessToken, refreshDTO.SigningKey);
             var user = await context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -55,14 +50,49 @@ namespace Fung.BLL.Services
                 throw new NotFoundException(nameof(User), userId);
             }
 
+            var rToken = await context.RefreshTokens.FirstOrDefaultAsync(t => t.Token == refreshDTO.RefreshToken);
+            if (rToken is null)
+            {
+                throw new InvalidTokenException("Invalid refresh token");
+            }
+
+            if (!rToken.IsActive)
+            {
+                throw new ExpiredRefreshTokenException();
+            }
+
             var accessToken = jwtFactory.GenerateAccessToken(user.Id, user.Email);
             var refreshToken = jwtFactory.GenerateRefreshToken();
+
+            context.RefreshTokens.Remove(rToken);
+            context.RefreshTokens.Add(new RefreshToken
+            {
+                Token = refreshToken,
+                UserId = user.Id
+            });
+            await context.SaveChangesAsync();
 
             return new AuthUserDTO
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken
             };
+        }
+
+        public async Task<AuthUserDTO> Register(UserRegisterDTO registerDTO)
+        {
+            var createdUser = await userService.CreateUser(registerDTO);
+            AuthUserDTO userTokens = GenerateAccessToken(createdUser.Id, createdUser.Email);
+
+            var s = new RefreshToken()
+            {
+                UserId = createdUser.Id,
+                Token = userTokens.RefreshToken
+            };
+
+            context.RefreshTokens.Add(s);
+            await context.SaveChangesAsync();
+            return userTokens;
         }
 
     }

@@ -4,6 +4,10 @@
     {
         public InvalidTokenException() : base("Invalid Token or Key")
         {
+        }
+
+        public InvalidTokenException(string message) : base(message)
+        {
 
         }
     }

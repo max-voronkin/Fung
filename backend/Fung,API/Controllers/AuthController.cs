@@ -12,11 +12,9 @@ namespace Fung_API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AuthService authService;
-        private readonly UserService userService;
-        public AuthController(AuthService authService, UserService userService)
+        public AuthController(AuthService authService)
         {
             this.authService = authService;
-            this.userService = userService;
         }
 
         // api/auth/login
@@ -30,8 +28,7 @@ namespace Fung_API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<AuthUserDTO>> Register([FromBody] UserRegisterDTO registerDTO)
         {
-            var createdUser = await userService.CreateUser(registerDTO);
-            return authService.GenerateAccessToken(createdUser.Id, createdUser.Email);
+            return Ok(await authService.Register(registerDTO));    
         }
 
         // api/auth/refresh
