@@ -8,10 +8,13 @@ namespace Fung.DAL.EtitiesConfiguration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasIndex(u => u.Email)
-                .IsUnique();
+            builder.HasKey(u => u.Id);
+            builder.HasIndex(u => u.Email).IsUnique();
 
             builder.HasMany<Station>()
+                .WithOne();
+
+            builder.HasMany<RefreshToken>()
                 .WithOne();
         }
     }

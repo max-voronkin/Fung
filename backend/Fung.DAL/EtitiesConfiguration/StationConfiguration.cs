@@ -8,6 +8,8 @@ namespace Fung.DAL.EtitiesConfiguration
     {
         public void Configure(EntityTypeBuilder<Station> builder)
         {
+            builder.HasKey(s => s.Id);
+
             builder.HasMany<FuelTank>()
                 .WithOne();
         }
