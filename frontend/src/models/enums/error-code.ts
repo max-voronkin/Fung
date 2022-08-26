@@ -3,5 +3,6 @@ export enum ErrorCode {
     InvalidLoginCredentials,
     SecurityToken,
     InvalidToken,
-    NotFound
+    NotFound,
+    ExpiredRefreshToken
 }
