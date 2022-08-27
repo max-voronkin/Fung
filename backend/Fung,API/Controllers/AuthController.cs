@@ -40,10 +40,9 @@ namespace Fung_API.Controllers
 
         //api/auth/revoke
         [HttpPost("revoke")]
-        public async Task<IActionResult> Revoke([FromBody] string refreshToken)
+        public async Task Revoke([FromBody] UserRevokeDTO token)
         {
-            await authService.RevokeToken(refreshToken);
-            return Ok();
+            await authService.RevokeToken(token);
         }
     }
 }

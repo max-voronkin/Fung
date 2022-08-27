@@ -37,7 +37,20 @@ namespace Fung.BLL.Services
                 throw new InvalidLoginCredentialsException();
             }
 
-            return GenerateAccessToken(user.Id, user.Email);
+            AuthUserDTO authUser = GenerateAccessToken(user.Id, user.Email);
+            var refreshToken = await context.RefreshTokens.FirstOrDefaultAsync(t => t.UserId == user.Id);
+            if (refreshToken is not null)
+            {
+                context.RefreshTokens.Remove(refreshToken);
+            }
+            context.RefreshTokens.Add(new RefreshToken
+            {
+                Token = authUser.RefreshToken,
+                UserId = user.Id
+            });
+            await context.SaveChangesAsync();
+
+            return authUser;
         }
 
         public async Task<AuthUserDTO> RefreshToken(UserRefreshDTO refreshDTO)
@@ -95,9 +108,9 @@ namespace Fung.BLL.Services
             return userTokens;
         }
 
-        public async Task RevokeToken(string token)
+        public async Task RevokeToken(UserRevokeDTO token)
         {
-            var tokenEntity = await context.RefreshTokens.FirstOrDefaultAsync(t => t.Token == token);
+            var tokenEntity = await context.RefreshTokens.FirstOrDefaultAsync(t => t.Token == token.RefreshToken);
             if (tokenEntity is not null)
             {
                 context.RefreshTokens.Remove(tokenEntity);
