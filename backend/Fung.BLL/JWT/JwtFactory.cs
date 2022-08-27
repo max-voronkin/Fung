@@ -17,7 +17,6 @@ namespace Fung.BLL.JWT
             this.jwtTokenHandler = new JwtSecurityTokenHandler();
         }
 
-        /// TODO: should be async
         public string GenerateAccessToken(int id, string email)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.Key));
@@ -33,7 +32,7 @@ namespace Fung.BLL.JWT
             var token = new JwtSecurityToken(null,
                 null,
                 claims,
-                expires: DateTime.Now.AddDays(options.ValidFor),
+                expires: DateTime.Now.AddMinutes(options.ValidFor),
                 signingCredentials: credentials);
 
             return jwtTokenHandler.WriteToken(token);

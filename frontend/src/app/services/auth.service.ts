@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { AuthUserDTO } from 'src/models/DTO/User/user-authDTO';
 import { UserLoginDTO } from 'src/models/DTO/User/user-loginDTO';
 import { UserRegisterDTO } from 'src/models/DTO/User/user-registerDTO';
+import { RevokeUserDTO } from 'src/models/DTO/User/user-revokeDTO';
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -48,6 +49,10 @@ private _setTokens(tokens: AuthUserDTO) {
   }
 
   public logout () {
+    let token : RevokeUserDTO = { refreshToken : JSON.parse(localStorage.getItem('refreshToken')!)};
+
+    this.httpService.postRequest(`${this.routePrefix}/revoke`, token).subscribe();
+
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
   }

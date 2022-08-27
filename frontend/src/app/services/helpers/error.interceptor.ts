@@ -35,6 +35,11 @@ export class ErrorInterceptor implements HttpInterceptor {
               if (response.error.errorCode === ErrorCode.InvalidToken && !this.authService.isAccessTokenExist()) {
                 return throwError(response.error.error);
               }
+              if (response.error.errorCode === ErrorCode.ExpiredRefreshToken) {
+                this.router.navigate(['/auth']);
+                this.authService.logout();
+                return throwError(response.error.errorCode);
+              }
             }
           }
 

@@ -6,6 +6,7 @@
         InvalidLoginCredentials,
         SecurityToken,
         InvalidToken,
-        NotFound
+        NotFound,
+        ExpiredRefreshToken
     }
 }
