@@ -26,7 +26,7 @@ Station ||--o{ FuelTank : Id_StationId
 Station {
   Id int PK
   Name string
-  UserId int 
+  UserId int FK
 }
 
 FuelTank ||--o{ LevelIndicator_Transactions : Id_FuelTankId
@@ -37,7 +37,7 @@ FuelTank {
   Number int
   Capacity numeric
   CurrentAmount numeric
-  StationId int
+  StationId int FK
   UpdatedAt datetime
 }
 
@@ -48,19 +48,19 @@ LevelIndicator_Transactions {
   Volume numeric
   Density numeric
   TransactionTime datetime
-  FuelTankId int
+  FuelTankId int FK
 }
 
 Remaining_Transactions {
   Id int PK
   Volume numeric
-  FuelTankId int
+  FuelTankId int FK
 }
 
 RefreshToken {
   Id int PK
   Token string
   Expires datetime
-  UserId int
+  UserId int FK
 }
 ```
