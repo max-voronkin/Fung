@@ -30,6 +30,9 @@ namespace Fung_API.Middleware
                     case InvalidLoginCredentialsException e:
                         await HandleInvalidCredentialException(httpContext, e);
                         break;
+                    case UserAlreadyExistsException e:
+                        await HandleUserAlreadyExistsException(httpContext, e);
+                        break;
                     default:
                         await HandleAnyException(httpContext, exception);
                         break;
@@ -46,6 +49,12 @@ namespace Fung_API.Middleware
         {
             logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
             await CreateExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message, ErrorCode.InvalidLoginCredentials);
+        }
+
+        private async Task HandleUserAlreadyExistsException(HttpContext context, UserAlreadyExistsException ex)
+        {
+            logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
+            await CreateExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message, ErrorCode.UserAlreadyExists);
         }
 
         private async Task CreateExceptionAsync(HttpContext context, HttpStatusCode statusCode = HttpStatusCode.InternalServerError,
