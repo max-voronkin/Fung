@@ -7,6 +7,7 @@ import { FungInputComponent } from './fung-input/fung-input.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FungSideBarComponent } from './fung-side-bar/fung-side-bar.component';
+import { FungSpinnerComponent } from './fung-spinner/fung-spinner.component';
 
 
 
@@ -15,7 +16,8 @@ import { FungSideBarComponent } from './fung-side-bar/fung-side-bar.component';
     FungLogoComponent,
     FungButtonComponent,
     FungInputComponent,
-    FungSideBarComponent
+    FungSideBarComponent,
+    FungSpinnerComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -29,7 +31,8 @@ import { FungSideBarComponent } from './fung-side-bar/fung-side-bar.component';
     FungButtonComponent,
     FungInputComponent,
     FormsModule,
-    FungSideBarComponent
+    FungSideBarComponent,
+    FungSpinnerComponent
   ]
 
 })
