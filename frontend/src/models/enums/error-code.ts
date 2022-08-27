@@ -4,5 +4,6 @@ export enum ErrorCode {
     SecurityToken,
     InvalidToken,
     NotFound,
-    ExpiredRefreshToken
+    ExpiredRefreshToken,
+    UserAlreadyExists
 }

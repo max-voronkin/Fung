@@ -7,6 +7,7 @@
         SecurityToken,
         InvalidToken,
         NotFound,
-        ExpiredRefreshToken
+        ExpiredRefreshToken,
+        UserAlreadyExists
     }
 }
