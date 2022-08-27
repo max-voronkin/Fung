@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEnvelope, faKey, faKeyboard, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +14,7 @@ import { RegisterFormValidationConstants } from 'src/models/validation-settings/
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.sass']
 })
-export class RegisterPageComponent implements OnInit {
+export class RegisterPageComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
   
@@ -49,6 +49,10 @@ export class RegisterPageComponent implements OnInit {
     ]);
 
    }
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
