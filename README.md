@@ -62,5 +62,5 @@ RefreshToken {
   Token string
   Expires datetime
   UserId int
-  }
+}
 ```
