@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEnvelope, faKey, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { ErrorNotificationService } from 'src/app/services/error-notification.service';
 import { EventService } from 'src/app/services/event.service';
-import { UserService } from 'src/app/services/user.service';
 import { UserLoginDTO } from 'src/models/DTO/User/user-loginDTO';
 import { RegisterFormValidationConstants } from 'src/models/validation-settings/register-form-validation';
 
@@ -15,7 +13,7 @@ import { RegisterFormValidationConstants } from 'src/models/validation-settings/
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.sass']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
   
@@ -44,6 +42,10 @@ export class LoginPageComponent implements OnInit {
     ]);
 
    }
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
