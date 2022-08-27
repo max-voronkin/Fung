@@ -12,6 +12,7 @@ Fung is a Fuel accounting system. It`s purpose to accumulate information in one 
 ```mermaid
 erDiagram
 User ||--o{ Station : Id_UserId
+User ||--o{ RefreshToken : Id_UserId
 User {
   Id int PK
   Email string
@@ -55,4 +56,10 @@ Remaining_Transactions {
   Volume numeric
   FuelTankId int
 }
+
+RefreshToken {
+  Id int PK
+  Token string
+  Expires datetime
+  UserId int
 ```
