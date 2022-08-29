@@ -1,5 +1,6 @@
 ﻿using Fung.COMMON.Entities;
 using Fung.DAL.EtitiesConfiguration;
+using Fung.DAL.ModelBuilderExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fung.DAL
@@ -19,6 +20,8 @@ namespace Fung.DAL
             modelBuilder.ApplyConfiguration(new RemainingTransactionsConfiguration());
             modelBuilder.ApplyConfiguration(new LevelIndicatorTransactionsConfiguration());
             modelBuilder.ApplyConfiguration(new FuelTankConfiguration());
+
+            modelBuilder.Seed();
         }
 
         public DbSet<User> Users { get; set; } = null!;
