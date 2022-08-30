@@ -2,11 +2,9 @@
 using Fung.BLL.MappingProfiles;
 using Fung.BLL.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Fung_API.ConfigurationExtensions
@@ -61,7 +59,7 @@ namespace Fung_API.ConfigurationExtensions
                         return Task.CompletedTask;
                     }
                 };
-            });      
+            });
         }
 
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
@@ -76,7 +74,8 @@ namespace Fung_API.ConfigurationExtensions
 
             services.AddScoped<AuthService>();
             services.AddScoped<UserService>();
-   
+            services.AddScoped<StationService>();
+
         }
 
         public static void RegisterAutoMapper(this IServiceCollection services)
@@ -89,7 +88,7 @@ namespace Fung_API.ConfigurationExtensions
                 conf.AddProfile<LevelIndicatorMappingProfile>();
                 conf.AddProfile<RemainingTransactionsMappingProfile>();
             },
-            Assembly.GetExecutingAssembly()); 
+            Assembly.GetExecutingAssembly());
         }
 
         public static void AddSwagger(this IServiceCollection services)
