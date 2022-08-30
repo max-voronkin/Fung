@@ -11,11 +11,15 @@ namespace Fung.DAL.EtitiesConfiguration
             builder.HasKey(u => u.Id);
             builder.HasIndex(u => u.Email).IsUnique();
 
-            builder.HasMany<Station>()
-                .WithOne();
+            builder.HasMany(u => u.Stations)
+                .WithOne()
+                .HasForeignKey(s => s.UserId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany<RefreshToken>()
-                .WithOne();
+                .WithOne()
+                .HasForeignKey(s => s.UserId);
         }
     }
 }

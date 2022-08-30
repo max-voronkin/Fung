@@ -10,11 +10,17 @@ namespace Fung.DAL.EtitiesConfiguration
         {
             builder.HasKey(f => f.Id);
 
-            builder.HasMany<LevelIndicatorTransactions>()
-                .WithOne();
+            builder.HasMany(f => f.LevelTransactions)
+                .WithOne()
+                .HasForeignKey(li => li.FuelTankId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany<RemainingTransactions>()
-                .WithOne();
+            builder.HasMany(f => f.RemainingTransactions)
+                .WithOne()
+                .HasForeignKey(rt => rt.FuelTankId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

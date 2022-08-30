@@ -1,6 +1,6 @@
-﻿namespace Fung.COMMON.Entities
+﻿namespace Fung.COMMON.DTO.RemainingTransaction
 {
-    public class RemainingTransactions
+    public sealed class RemainingTransactionsDTO
     {
         public int Id { get; set; }
         public double Value { get; set; }

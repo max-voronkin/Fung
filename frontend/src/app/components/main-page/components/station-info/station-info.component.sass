@@ -1,0 +1,35 @@
+@import 'src/colors.sass'
+
+.station-container
+    font-size: 22px
+    font-family: Verdana
+    border-width: 1px
+    border-color: color(gray-2)
+    border-radius: 20px
+    padding: 20px
+    background-color: #ffffff
+    margin-bottom: 20px
+    &:hover
+        cursor: default
+
+.station-header
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+.station-name
+    font-family: Arial, Helvetica, sans-serif
+    font-size: 24px
+
+.tanks-container
+    padding: 10px
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr))
+    grid-gap: 10px
+
+.refresh-icon
+    color: color(blue-4)
+    font-size: 24px
+    &:hover
+        cursor: pointer
+        color: color(blue-2)

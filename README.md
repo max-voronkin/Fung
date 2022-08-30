@@ -54,6 +54,7 @@ LevelIndicator_Transactions {
 Remaining_Transactions {
   Id int PK
   Volume numeric
+  TransactionTime datetime
   FuelTankId int FK
 }
 
