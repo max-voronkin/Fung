@@ -70,6 +70,7 @@ namespace Fung.DAL.ModelBuilderExtensions
                 var remainingTransactionsFaker = new Faker<RemainingTransactions>()
                     .RuleFor(t => t.Id, f => Id++)
                     .RuleFor(t => t.Value, f => 10d - (Id * 0.1))
+                    .RuleFor(t => t.TransactionTime, f => DateTime.UtcNow)
                     .RuleFor(t => t.FuelTankId, f => item.Id);
 
                 var s = remainingTransactionsFaker.Generate(3);
