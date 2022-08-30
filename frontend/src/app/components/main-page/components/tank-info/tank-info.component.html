@@ -5,16 +5,15 @@
             {{tank.name}}
         </div>
         <div class="tank-icon">
-            <fa-icon [icon]="infoIcon"></fa-icon>
+            <fa-icon [icon]="infoIcon" (click)="redirectToTankInfo()"></fa-icon>
         </div>
     </div>
-    <hr>
     <div class="height-container">
         <div class="height-icon">
             <fa-icon [icon]="rulerIcon"></fa-icon>
         </div>
         <div class="height">
-            8
+            {{tank.levelTransactions![0].height}}
         </div>
     </div>
     <div class="progress-bar-container">

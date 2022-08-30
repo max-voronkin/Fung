@@ -5,5 +5,5 @@ export interface Station
     id: number,
     name: string,
     userId: number
-    fuelTanks: Array<FuelTank>
+    fuelTanks?: Array<FuelTank>
 }

@@ -4,6 +4,7 @@ import { StationsPageComponent } from './stations-page/stations-page.component';
 import { MainPageOverlayComponent } from './main-page-overlay/main-page-overlay.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TankInfoComponent } from './components/tank-info/tank-info.component';
+import { StationInfoComponent } from './components/station-info/station-info.component';
 
 
 
@@ -11,7 +12,8 @@ import { TankInfoComponent } from './components/tank-info/tank-info.component';
   declarations: [
     StationsPageComponent,
     MainPageOverlayComponent,
-    TankInfoComponent
+    TankInfoComponent,
+    StationInfoComponent
   ],
   imports: [
     CommonModule,

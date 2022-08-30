@@ -20,4 +20,8 @@ export class TankInfoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  redirectToTankInfo() {
+    alert('Redirect to tank info page');
+  }
+
 }
