@@ -13,7 +13,7 @@ namespace Fung.COMMON.DTO.FuelTank
         public double CurrentAmount { get; set; }
         public DateTime UpdatedAt { get; set; }
         public int StationId { get; set; }
-        public ICollection<LevelIndicatorTransactionsDTO>? LavelTransactions { get; set; }
+        public ICollection<LevelIndicatorTransactionsDTO>? LevelTransactions { get; set; }
         public ICollection<RemainingTransactionsDTO>? RemainingTransactions { get; set; }
     }
 }
