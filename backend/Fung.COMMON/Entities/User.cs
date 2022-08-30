@@ -8,5 +8,6 @@
         public string Salt { get; set; } = null!;
         public bool IsEmailConfirmed { get; set; } = false;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public ICollection<Station>? Stations { get; set; }
     }
 }
