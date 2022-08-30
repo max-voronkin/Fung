@@ -84,6 +84,10 @@ namespace Fung_API.ConfigurationExtensions
             services.AddAutoMapper(conf =>
             {
                 conf.AddProfile<UserMappingProfile>();
+                conf.AddProfile<StationMappingProfile>();
+                conf.AddProfile<FuelTankMappingProfile>();
+                conf.AddProfile<LevelIndicatorMappingProfile>();
+                conf.AddProfile<RemainingTransactionsMappingProfile>();
             },
             Assembly.GetExecutingAssembly()); 
         }
