@@ -10,7 +10,7 @@ namespace Fung.DAL.EtitiesConfiguration
         {
             builder.HasKey(f => f.Id);
 
-            builder.HasMany(f => f.LavelTransactions)
+            builder.HasMany(f => f.LevelTransactions)
                 .WithOne()
                 .HasForeignKey(li => li.FuelTankId)
                 .IsRequired(false)

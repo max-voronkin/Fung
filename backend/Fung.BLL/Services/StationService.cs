@@ -16,7 +16,7 @@ namespace Fung.BLL.Services
         {
             var stations = await context.Stations.Where(s => s.UserId == userId)
                 .Include(s => s.FuelTanks!)
-                    .ThenInclude(ft => ft.LavelTransactions!.OrderByDescending(l => l.TransactionTime).Take(1))
+                    .ThenInclude(ft => ft.LevelTransactions!.OrderByDescending(l => l.TransactionTime).Take(1))
                 .Include(s => s.FuelTanks!)
                     .ThenInclude(ft => ft.RemainingTransactions!.OrderByDescending(r => r.TransactionTime).Take(1))
                 .ToListAsync();
