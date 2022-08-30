@@ -10,5 +10,8 @@
         public DateTime UpdatedAt { get; set; }
         public int StationId { get; set; }
 
+        public ICollection<LevelIndicatorTransactions>? LavelTransactions{ get; set; }
+        public ICollection<RemainingTransactions>? RemainingTransactions{ get; set; }
+
     }
 }
