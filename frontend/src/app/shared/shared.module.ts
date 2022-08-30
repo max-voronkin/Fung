@@ -27,6 +27,7 @@ import { FungSpinnerComponent } from './fung-spinner/fung-spinner.component';
   ],
   exports: [
     RouterModule,
+    FontAwesomeModule,
     FungLogoComponent,
     FungButtonComponent,
     FungInputComponent,
