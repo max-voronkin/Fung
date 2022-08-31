@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FungSideBarComponent } from './fung-side-bar/fung-side-bar.component';
 import { FungSpinnerComponent } from './fung-spinner/fung-spinner.component';
+import { TimeFromUpdatePipe } from '../pipes/time-from-update.pipe';
 
 
 
@@ -17,7 +18,8 @@ import { FungSpinnerComponent } from './fung-spinner/fung-spinner.component';
     FungButtonComponent,
     FungInputComponent,
     FungSideBarComponent,
-    FungSpinnerComponent
+    FungSpinnerComponent,
+    TimeFromUpdatePipe
   ],
   imports: [
     FontAwesomeModule,
@@ -33,7 +35,8 @@ import { FungSpinnerComponent } from './fung-spinner/fung-spinner.component';
     FungInputComponent,
     FormsModule,
     FungSideBarComponent,
-    FungSpinnerComponent
+    FungSpinnerComponent,
+    TimeFromUpdatePipe
   ]
 
 })
