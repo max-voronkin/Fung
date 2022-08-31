@@ -33,6 +33,9 @@ namespace Fung_API.Middleware
                     case UserAlreadyExistsException e:
                         await HandleUserAlreadyExistsException(httpContext, e);
                         break;
+                    case InvalidTokenException e:
+                        await HandleInvalidTokenException(httpContext, e);
+                        break;
                     default:
                         await HandleAnyException(httpContext, exception);
                         break;
@@ -55,6 +58,12 @@ namespace Fung_API.Middleware
         {
             logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
             await CreateExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message, ErrorCode.UserAlreadyExists);
+        }
+
+        private async Task HandleInvalidTokenException(HttpContext context, InvalidTokenException ex)
+        {
+            logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
+            await CreateExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message, ErrorCode.InvalidToken);
         }
 
         private async Task CreateExceptionAsync(HttpContext context, HttpStatusCode statusCode = HttpStatusCode.InternalServerError,

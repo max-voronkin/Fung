@@ -20,31 +20,57 @@
     flex-direction: row
     justify-content: space-between
 
-.height-container
-    padding-top: 10px
-    padding-left: 15px
+.values-container
     display: flex
     flex-direction: row
+    justify-content: space-between
+    padding: 15px
+
+.value-icon-container
+    display: flex
+    flex-direction: row
+    align-items: baseline
 
 .tank-icon
+    display: flex
+    flex-direction: row
+    align-items: center
+
+.info-icon
     color: color(blue-4)
     font-size: 24px
     &:hover
         cursor: pointer
         color: color(blue-2)
 
-.height-icon
+.icon
+    font-size: 30px
     color: color(blue-4)
 
-.height
+.value
     padding-left: 10px
 
 .progress-bar-container
     padding-left: 15px
     padding-right: 15px
+    position: relative
 
 .progress-bar
     height: 45px
     width: 100%
+
+.progress
+    color: color(violet-3)
+    font-size: 18px
+    position: absolute
+    top: 10px
+    left: 46%
+
+.last-update
+    font-size: 14px
+    margin-right: 10px
+    color: color(gray-2)
+    &.outdated
+        color: color(red-1)
         
     
