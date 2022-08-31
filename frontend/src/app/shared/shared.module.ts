@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { FungSideBarComponent } from './fung-side-bar/fung-side-bar.component';
 import { FungSpinnerComponent } from './fung-spinner/fung-spinner.component';
 import { TimeFromUpdatePipe } from '../pipes/time-from-update.pipe';
+import { DensityPipe } from '../pipes/density.pipe';
 
 
 
@@ -19,7 +20,8 @@ import { TimeFromUpdatePipe } from '../pipes/time-from-update.pipe';
     FungInputComponent,
     FungSideBarComponent,
     FungSpinnerComponent,
-    TimeFromUpdatePipe
+    TimeFromUpdatePipe,
+    DensityPipe
   ],
   imports: [
     FontAwesomeModule,
@@ -36,7 +38,8 @@ import { TimeFromUpdatePipe } from '../pipes/time-from-update.pipe';
     FormsModule,
     FungSideBarComponent,
     FungSpinnerComponent,
-    TimeFromUpdatePipe
+    TimeFromUpdatePipe,
+    DensityPipe
   ]
 
 })
