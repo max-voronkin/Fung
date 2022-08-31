@@ -14,10 +14,13 @@ export class TankInfoComponent implements OnInit {
   @Input() public tank: FuelTank = {} as FuelTank;
   infoIcon = faCircleInfo;
   rulerIcon = faRulerVertical;
+  progress: number | undefined;
+  
 
   constructor() { }
 
   ngOnInit(): void {
+    this.progress = this.tank.currentAmount / (this.tank.capacity / 100)
   }
 
   redirectToTankInfo() {

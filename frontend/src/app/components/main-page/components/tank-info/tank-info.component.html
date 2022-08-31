@@ -17,6 +17,9 @@
         </div>
     </div>
     <div class="progress-bar-container">
+        <div class="progress" *ngIf="progress">
+            {{progress+'%'}}
+        </div>
         <progress class="progress-bar" [value]="tank.currentAmount" [max]="tank.capacity"></progress>
     </div>
 </div>
