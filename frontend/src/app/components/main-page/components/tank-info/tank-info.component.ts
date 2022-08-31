@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { faCircleInfo, faRulerVertical } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faFlask, faRulerVertical, faTemperature0, faTemperatureFull } from '@fortawesome/free-solid-svg-icons';
 import { map, Subscription, timer } from 'rxjs';
 import { FuelTank } from 'src/models/Entities/fuel-tank';
 
@@ -15,6 +15,8 @@ export class TankInfoComponent implements OnInit, OnDestroy {
   @Input() public tank: FuelTank = {} as FuelTank;
   infoIcon = faCircleInfo;
   rulerIcon = faRulerVertical;
+  flaskIcon = faFlask;
+  temperatureIcon = faTemperatureFull;
   progress: number | undefined;
   minutesFromUpdate: number | undefined;
   
