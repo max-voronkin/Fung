@@ -5,7 +5,10 @@
             {{tank.name}}
         </div>
         <div class="tank-icon">
-            <fa-icon [icon]="infoIcon" (click)="redirectToTankInfo()"></fa-icon>
+            <div class="last-update" *ngIf="minutesFromUpdate" [ngClass]="{'outdated': minutesFromUpdate>10}">
+                <i>{{minutesFromUpdate | timeFromUpdate}}</i>
+            </div>
+            <fa-icon class="info-icon" [icon]="infoIcon" (click)="redirectToTankInfo()"></fa-icon>
         </div>
     </div>
     <div class="height-container">
