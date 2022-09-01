@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
 import { Station } from 'src/models/Entities/station';
 import { HttpService } from './http.service';
 
@@ -13,5 +12,9 @@ export class StationService {
 
   public GetStations() {
     return this.httpService.getFullRequest<Array<Station>>(`${this.routePrefix}`);
+  }
+
+  public GetStation(id: number) {
+    return this.httpService.getFullRequest<Station>(`${this.routePrefix}/${id}`);
   }
 }

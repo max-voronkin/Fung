@@ -12,7 +12,7 @@ namespace Fung.BLL.Services
         {
         }
 
-        public async Task<ICollection<StationDTO>> GetStationsInfo(int userId)
+        public async Task<ICollection<StationDTO>> GetStations(int userId)
         {
             var stations = await context.Stations.Where(s => s.UserId == userId)
                 .Include(s => s.FuelTanks!)
@@ -22,6 +22,19 @@ namespace Fung.BLL.Services
                 .ToListAsync();
 
             return mapper.Map<ICollection<StationDTO>>(stations);
+        }
+
+        public async Task<StationDTO> GetStation(int stationId)
+        {
+            var station = await context.Stations
+                .Include(s => s.FuelTanks!)
+                    .ThenInclude(ft => ft.LevelTransactions!.OrderByDescending(l => l.TransactionTime).Take(1))
+                .Include(s => s.FuelTanks!)
+                    .ThenInclude(ft => ft.RemainingTransactions!.OrderByDescending(r => r.TransactionTime).Take(1))
+                .FirstOrDefaultAsync(s => s.Id == stationId);
+
+            return mapper.Map<StationDTO>(station);
+
         }
     }
 }
