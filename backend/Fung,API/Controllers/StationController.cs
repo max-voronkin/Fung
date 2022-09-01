@@ -16,11 +16,18 @@ namespace Fung_API.Controllers
         {
             this.stationService = stationService;
         }
+
         [HttpGet]
         public async Task<ICollection<StationDTO>> GetStations()
         {
             var userId = this.GetUserIdFromToken();
-            return await stationService.GetStationsInfo(userId);
+            return await stationService.GetStations(userId);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<StationDTO> GetStation(int stationId)
+        {
+            return await stationService.GetStation(stationId);
         }
     }
 }
