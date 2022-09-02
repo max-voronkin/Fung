@@ -19,7 +19,7 @@ namespace Fung.BLL.Tests
         });
 
         protected DbContextOptions<DataContext> dbContextOptions = new DbContextOptionsBuilder<DataContext>()
-            .UseInMemoryDatabase("TestingDB")
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
     }
 }
