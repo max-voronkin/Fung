@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { faBook, faChartLine, faL, faRulerVertical } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { TankService } from 'src/app/services/tank.service';
 import { FuelTankInfoDTO } from 'src/models/DTO/FuelTank/fuel-tank-infoDTO';
-import { FuelTank } from 'src/models/Entities/fuel-tank';
 
 @Component({
   selector: 'app-tank-info-page',
@@ -16,6 +16,12 @@ export class TankInfoPageComponent implements OnInit {
   spinner = false;
   private unsubscribe$ = new Subject<void>();
   public tank: FuelTankInfoDTO = {} as FuelTankInfoDTO;
+  levelTransactions : boolean = true;
+  bookTransactions : boolean = false;
+  graphRepresentation : boolean = false;
+  bookIcon = faBook;
+  rulerIcon = faRulerVertical;
+  graphIcon = faChartLine;
   
   constructor(private route: ActivatedRoute, private tankService: TankService) { }
 
@@ -31,6 +37,24 @@ export class TankInfoPageComponent implements OnInit {
           this.tank = resp.body!
           this.spinner = !this.spinner;
         });
+  }
+
+  bookButtonClick() {
+    this.levelTransactions = false;
+    this.bookTransactions = true;
+    this.graphRepresentation = false;
+  }
+
+  rulerButtonClick() {
+    this.levelTransactions = true;
+    this.bookTransactions = false;
+    this.graphRepresentation = false;
+  }
+
+  graphButtonClick() {
+    this.levelTransactions = false;
+    this.bookTransactions = false;
+    this.graphRepresentation = true;
   }
 
 }
