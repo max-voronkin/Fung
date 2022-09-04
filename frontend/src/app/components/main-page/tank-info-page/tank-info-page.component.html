@@ -1,2 +1,16 @@
-<p>tank-info-page works!</p>
-{{tankId}}
+<fung-spinner *ngIf="spinner"></fung-spinner>
+<div class="tank-info-container">
+    <div class="info-container">
+        <div class="info-header">
+            <div class="station-name">
+                {{tank.stationName}}
+            </div>
+            <div class="tank-name">
+                {{tank.name}}
+            </div>
+        </div>
+    </div>
+    <div class="transactions-container">
+        transactions
+    </div>
+</div>
