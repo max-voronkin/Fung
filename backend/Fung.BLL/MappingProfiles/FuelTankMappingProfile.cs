@@ -10,6 +10,7 @@ namespace Fung.BLL.MappingProfiles
         {
             CreateMap<FuelTank, FuelTankDTO>();
             CreateMap<FuelTankDTO, FuelTank>();
+            CreateMap<FuelTank, FuelTankInfoDTO>();
         }
     }
 }
