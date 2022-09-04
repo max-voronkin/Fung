@@ -16,8 +16,8 @@ namespace Fung.BLL.Services
         public async Task<FuelTankInfoDTO> GetTank(int tankId)
         {
             var tank = await context.FuelTanks
-                .Include(t => t.LevelTransactions)
-                .Include(t => t.RemainingTransactions)
+                .Include(t => t.LevelTransactions!.OrderByDescending(l => l.TransactionTime).Take(50))
+                .Include(t => t.RemainingTransactions!.OrderByDescending(r => r.TransactionTime).Take(50))
                 .FirstOrDefaultAsync(t => t.Id == tankId);
 
             if (tank is null)
@@ -32,6 +32,7 @@ namespace Fung.BLL.Services
             {
                 throw new NotFoundException(nameof(station), tank.StationId);
             }
+
             tankInfoDto.StationName = station.Name;
 
             return tankInfoDto;
