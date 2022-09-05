@@ -17,8 +17,8 @@
             <fung-button-icon [icon]="graphIcon" [isActive]="graphRepresentation" (click)="graphButtonClick()"></fung-button-icon>
         </div>
         <div class="transactions">
-            <level-transactions *ngIf="levelTransactions"></level-transactions>
-            <book-transactions *ngIf="bookTransactions"></book-transactions>
+            <level-transactions *ngIf="levelTransactions" ></level-transactions>
+            <book-transactions-table *ngIf="bookTransactions" [transactions]="tank.remainingTransactions"></book-transactions-table>
         </div>         
     </div>
 </div>

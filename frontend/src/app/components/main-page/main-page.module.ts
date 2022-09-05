@@ -7,7 +7,7 @@ import { TankInfoComponent } from './components/tank-info/tank-info.component';
 import { StationInfoComponent } from './components/station-info/station-info.component';
 import { TankInfoPageComponent } from './tank-info-page/tank-info-page.component';
 import { LevelTransactionsComponent } from './components/level-transactions/level-transactions.component';
-import { BookTransactionsComponent } from './components/book-transactions/book-transactions.component';
+import { BookTransactionsTableComponent } from './components/book-transactions-table/book-transactions-table.component';
 
 
 
@@ -19,7 +19,7 @@ import { BookTransactionsComponent } from './components/book-transactions/book-t
     StationInfoComponent,
     TankInfoPageComponent,
     LevelTransactionsComponent,
-    BookTransactionsComponent
+    BookTransactionsTableComponent
   ],
   imports: [
     CommonModule,
