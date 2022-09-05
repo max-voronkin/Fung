@@ -6,8 +6,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { TankInfoComponent } from './components/tank-info/tank-info.component';
 import { StationInfoComponent } from './components/station-info/station-info.component';
 import { TankInfoPageComponent } from './tank-info-page/tank-info-page.component';
-import { LevelTransactionsComponent } from './components/level-transactions/level-transactions.component';
 import { BookTransactionsTableComponent } from './components/book-transactions-table/book-transactions-table.component';
+import { LevelTransactionsTableComponent } from './components/level-transactions-table/level-transactions-table.component';
 
 
 
@@ -18,7 +18,7 @@ import { BookTransactionsTableComponent } from './components/book-transactions-t
     TankInfoComponent,
     StationInfoComponent,
     TankInfoPageComponent,
-    LevelTransactionsComponent,
+    LevelTransactionsTableComponent,
     BookTransactionsTableComponent
   ],
   imports: [
