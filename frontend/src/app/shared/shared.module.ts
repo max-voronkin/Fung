@@ -11,6 +11,7 @@ import { FungSpinnerComponent } from './fung-spinner/fung-spinner.component';
 import { TimeFromUpdatePipe } from '../pipes/time-from-update.pipe';
 import { DensityPipe } from '../pipes/density.pipe';
 import { FungButtonIconComponent } from './fung-button-icon/fung-button-icon.component';
+import { VolumePipe } from '../pipes/volume.pipe';
 
 
 
@@ -23,7 +24,8 @@ import { FungButtonIconComponent } from './fung-button-icon/fung-button-icon.com
     FungSpinnerComponent,
     TimeFromUpdatePipe,
     DensityPipe,
-    FungButtonIconComponent
+    FungButtonIconComponent,
+    VolumePipe
   ],
   imports: [
     FontAwesomeModule,
@@ -42,7 +44,8 @@ import { FungButtonIconComponent } from './fung-button-icon/fung-button-icon.com
     FungSpinnerComponent,
     TimeFromUpdatePipe,
     DensityPipe,
-    FungButtonIconComponent
+    FungButtonIconComponent,
+    VolumePipe
   ]
 
 })
