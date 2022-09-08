@@ -8,6 +8,7 @@ import { StationInfoComponent } from './components/station-info/station-info.com
 import { TankInfoPageComponent } from './tank-info-page/tank-info-page.component';
 import { BookTransactionsTableComponent } from './components/book-transactions-table/book-transactions-table.component';
 import { LevelTransactionsTableComponent } from './components/level-transactions-table/level-transactions-table.component';
+import { BookTransactionComponent } from './components/book-transaction/book-transaction.component';
 
 
 
@@ -19,7 +20,8 @@ import { LevelTransactionsTableComponent } from './components/level-transactions
     StationInfoComponent,
     TankInfoPageComponent,
     LevelTransactionsTableComponent,
-    BookTransactionsTableComponent
+    BookTransactionsTableComponent,
+    BookTransactionComponent
   ],
   imports: [
     CommonModule,

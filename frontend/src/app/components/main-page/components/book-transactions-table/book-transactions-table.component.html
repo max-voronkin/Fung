@@ -5,6 +5,11 @@
         </div>
     </div>
     <div class="transactions-body">
-        
+        <div class="table-columns">
+            <div class="column-id column">Id</div>
+            <div class="column-value column">Value</div>
+            <div class="column-time column">Time</div>
+        </div>
+        <book-transaction *ngFor="let item of transactions" [transaction]="item"></book-transaction>
     </div>
 </div>

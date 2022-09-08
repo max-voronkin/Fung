@@ -16,7 +16,7 @@ export class TankInfoPageComponent implements OnInit {
   spinner = false;
   private unsubscribe$ = new Subject<void>();
   public tank: FuelTankInfoDTO = {} as FuelTankInfoDTO;
-  levelTransactions : boolean = true;
+  levelTransactions : boolean = false;
   bookTransactions : boolean = false;
   graphRepresentation : boolean = false;
   bookIcon = faBook;
@@ -36,6 +36,7 @@ export class TankInfoPageComponent implements OnInit {
         .subscribe((resp) => {
           this.tank = resp.body!
           this.spinner = !this.spinner;
+          this.bookTransactions = true;
         });
   }
 
