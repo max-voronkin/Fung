@@ -36,7 +36,7 @@ export class TankInfoPageComponent implements OnInit {
         .subscribe((resp) => {
           this.tank = resp.body!
           this.spinner = !this.spinner;
-          this.bookTransactions = true;
+          this.levelTransactions = true;
         });
   }
 

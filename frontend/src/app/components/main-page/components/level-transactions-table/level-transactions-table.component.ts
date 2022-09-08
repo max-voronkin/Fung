@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { LevelTransaction } from 'src/models/Entities/level-transaction';
 
 @Component({
   selector: 'level-transactions-table',
@@ -7,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LevelTransactionsTableComponent implements OnInit {
 
+  @Input() public transactions?: Array<LevelTransaction>;
+  public minutesFromLastTransaction!: number;
+
   constructor() { }
   ngOnInit(): void {
+    if (this.transactions)
+    {
+      this.minutesFromLastTransaction = Math.round((new Date().getTime() - new Date(this.transactions[0].transactionTime).getTime()) / 60000);
+    }
   }
 
 }

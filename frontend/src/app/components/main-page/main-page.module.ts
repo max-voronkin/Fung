@@ -9,6 +9,7 @@ import { TankInfoPageComponent } from './tank-info-page/tank-info-page.component
 import { BookTransactionsTableComponent } from './components/book-transactions-table/book-transactions-table.component';
 import { LevelTransactionsTableComponent } from './components/level-transactions-table/level-transactions-table.component';
 import { BookTransactionComponent } from './components/book-transaction/book-transaction.component';
+import { LevelTransactionComponent } from './components/level-transaction/level-transaction.component';
 
 
 
@@ -21,7 +22,8 @@ import { BookTransactionComponent } from './components/book-transaction/book-tra
     TankInfoPageComponent,
     LevelTransactionsTableComponent,
     BookTransactionsTableComponent,
-    BookTransactionComponent
+    BookTransactionComponent,
+    LevelTransactionComponent
   ],
   imports: [
     CommonModule,

@@ -1,2 +1,67 @@
 @import 'src/colors.sass'
+
+.level-transactions-container
+    font-family: Arial, Helvetica, sans-serif
+    padding: 10px
+    display: flex
+    flex-direction: column
+    height: 100%
+
+.transactions-header
+    font-weight: 550
+    font-size: 16px
+    display: flex
+    flex-direction: row-reverse
+
+.time-from-update
+    padding-right: 30px
+    padding-top: 20px
+
+.outdated
+    color: color(red-1)
+
+.transactions-body
+    margin: 30px
+    height: 100%
+    border-style: solid
+    border-width: 2px
+    border-radius: 20px
+    border-color: color(gray-2)
+
+.table-columns
+    font-weight: 550
+    font-size: 16px
+    display: flex
+    flex-direction: row
+    &:hover
+        cursor: default
+
+.column
+    padding-top: 10px
+    padding-bottom: 10px
+    text-align: center
     
+
+.column-id
+    width: 10%
+    border-style: none double double none
+
+.column-height
+    border-style: none double double none
+    width: 20%
+
+.column-temperature
+    border-style: none double double none
+    width: 20%
+
+.column-density
+    border-style: none double double none
+    width: 20%
+
+.column-value
+    border-style: none none double none
+    width: 10%
+
+.column-time
+    border-style: none none double double
+    width: 20%
