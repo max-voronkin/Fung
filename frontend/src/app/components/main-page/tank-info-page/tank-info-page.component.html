@@ -8,6 +8,42 @@
             <div class="tank-name">
                 {{tank.name}}
             </div>
+            <div class="tank-picture-container">
+                <div class="tank" (click)="toggleUnits()" [ngStyle]="gradientStyle">
+                    <div class="volume-percentage value"  *ngIf="displayValueInPercentage">
+                        {{volumeInPercentage}}%                     
+                    </div>
+                    <div class="volume-liters value" *ngIf="!displayValueInPercentage">
+                        {{tank.currentAmount}}/{{tank.capacity}}
+                    </div>
+                </div>
+            </div>
+            <div class="tank-values-container">
+                <div class="value-icon-container">
+                    <div class="icon">
+                        <fa-icon [icon]="rulerIcon"></fa-icon>
+                    </div>
+                    <div class="tank-value" *ngIf="tank.levelTransactions">
+                        {{tank.levelTransactions![0].height}}
+                    </div>
+                </div>
+                <div class="value-icon-container">
+                    <div class="icon">
+                        <fa-icon [icon]="flaskIcon"></fa-icon>
+                    </div>
+                    <div class="tank-value" *ngIf="tank.levelTransactions">
+                        {{tank.levelTransactions![0].density | density}}
+                    </div>
+                </div>
+                <div class="value-icon-container" *ngIf="tank.levelTransactions">
+                    <div class="icon">
+                        <fa-icon [icon]="temperatureIcon"></fa-icon>
+                    </div>
+                    <div class="tank-value">
+                        {{tank.levelTransactions![0].temperature}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="transactions-container">
