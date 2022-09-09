@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { faBook, faChartLine, faFlask, faL, faRulerVertical, faTemperatureFull } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
@@ -38,7 +37,7 @@ export class TankInfoPageComponent implements OnInit {
     return {'background-image': `linear-gradient(to top, #8AAAE5 0% ${this.volumeInPercentage}%, #ebebeb 0% ${100 - this.volumeInPercentage}%)`}
   }
 
-  constructor(private route: ActivatedRoute, private tankService: TankService, private sanitizer: DomSanitizer) { }
+  constructor(private route: ActivatedRoute, private tankService: TankService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
