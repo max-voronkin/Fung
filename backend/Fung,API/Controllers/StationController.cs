@@ -25,9 +25,9 @@ namespace Fung_API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<StationDTO> GetStation(int stationId)
+        public async Task<StationDTO> GetStation(int id)
         {
-            return await stationService.GetStation(stationId);
+            return await stationService.GetStation(id);
         }
     }
 }

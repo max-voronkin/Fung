@@ -1,13 +1,13 @@
 <div class="station-container">
     <div class="station-header">
-        <div class="station-name">
+        <div class="station-name" *ngIf="station">
             {{station.name}}
         </div>
         <div class="refresh-icon">
             <fa-icon [icon]="refreshIcon" (click)="refreshStation()"></fa-icon>
         </div>
     </div>
-    <div class="tanks-container">
+    <div class="tanks-container" *ngIf="station">
         <tank-info *ngFor="let tank of station.fuelTanks" [tank]="tank"></tank-info>
     </div>
 </div>
