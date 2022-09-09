@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faCircleInfo, faFlask, faRulerVertical, faTemperature0, faTemperatureFull } from '@fortawesome/free-solid-svg-icons';
 import { map, Subscription, timer } from 'rxjs';
 import { FuelTank } from 'src/models/Entities/fuel-tank';
@@ -22,7 +23,7 @@ export class TankInfoComponent implements OnInit, OnDestroy {
   
   timerSubscription?: Subscription; 
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.timerSubscription = timer(0, 60000).pipe( 
@@ -39,7 +40,10 @@ export class TankInfoComponent implements OnInit, OnDestroy {
   } 
 
   redirectToTankInfo() {
-    alert('Redirect to tank info page');
+    this.router.navigate(['../tank/'+ this.tank.id], {
+      replaceUrl: true,
+      relativeTo: this.route
+    });
   }
 
   updateTime() {

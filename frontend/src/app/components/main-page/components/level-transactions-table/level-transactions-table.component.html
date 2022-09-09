@@ -1,0 +1,18 @@
+<div class="level-transactions-container">
+    <div class="transactions-header" *ngIf="transactions">
+        <div class="time-from-update" >
+            Last update: <i [ngClass]="{'outdated': minutesFromLastTransaction>10}">{{minutesFromLastTransaction | timeFromUpdate}}</i>
+        </div>
+    </div>
+    <div class="transactions-body">
+        <div class="table-columns">
+            <div class="column-id column">Id</div>
+            <div class="column-height column">Height</div>
+            <div class="column-temperature column">Temperature</div>
+            <div class="column-density column">Density</div>
+            <div class="column-value column">Volume</div>
+            <div class="column-time column">Time</div>
+        </div>
+        <level-transaction *ngFor="let item of transactions" [transaction]="item"></level-transaction>
+    </div>
+</div>

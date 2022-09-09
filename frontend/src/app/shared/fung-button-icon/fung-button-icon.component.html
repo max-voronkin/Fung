@@ -1,0 +1,7 @@
+<button 
+class="icon-button"
+[ngStyle]="{'width': width, 'height': height}"
+[ngClass]="{'active': isActive}"
+type="button">
+<fa-icon class="icon" *ngIf="icon" [icon]="icon"></fa-icon>
+</button>

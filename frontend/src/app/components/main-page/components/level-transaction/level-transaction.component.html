@@ -1,0 +1,20 @@
+<div class="level-transaction-container">
+    <div class="transaction-id cell">
+        {{transaction.id}}
+    </div>
+    <div class="transaction-height cell">
+        {{transaction.height}}
+    </div>
+    <div class="transaction-temperature cell">
+        {{transaction.temperature}}
+    </div>
+    <div class="transaction-density cell">
+        {{transaction.density | density}}
+    </div>
+    <div class="transaction-volume cell">
+        {{transaction.volume | volume}}
+    </div>
+    <div class="transaction-time cell">
+        {{transaction.transactionTime | date:'d/M/yy, h:mm'}}
+    </div>
+</div>
