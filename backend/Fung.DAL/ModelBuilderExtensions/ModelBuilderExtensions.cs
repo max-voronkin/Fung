@@ -55,7 +55,7 @@ namespace Fung.DAL.ModelBuilderExtensions
                 .RuleFor(t => t.Name, f => f.Lorem.Word())
                 .RuleFor(t => t.Number, f => Id++)
                 .RuleFor(t => t.Capacity, f => 10d)
-                .RuleFor(t => t.CurrentAmount, f => 3.5d + Id)
+                .RuleFor(t => t.CurrentAmount, f => 9.35d - (Id * 0.01d))
                 .RuleFor(t => t.StationId, f => station.Id)
                 .RuleFor(t => t.UpdatedAt, f => DateTime.UtcNow);
             return fuelTankFaker.Generate(3);
@@ -69,11 +69,11 @@ namespace Fung.DAL.ModelBuilderExtensions
             {          
                 var remainingTransactionsFaker = new Faker<RemainingTransactions>()
                     .RuleFor(t => t.Id, f => Id++)
-                    .RuleFor(t => t.Value, f => 10d - (Id * 0.1))
-                    .RuleFor(t => t.TransactionTime, f => DateTime.UtcNow)
+                    .RuleFor(t => t.Value, f => 7d - (Id * 0.01d))
+                    .RuleFor(t => t.TransactionTime, f => DateTime.UtcNow.AddMinutes(-Id))
                     .RuleFor(t => t.FuelTankId, f => item.Id);
 
-                var s = remainingTransactionsFaker.Generate(3);
+                var s = remainingTransactionsFaker.Generate(100);
                 transactions.AddRange(s);
             }
             return transactions;
@@ -87,13 +87,13 @@ namespace Fung.DAL.ModelBuilderExtensions
             {
                 var levelTransactionsFaker = new Faker<LevelIndicatorTransactions>()
                     .RuleFor(t => t.Id, f => Id++)
-                    .RuleFor(t => t.Height, f => 10d - (Id * 0.1))
+                    .RuleFor(t => t.Height, f => 10d - (Id * 0.01))
                     .RuleFor(t => t.Temperature, f => f.Random.Number(40))
-                    .RuleFor(t => t.Volume, f => f.Random.Double(0, 10))
+                    .RuleFor(t => t.Volume, f => 7d - (Id * 0.01d))
                     .RuleFor(t => t.Density, f => f.Random.Double(0, 1000))
-                    .RuleFor(t => t.TransactionTime, f => DateTime.UtcNow)
+                    .RuleFor(t => t.TransactionTime, f => DateTime.UtcNow.AddMinutes(-Id))
                     .RuleFor(t => t.FuelTankId, f => item.Id);
-                transactions.AddRange(levelTransactionsFaker.Generate(3));
+                transactions.AddRange(levelTransactionsFaker.Generate(100));
             }
             return transactions;
         }
