@@ -10,7 +10,7 @@ import { BookTransactionsTableComponent } from './components/book-transactions-t
 import { LevelTransactionsTableComponent } from './components/level-transactions-table/level-transactions-table.component';
 import { BookTransactionComponent } from './components/book-transaction/book-transaction.component';
 import { LevelTransactionComponent } from './components/level-transaction/level-transaction.component';
-import { LevelChartComponent } from './components/level-chart/level-chart.component';
+import { LevelChartComponent } from './components/charts/level-chart/level-chart.component';
 import { NgChartsModule } from 'ng2-charts';
 import { LevelChartsComponent } from './components/level-charts/level-charts.component';
 
