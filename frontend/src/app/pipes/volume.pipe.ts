@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class VolumePipe implements PipeTransform {
 
   transform(value: number): number {
-    return Math.round(value * 10) / 10;
+    return Math.round(value * 1000) / 1000 * 1000;
   }
 
 }
