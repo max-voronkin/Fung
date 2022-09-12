@@ -12,6 +12,9 @@ import { TimeFromUpdatePipe } from '../pipes/time-from-update.pipe';
 import { DensityPipe } from '../pipes/density.pipe';
 import { FungButtonIconComponent } from './fung-button-icon/fung-button-icon.component';
 import { VolumePipe } from '../pipes/volume.pipe';
+import { MaterialModule } from '../material/material.module';
+import { FungDropdownComponent } from './fung-dropdown/fung-dropdown.component';
+import { ClickOutsideDirective } from '../directives/click-outside.directive';
 
 
 
@@ -25,13 +28,16 @@ import { VolumePipe } from '../pipes/volume.pipe';
     TimeFromUpdatePipe,
     DensityPipe,
     FungButtonIconComponent,
-    VolumePipe
+    VolumePipe,
+    FungDropdownComponent,
+    ClickOutsideDirective
   ],
   imports: [
     FontAwesomeModule,
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    MaterialModule
   ],
   exports: [
     RouterModule,
@@ -45,7 +51,9 @@ import { VolumePipe } from '../pipes/volume.pipe';
     TimeFromUpdatePipe,
     DensityPipe,
     FungButtonIconComponent,
-    VolumePipe
+    VolumePipe,
+    MaterialModule,
+    FungDropdownComponent
   ]
 
 })
