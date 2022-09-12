@@ -76,6 +76,7 @@ namespace Fung_API.ConfigurationExtensions
             services.AddScoped<UserService>();
             services.AddScoped<StationService>();
             services.AddScoped<TankService>();
+            services.AddScoped<LevelTransactionService>();
 
         }
 
