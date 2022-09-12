@@ -55,7 +55,7 @@
         <div class="transactions">
             <level-transactions-table *ngIf="levelTransactions" [transactions]="tank.levelTransactions"></level-transactions-table>
             <book-transactions-table *ngIf="bookTransactions" [transactions]="tank.remainingTransactions"></book-transactions-table>
-            <level-charts *ngIf="graphRepresentation"></level-charts>
+            <level-charts *ngIf="graphRepresentation" [transactions]="tank.levelTransactions!" [tankCapacity]="tank.capacity"></level-charts>
         </div>         
     </div>
 </div>

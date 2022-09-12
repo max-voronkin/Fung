@@ -1,1 +1,8 @@
-<p>level-charts works!</p>
+    <div class="charts-container">
+        <div class="dropdowns">
+            <fung-dropdown width="15%" height="30px" minWidth="150px" [options]="typeOptions" class="dropdown" (onSelect)="changeType($event)"></fung-dropdown>
+            <fung-dropdown width="10%" height="30px" minWidth="140px" [options]="periodOptions" class="dropdown" (onSelect)="changeTime($event)"></fung-dropdown>
+        </div>
+        <level-chart [transactions]="transactions" [tankCapacity]="tankCapacity"></level-chart>
+    </div>
+  
