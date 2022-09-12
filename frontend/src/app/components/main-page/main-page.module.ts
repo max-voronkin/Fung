@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { StationsPageComponent } from './stations-page/stations-page.component';
 import { MainPageOverlayComponent } from './main-page-overlay/main-page-overlay.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -13,6 +13,7 @@ import { LevelTransactionComponent } from './components/level-transaction/level-
 import { LevelChartComponent } from './components/charts/level-chart/level-chart.component';
 import { NgChartsModule } from 'ng2-charts';
 import { LevelChartsComponent } from './components/level-charts/level-charts.component';
+import { VolumePipe } from 'src/app/pipes/volume.pipe';
 
 
 
@@ -34,6 +35,10 @@ import { LevelChartsComponent } from './components/level-charts/level-charts.com
     CommonModule,
     SharedModule,
     NgChartsModule
+  ],
+  providers: [
+    VolumePipe,
+    DatePipe
   ]
 })
 export class MainPageModule { }
