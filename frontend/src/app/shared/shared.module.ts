@@ -15,6 +15,7 @@ import { VolumePipe } from '../pipes/volume.pipe';
 import { MaterialModule } from '../material/material.module';
 import { FungDropdownComponent } from './fung-dropdown/fung-dropdown.component';
 import { ClickOutsideDirective } from '../directives/click-outside.directive';
+import { HeightPipe } from '../pipes/height.pipe';
 
 
 
@@ -30,7 +31,8 @@ import { ClickOutsideDirective } from '../directives/click-outside.directive';
     FungButtonIconComponent,
     VolumePipe,
     FungDropdownComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    HeightPipe
   ],
   imports: [
     FontAwesomeModule,
