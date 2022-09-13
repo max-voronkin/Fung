@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faArrowAltCircleDown, faArrowAltCircleUp, faCaretDown, faCaretUp, faL } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 export interface DropdownOption {
   option: string,
