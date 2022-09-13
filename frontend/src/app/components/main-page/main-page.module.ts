@@ -10,10 +10,14 @@ import { BookTransactionsTableComponent } from './components/book-transactions-t
 import { LevelTransactionsTableComponent } from './components/level-transactions-table/level-transactions-table.component';
 import { BookTransactionComponent } from './components/book-transaction/book-transaction.component';
 import { LevelTransactionComponent } from './components/level-transaction/level-transaction.component';
-import { LevelChartComponent } from './components/charts/level-chart/level-chart.component';
 import { NgChartsModule } from 'ng2-charts';
 import { LevelChartsComponent } from './components/level-charts/level-charts.component';
 import { VolumePipe } from 'src/app/pipes/volume.pipe';
+import { VolumeChartComponent } from './components/charts/volume-chart/volume-chart.component';
+import { HeightChartComponent } from './components/charts/height-chart/height-chart.component';
+import { DensityChartComponent } from './components/charts/density-chart/density-chart.component';
+import { HeightPipe } from 'src/app/pipes/height.pipe';
+import { DensityPipe } from 'src/app/pipes/density.pipe';
 
 
 
@@ -28,8 +32,10 @@ import { VolumePipe } from 'src/app/pipes/volume.pipe';
     BookTransactionsTableComponent,
     BookTransactionComponent,
     LevelTransactionComponent,
-    LevelChartComponent,
-    LevelChartsComponent
+    VolumeChartComponent,
+    LevelChartsComponent,
+    HeightChartComponent,
+    DensityChartComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +44,9 @@ import { VolumePipe } from 'src/app/pipes/volume.pipe';
   ],
   providers: [
     VolumePipe,
-    DatePipe
+    DatePipe,
+    HeightPipe,
+    DensityPipe
   ]
 })
 export class MainPageModule { }
