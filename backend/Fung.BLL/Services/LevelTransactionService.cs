@@ -13,15 +13,20 @@ namespace Fung.BLL.Services
         {
         }
 
-        public async Task<ICollection<LevelIndicatorTransactionDTO>> GetOneHourInfo(int tankId)
+        public async Task<List<LevelIndicatorTransactionDTO>> GetTransactionsByTimePeriod(int tankId, int hours)
         {
+            var lastTransaction = await context.LevelIndicatorTransactions
+                .Where(t => t.FuelTankId == tankId)
+                .OrderByDescending(t => t.TransactionTime)
+                .FirstOrDefaultAsync();
+
             var transactions = await context.LevelIndicatorTransactions
                 .Where(t => t.FuelTankId == tankId)
                 .OrderByDescending(t => t.TransactionTime)
-                .TakeWhile(t => t.TransactionTime <= DateTime.UtcNow.AddHours(-1))
+                .Where(t => t.TransactionTime >= lastTransaction!.TransactionTime.AddHours(-hours))
                 .ToListAsync();
 
-            return mapper.Map<ICollection<LevelIndicatorTransactionDTO>>(transactions);
+            return mapper.Map<List<LevelIndicatorTransactionDTO>>(transactions);
         }
     }
 }
