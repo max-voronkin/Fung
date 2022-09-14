@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainPageModule } from './components/main-page/main-page.module';
 import { JwtInterceptor } from './services/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './services/helpers/error.interceptor';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ErrorInterceptor } from './services/helpers/error.interceptor';
     SharedModule,
     AuthModule,
     HttpClientModule,
-    MainPageModule
+    MainPageModule,
+    NgChartsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

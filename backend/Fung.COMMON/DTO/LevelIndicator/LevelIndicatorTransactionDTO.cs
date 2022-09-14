@@ -1,6 +1,6 @@
 ﻿namespace Fung.COMMON.DTO.LevelIndicator
 {
-    public sealed class LevelIndicatorTransactionsDTO
+    public sealed class LevelIndicatorTransactionDTO
     {
         public int Id { get; set; }
         public double Height { get; set; }

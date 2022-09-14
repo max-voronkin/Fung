@@ -1,0 +1,20 @@
+<div class="dropdown-container" [ngStyle]="{'width': width, 'min-width': minWidth}" ClickOutsideDirective (clickOutside)="clickedOutside()">
+    <div class="dropdown-label" *ngIf="label">
+        {{label}}
+    </div>
+    <div class="dropdown" [ngStyle]="{'height': height}" (click)="toggleDropdown()">
+        <div class="selected_item" *ngIf="selectedOption">
+            {{selectedOption.option}}
+        </div>
+        <div class="dropdown-icon">
+            <fa-icon [icon]="dropdownIcon" *ngIf="!expanded"></fa-icon>
+            <fa-icon [icon]="dropdownExpandedIcon" *ngIf="expanded"></fa-icon>
+        </div>
+    </div>
+    <div class="dropdown-options" *ngIf="expanded">
+        <div class="option" *ngFor="let opt of options" (click)="selectOption(opt)">
+            {{opt.option}}
+        </div>
+    </div>
+
+</div>
