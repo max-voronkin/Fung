@@ -1,5 +1,12 @@
-<fung-spinner *ngIf="spinner"></fung-spinner>
-<div class="stations-container">
-    <station-info *ngFor="let st of stations" [station]="st"></station-info>
+<div class="container">
+    <fung-side-bar></fung-side-bar>
+    <div class="content">
+        <fung-spinner *ngIf="spinner"></fung-spinner>
+        <div class="stations-container">
+            <station-info *ngFor="let st of stations" [station]="st"></station-info>
+        </div>
+    </div>   
 </div>
+
+
 

@@ -10,7 +10,7 @@ export class EventService {
 
   public userLoggedIn()
   {
-    this.router.navigate(['/main'], {
+    this.router.navigate(['/stations'], {
       replaceUrl: true,
       relativeTo: this.route
     });
@@ -18,7 +18,7 @@ export class EventService {
 
   public userLoggedOut()
   {
-    this.router.navigate(['/auth'], {
+    this.router.navigate(['/auth/login'], {
       replaceUrl: true,
       relativeTo: this.route
     });
