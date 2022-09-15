@@ -26,6 +26,7 @@ Station ||--o{ FuelTank : Id_StationId
 Station {
   Id int PK
   Name string
+  Token sting
   UserId int FK
 }
 
@@ -48,6 +49,7 @@ LevelIndicator_Transactions {
   Volume numeric
   Density numeric
   TransactionTime datetime
+  CreatedAt datetime
   FuelTankId int FK
 }
 
@@ -55,6 +57,7 @@ Remaining_Transactions {
   Id int PK
   Volume numeric
   TransactionTime datetime
+  CreatedAt datetime
   FuelTankId int FK
 }
 
