@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthRoutes } from './components/auth/auth.routes';
-import { StationsPageComponent } from './components/main-page/stations-page/stations-page.component';
-import { TankInfoPageComponent } from './components/main-page/tank-info-page/tank-info-page.component';
+import { AuthRoutes } from './pages/auth/auth.routes';
+import { StationsPageComponent } from './pages/main-page/stations-page/stations-page.component';
+import { TankInfoPageComponent } from './pages/main-page/tank-info-page/tank-info-page.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
