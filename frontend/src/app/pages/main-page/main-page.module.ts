@@ -17,6 +17,7 @@ import { HeightChartComponent } from './components/charts/height-chart/height-ch
 import { DensityChartComponent } from './components/charts/density-chart/density-chart.component';
 import { HeightPipe } from 'src/app/pipes/height.pipe';
 import { DensityPipe } from 'src/app/pipes/density.pipe';
+import { SettingsPageComponent } from '../settings-page/settings-page.component';
 
 
 
@@ -33,7 +34,8 @@ import { DensityPipe } from 'src/app/pipes/density.pipe';
     VolumeChartComponent,
     LevelChartsComponent,
     HeightChartComponent,
-    DensityChartComponent
+    DensityChartComponent,
+    SettingsPageComponent
   ],
   imports: [
     CommonModule,
