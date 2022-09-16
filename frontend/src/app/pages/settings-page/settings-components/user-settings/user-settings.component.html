@@ -2,5 +2,5 @@
     <div class="email">
         {{user?.email}}
     </div>
-    <settings-menu-item></settings-menu-item>
+    <settings-menu-item label="Change password" [icon]="caretRightIcon" (click)="onChangePasswordClick()"></settings-menu-item>
 </div>
