@@ -8,14 +8,14 @@
                 </div>
             </div>
         </div>
-        <div class="icon-block">
+        <div class="icon-block" (click)="onHomeClick()">
             <div class="icon-wrapper">
                 <fa-icon class="icon" [icon]="homeIcon"></fa-icon>
             </div>
             <div class="label" *ngIf="expanded">Stations</div>
         </div>
         <div class="bottom-buttons">
-            <div class="icon-block">
+            <div class="icon-block" (click)="onSettingsClick()">
                 <div class="icon-wrapper">
                     <fa-icon class="icon" [icon]="gearsIcon"></fa-icon>
                 </div>

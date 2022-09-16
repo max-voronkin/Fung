@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowRightFromBracket, faBars, faEllipsisVertical, faGears, faHouse, faL } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { EventService } from 'src/app/services/event.service';
@@ -18,18 +19,32 @@ export class FungSideBarComponent implements OnInit {
   dotsIcon = faEllipsisVertical;
   gearsIcon = faGears;
   
-  constructor(private authService: AuthService, private eventService: EventService) { }
+  constructor(private authService: AuthService, private eventService: EventService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
-  toggleExpanded() {
+  toggleExpanded(): void {
     this.expanded = !this.expanded;
   }
 
-  onLogoutClick() {
+  onLogoutClick(): void {
     this.authService.logout();
     this.eventService.userLoggedOut();
+  }
+
+  onSettingsClick(): void {
+    this.router.navigate(['/settings'], {
+      replaceUrl: true,
+      relativeTo: this.route
+    });
+  }
+
+  onHomeClick(): void {
+    this.router.navigate(['/stations'], {
+      replaceUrl: true,
+      relativeTo: this.route
+    });
   }
 
 }
