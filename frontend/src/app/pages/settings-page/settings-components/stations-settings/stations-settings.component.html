@@ -1,1 +1,7 @@
-<p>stations-settings works!</p>
+<div class="stations-settings-container">
+    <div class="stations-header">
+        Stations
+    </div>
+    <settings-menu-item *ngFor="let station of stations" [label]="station.name" [icon]="caretRightIcon" (click)="onStationClick(station)"></settings-menu-item>
+    <settings-menu-item label="Create station" [icon]="plusIcon" (click)="onCreateStationClick()"></settings-menu-item>
+</div>
