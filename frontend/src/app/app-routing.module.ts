@@ -4,7 +4,7 @@ import { AuthRoutes } from './pages/auth/auth.routes';
 import { StationsPageComponent } from './pages/main-page/stations-page/stations-page.component';
 import { TankInfoPageComponent } from './pages/main-page/tank-info-page/tank-info-page.component';
 import { AuthGuard } from './guards/auth.guard';
-import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+import { SettingsPageComponent } from './pages/settings-page/settings-page/settings-page.component';
 
 const routes: Routes = [
   ...AuthRoutes,
