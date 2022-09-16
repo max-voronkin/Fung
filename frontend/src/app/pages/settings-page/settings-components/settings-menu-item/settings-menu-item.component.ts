@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'settings-menu-item',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings-menu-item.component.sass']
 })
 export class SettingsMenuItemComponent implements OnInit {
+
+  @Input() public label: string = 'placeholder';
+  @Input() public icon?: IconDefinition = undefined;
 
   constructor() { }
 
