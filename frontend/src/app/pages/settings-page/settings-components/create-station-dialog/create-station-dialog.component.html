@@ -1,0 +1,11 @@
+<form class="create-station" [formGroup]="stationForm">
+    <div class="top-actions">
+        <fa-icon [icon]="exitIcon" class="exit-icon" (click)="closeForm()"></fa-icon>
+    </div>
+    <div class="form">
+        <fung-input label="Enter station name" [formControl]="stationNameControl" placeholder="Name" [errorMessage]="nameError"></fung-input>  
+    </div>
+    <div class="bottom-actions">
+        <fung-button label="Create" width="200px" height="40px" (click)="submitForm()"></fung-button>
+    </div>
+</form>

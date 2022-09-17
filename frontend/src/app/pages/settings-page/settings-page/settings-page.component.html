@@ -3,8 +3,8 @@
     <div class="content">
         <fung-spinner *ngIf="spinner"></fung-spinner>
         <div class="settings-container">
-            <user-settings></user-settings>
-            <stations-settings></stations-settings>
+            <user-settings [user]="currentUser"></user-settings>
+            <stations-settings [user]="currentUser"></stations-settings>
             <units-settings></units-settings>
         </div>
     </div>   

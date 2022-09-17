@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { StationCreateDTO } from 'src/models/DTO/Station/station-CreateDTO';
 import { Station } from 'src/models/Entities/station';
 import { HttpService } from './http.service';
 
@@ -16,5 +17,9 @@ export class StationService {
 
   public GetStation(id: number) {
     return this.httpService.getFullRequest<Station>(`${this.routePrefix}/${id}`);
+  }
+
+  public CreateStation(stationDTO: StationCreateDTO) {
+    return this.httpService.postFullRequest<Station>(`${this.routePrefix}`, stationDTO);
   }
 }

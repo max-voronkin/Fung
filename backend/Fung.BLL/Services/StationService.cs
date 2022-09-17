@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Fung.BLL.Exceptions;
 using Fung.BLL.Services.Abstract;
 using Fung.COMMON.DTO.Station;
+using Fung.COMMON.Entities;
 using Fung.DAL;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,6 +37,25 @@ namespace Fung.BLL.Services
 
             return mapper.Map<StationDTO>(station);
 
+        }
+
+        public async Task<StationDTO> CreateStation(StationCreateDTO newStationDTO)
+        {
+            var station = new Station()
+            {
+                Name = newStationDTO.Name,
+                UserId = newStationDTO.UserId
+            };
+
+            await context.Stations.AddAsync(station);
+            await context.SaveChangesAsync();
+
+            var createdStation = await context.Stations.FirstOrDefaultAsync(s => s.Id == station.Id);
+            if (createdStation is null)
+            {
+                throw new NotFoundException(nameof(Station));
+            }
+            return mapper.Map<StationDTO>(createdStation);
         }
     }
 }

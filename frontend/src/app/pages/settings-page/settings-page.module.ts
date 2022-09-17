@@ -6,6 +6,8 @@ import { UserSettingsComponent } from './settings-components/user-settings/user-
 import { StationsSettingsComponent } from './settings-components/stations-settings/stations-settings.component';
 import { UnitsSettingsComponent } from './settings-components/units-settings/units-settings.component';
 import { SettingsMenuItemComponent } from './settings-components/settings-menu-item/settings-menu-item.component';
+import { CreateStationDialogComponent } from './settings-components/create-station-dialog/create-station-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,11 +17,13 @@ import { SettingsMenuItemComponent } from './settings-components/settings-menu-i
     UserSettingsComponent,
     StationsSettingsComponent,
     UnitsSettingsComponent,
-    SettingsMenuItemComponent
+    SettingsMenuItemComponent,
+    CreateStationDialogComponent
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class SettingsPageModule { }
