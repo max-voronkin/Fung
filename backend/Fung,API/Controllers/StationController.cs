@@ -29,5 +29,11 @@ namespace Fung_API.Controllers
         {
             return await stationService.GetStation(id);
         }
+
+        [HttpPost]
+        public async Task<StationDTO> CreateStation([FromBody] StationCreateDTO newStationDTO)
+        {
+            return await stationService.CreateStation(newStationDTO);
+        }
     }
 }
