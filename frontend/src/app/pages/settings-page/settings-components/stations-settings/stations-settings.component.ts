@@ -31,14 +31,25 @@ export class StationsSettingsComponent implements OnInit {
   }
 
   onCreateStationClick(): void {
-    this.dialog.open(CreateStationDialogComponent, {
+    let dialogRef = this.dialog.open(CreateStationDialogComponent, {
       data: this.user?.id,
       panelClass: 'mat-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res != undefined)
+      {
+        this.addStationToList(res);
+      }
     });
   }
 
   onStationClick(station: Station): void {
     alert('In development');
+  }
+
+  addStationToList(station: Station): void {
+    this.stations.push(station);
   }
 
 }

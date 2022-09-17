@@ -1,10 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { StationService } from 'src/app/services/station.service';
 import { StationCreateDTO } from 'src/models/DTO/Station/station-CreateDTO';
+import { Station } from 'src/models/Entities/station';
 import { CreateStationValidationConstants } from 'src/models/validation-settings/create-station-validation';
 
 @Component({
@@ -42,10 +43,11 @@ export class CreateStationDialogComponent implements OnInit {
       this.newStation.name = this.stationNameControl.value;
       this.stationService.CreateStation(this.newStation).pipe(takeUntil(this.unsubscribe$))
         .subscribe((resp) => {
-          console.log(resp.body);
-        });
-        
-      this.dialogRef.close();
+          if (resp.body != null)
+          {
+            this.dialogRef.close(resp.body);
+          }
+        });    
     }
   }
 
