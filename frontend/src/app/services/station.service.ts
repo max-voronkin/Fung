@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StationCreateDTO } from 'src/models/DTO/Station/station-CreateDTO';
+import { StationCreateDTO } from 'src/models/DTO/Station/station-createDTO';
 import { Station } from 'src/models/Entities/station';
 import { HttpService } from './http.service';
 
