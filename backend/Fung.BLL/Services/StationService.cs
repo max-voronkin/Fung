@@ -48,6 +48,7 @@ namespace Fung.BLL.Services
             };
 
             await context.Stations.AddAsync(station);
+            await context.SaveChangesAsync();
 
             var createdStation = await context.Stations.FirstOrDefaultAsync(s => s.Id == station.Id);
             if (createdStation is null)
