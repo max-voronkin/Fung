@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/models/Entities/user';
 
 @Component({
@@ -10,14 +9,13 @@ import { User } from 'src/models/Entities/user';
 })
 export class UserSettingsComponent implements OnInit {
 
-  public user!: User | null;
+  @Input() public user!: User | null;
 
   caretRightIcon = faCaretRight;
 
-  constructor(private userService: UserService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.user = this.userService.getUser();
   }
 
   onChangePasswordClick(): void {

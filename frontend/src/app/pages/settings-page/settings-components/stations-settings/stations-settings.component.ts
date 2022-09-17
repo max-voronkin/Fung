@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { faCaretRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { StationService } from 'src/app/services/station.service';
 import { Station } from 'src/models/Entities/station';
+import { User } from 'src/models/Entities/user';
 import { CreateStationDialogComponent } from '../create-station-dialog/create-station-dialog.component';
 
 @Component({
@@ -17,6 +18,7 @@ export class StationsSettingsComponent implements OnInit {
   plusIcon = faPlus;
   private unsubscribe$ = new Subject<void>();
 
+  @Input() public user!: User | null;
   public stations!: Array<Station>;
 
   constructor(private stationService: StationService, private dialog: MatDialog) { }
@@ -30,7 +32,7 @@ export class StationsSettingsComponent implements OnInit {
 
   onCreateStationClick(): void {
     this.dialog.open(CreateStationDialogComponent, {
-      data: 1,
+      data: this.user?.id,
       panelClass: 'mat-dialog'
     });
   }
