@@ -6,6 +6,7 @@ import { StationService } from 'src/app/services/station.service';
 import { Station } from 'src/models/Entities/station';
 import { User } from 'src/models/Entities/user';
 import { CreateStationDialogComponent } from '../create-station-dialog/create-station-dialog.component';
+import { StationInfoDialogComponent } from '../station-info-dialog/station-info-dialog.component';
 
 @Component({
   selector: 'stations-settings',
@@ -21,7 +22,7 @@ export class StationsSettingsComponent implements OnInit {
   @Input() public user!: User | null;
   public stations!: Array<Station>;
 
-  constructor(private stationService: StationService, private dialog: MatDialog) { }
+  constructor(private stationService: StationService, private dialogCreate: MatDialog, private dialogInfo: MatDialog) { }
 
   ngOnInit(): void {
     this.stationService.GetStations().pipe(takeUntil(this.unsubscribe$))
@@ -31,7 +32,7 @@ export class StationsSettingsComponent implements OnInit {
   }
 
   onCreateStationClick(): void {
-    let dialogRef = this.dialog.open(CreateStationDialogComponent, {
+    let dialogRef = this.dialogCreate.open(CreateStationDialogComponent, {
       data: this.user?.id,
       panelClass: 'mat-dialog'
     });
@@ -45,7 +46,10 @@ export class StationsSettingsComponent implements OnInit {
   }
 
   onStationClick(station: Station): void {
-    alert('In development');
+    this.dialogInfo.open(StationInfoDialogComponent, {
+      data: station,
+      panelClass: 'mat-dialog'
+    });
   }
 
   addStationToList(station: Station): void {
