@@ -1,4 +1,4 @@
 export interface StationCreateDTO {
-    userId: number,
+    userId: number
     name:  string
 }
