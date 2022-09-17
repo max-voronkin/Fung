@@ -1,0 +1,17 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-settings-page',
+  templateUrl: './settings-page.component.html',
+  styleUrls: ['./settings-page.component.sass']
+})
+export class SettingsPageComponent implements OnInit {
+
+  public spinner = false;
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}

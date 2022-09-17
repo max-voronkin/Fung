@@ -7,12 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from './shared/shared.module';
-import { AuthModule } from './components/auth/auth.module';
+import { AuthModule } from './pages/auth/auth.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MainPageModule } from './components/main-page/main-page.module';
+import { MainPageModule } from './pages/main-page/main-page.module';
 import { JwtInterceptor } from './services/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './services/helpers/error.interceptor';
 import { NgChartsModule } from 'ng2-charts';
+import { SettingsPageModule } from './pages/settings-page/settings-page.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgChartsModule } from 'ng2-charts';
     AuthModule,
     HttpClientModule,
     MainPageModule,
-    NgChartsModule
+    NgChartsModule,
+    SettingsPageModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

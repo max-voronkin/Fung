@@ -18,8 +18,6 @@ import { DensityChartComponent } from './components/charts/density-chart/density
 import { HeightPipe } from 'src/app/pipes/height.pipe';
 import { DensityPipe } from 'src/app/pipes/density.pipe';
 
-
-
 @NgModule({
   declarations: [
     StationsPageComponent,
