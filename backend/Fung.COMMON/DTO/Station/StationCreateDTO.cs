@@ -2,7 +2,7 @@
 {
     public sealed class StationCreateDTO
     {
-        public int userId { get; set; }
+        public int UserId { get; set; }
         public string Name { get; set; } = null!;
     }
 }
