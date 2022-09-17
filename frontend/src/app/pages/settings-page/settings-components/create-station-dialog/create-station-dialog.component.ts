@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { CreateStationValidationConstants } from 'src/models/validation-settings/create-station-validation';
 
@@ -17,7 +17,7 @@ export class CreateStationDialogComponent implements OnInit {
   public stationForm: FormGroup = new FormGroup({});
   public stationNameControl: FormControl;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public userId: number) {
+  constructor(@Inject(MAT_DIALOG_DATA) public userId: number, private dialogRef: MatDialogRef<CreateStationDialogComponent>) {
     this.stationNameControl = new FormControl(this.stationName, [
       Validators.required,
       Validators.minLength(CreateStationValidationConstants.minNameLength),
@@ -39,7 +39,8 @@ export class CreateStationDialogComponent implements OnInit {
   }
 
   closeForm(): void {
-
+    this.stationForm.reset();
+    this.dialogRef.close();
   }
 
   get nameError() : string {
