@@ -8,6 +8,7 @@ import { UnitsSettingsComponent } from './settings-components/units-settings/uni
 import { SettingsMenuItemComponent } from './settings-components/settings-menu-item/settings-menu-item.component';
 import { CreateStationDialogComponent } from './settings-components/create-station-dialog/create-station-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StationInfoDialogComponent } from './settings-components/station-info-dialog/station-info-dialog.component';
 
 
 
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     StationsSettingsComponent,
     UnitsSettingsComponent,
     SettingsMenuItemComponent,
-    CreateStationDialogComponent
+    CreateStationDialogComponent,
+    StationInfoDialogComponent
   ],
   imports: [
     CommonModule,
