@@ -1,14 +1,32 @@
 @import 'src/colors.sass'
 
+.top-actions
+    display: flex
+    flex-direction: row-reverse
+    font-size: 24px
+    padding-bottom: 10px
+
+.exit-icon
+    &:hover
+    cursor: pointer
+
 .line
     padding: 20px
+    width: 100%
+    &:hover
+        cursor: default
 
 .label
     margin-right: 10px
     
-.token
+.item
     padding: 10px
     border-radius: 10px
     box-shadow: 1px 1px 5px 1px color(gray-2)
     &:hover
         cursor: pointer
+
+.delete
+    width: 100%
+    text-align: center
+    box-shadow: 1px 1px 5px 1px color(red-2)

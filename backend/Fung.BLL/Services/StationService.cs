@@ -57,5 +57,16 @@ namespace Fung.BLL.Services
             }
             return mapper.Map<StationDTO>(createdStation);
         }
+
+        public async Task DeleteStation(int stationId)
+        {
+            var station = await context.Stations.FirstOrDefaultAsync(s => s.Id == stationId);
+            if (station is null)
+            {
+                throw new NotFoundException(nameof(Station), stationId);
+            }
+            context.Stations.Remove(station);
+            await context.SaveChangesAsync();
+        }
     }
 }

@@ -46,14 +46,25 @@ export class StationsSettingsComponent implements OnInit {
   }
 
   onStationClick(station: Station): void {
-    this.dialogInfo.open(StationInfoDialogComponent, {
+    let dialogRef = this.dialogInfo.open(StationInfoDialogComponent, {
       data: station,
       panelClass: 'mat-dialog'
     });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res.result.status == 204)
+      {
+        this.removeStation(res.stationId);
+      }
+    })
   }
 
   addStationToList(station: Station): void {
     this.stations.push(station);
+  }
+
+  private removeStation(stationId: number): void {
+    this.stations = this.stations.filter(s => s.id !== stationId);
   }
 
 }

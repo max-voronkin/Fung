@@ -1,8 +1,16 @@
+<div class="top-actions">
+    <fa-icon [icon]="exitIcon" class="exit-icon" (click)="closeForm()"></fa-icon>
+</div>
 <div class="line">
     <span class="label">
         Token:
     </span>
-    <span class="token" (click)="copyToClipboard()">
+    <span class="item token" (click)="copyToClipboard()">
         {{station.token}}
     </span>
+</div>
+<div class="line">
+    <div class="item delete" (click)="deleteStation()">
+        Delete station
+    </div>
 </div>

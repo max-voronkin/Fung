@@ -22,4 +22,8 @@ export class StationService {
   public CreateStation(stationDTO: StationCreateDTO) {
     return this.httpService.postFullRequest<Station>(`${this.routePrefix}`, stationDTO);
   }
+
+  public DeleteStation(stationId: number) {
+    return this.httpService.deleteFullRequest<void>(`${this.routePrefix}/${stationId}`);
+  }
 }

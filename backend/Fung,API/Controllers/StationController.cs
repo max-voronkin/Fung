@@ -35,5 +35,12 @@ namespace Fung_API.Controllers
         {
             return await stationService.CreateStation(newStationDTO);
         }
+
+        [HttpDelete("{stationId}")]
+        public async Task<IActionResult> DeleteStation(int stationId)
+        {
+            await stationService.DeleteStation(stationId);
+            return NoContent();
+        }
     }
 }
