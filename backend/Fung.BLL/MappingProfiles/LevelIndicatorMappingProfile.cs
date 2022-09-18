@@ -10,6 +10,7 @@ namespace Fung.BLL.MappingProfiles
         {
             CreateMap<LevelIndicatorTransactions, LevelIndicatorTransactionDTO>();
             CreateMap<LevelIndicatorTransactionDTO, LevelIndicatorTransactions>();
+            CreateMap<LevelIndicatorTransactionCreateDTO, LevelIndicatorTransactions>();
         }
     }
 }
