@@ -64,9 +64,9 @@ export class DensityChartComponent implements OnInit {
       this.spinner = !this.spinner;
 
       this.chart.data.labels = [];
-      this.chart.data.labels?.push(...this.transactions.map(t => this.datePipe.transform(t.transactionTime, 'd/M/yy, h:mm')));
+      this.chart.data.labels?.push(...this.transactions.map(t => this.datePipe.transform(t.transactionTime, 'd/M/yy, h:mm')).reverse());
       this.chart.data.datasets[0].data = [];
-      this.chart.data.datasets[0].data.push(...this.transactions.map(t => this.densityPipe.transform(t.density)));
+      this.chart.data.datasets[0].data.push(...this.transactions.map(t => this.densityPipe.transform(t.density)).reverse());
       this.chart.update();
     })
   }

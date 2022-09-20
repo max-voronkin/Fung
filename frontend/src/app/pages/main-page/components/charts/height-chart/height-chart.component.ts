@@ -64,9 +64,9 @@ export class HeightChartComponent implements OnInit, OnDestroy {
       this.spinner = !this.spinner;
 
       this.chart.data.labels = [];
-      this.chart.data.labels?.push(...this.transactions.map(t => this.datePipe.transform(t.transactionTime, 'd/M/yy, h:mm')));
+      this.chart.data.labels?.push(...this.transactions.map(t => this.datePipe.transform(t.transactionTime, 'd/M/yy, h:mm')).reverse());
       this.chart.data.datasets[0].data = [];
-      this.chart.data.datasets[0].data.push(...this.transactions.map(t => this.heightPipe.transform(t.height)));
+      this.chart.data.datasets[0].data.push(...this.transactions.map(t => this.heightPipe.transform(t.height)).reverse());
       this.chart.update();
     })
   }
