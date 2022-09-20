@@ -8,6 +8,9 @@
             <div class="last-update" *ngIf="minutesFromUpdate" [ngClass]="{'outdated': minutesFromUpdate>10}">
                 <i>{{minutesFromUpdate | timeFromUpdate}}</i>
             </div>
+            <div class="last-update" *ngIf="!minutesFromUpdate">
+                <i>No info yet!</i>
+            </div>
             <fa-icon class="info-icon" [icon]="infoIcon" (click)="redirectToTankInfo()"></fa-icon>
         </div>
     </div>
@@ -17,7 +20,7 @@
                 <fa-icon [icon]="rulerIcon"></fa-icon>
             </div>
             <div class="value">
-                {{tank.levelTransactions![0].height}}
+                {{h}}
             </div>
         </div>
         <div class="value-icon-container">
@@ -25,7 +28,7 @@
                 <fa-icon [icon]="flaskIcon"></fa-icon>
             </div>
             <div class="value">
-                {{tank.levelTransactions![0].density | density}}
+                {{d | density}}
             </div>
         </div>
         <div class="value-icon-container">
@@ -33,12 +36,12 @@
                 <fa-icon [icon]="temperatureIcon"></fa-icon>
             </div>
             <div class="value">
-                {{tank.levelTransactions![0].temperature}}
+                {{t}}
             </div>
         </div>
     </div>
     <div class="progress-bar-container">
-        <div class="progress" *ngIf="progress">
+        <div class="progress">
             {{progress+'%'}}
         </div>
         <progress class="progress-bar" [value]="tank.currentAmount" [max]="tank.capacity"></progress>
