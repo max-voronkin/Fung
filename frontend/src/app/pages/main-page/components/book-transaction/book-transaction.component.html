@@ -3,7 +3,7 @@
         {{transaction.id}}
     </div>
     <div class="transaction-value cell">
-        {{transaction.value}}
+        {{transaction.value | volume}}
     </div>
     <div class="transaction-time cell">
         {{transaction.transactionTime | date:'d/M/yy, h:mm'}}

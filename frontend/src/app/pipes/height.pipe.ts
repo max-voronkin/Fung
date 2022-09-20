@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class HeightPipe implements PipeTransform {
 
   transform(value: number): number {
-    return value;
+    return Math.round(value * 100) / 100;
   }
 
 }
