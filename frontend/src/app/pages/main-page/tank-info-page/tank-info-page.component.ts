@@ -37,6 +37,16 @@ export class TankInfoPageComponent implements OnInit {
     return {'background-image': `linear-gradient(to top, #8AAAE5 0% ${this.volumeInPercentage}%, #ebebeb 0% ${100 - this.volumeInPercentage}%)`}
   }
 
+  public get h(): number {
+    return this.tank.levelTransactions![0] ? this.tank.levelTransactions![0].height : 0;
+  }
+  public get d(): number {
+    return this.tank.levelTransactions![0] ? this.tank.levelTransactions![0].density : 0;
+  }
+  public get t(): number {
+    return this.tank.levelTransactions![0] ? this.tank.levelTransactions![0].temperature : 0;
+  }
+
   constructor(private route: ActivatedRoute, private tankService: TankService) { }
 
   ngOnInit(): void {

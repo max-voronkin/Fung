@@ -7,7 +7,10 @@
             <fa-icon [icon]="refreshIcon" (click)="refreshStation()"></fa-icon>
         </div>
     </div>
-    <div class="tanks-container" *ngIf="station">
+    <div class="tanks-container">
         <tank-info *ngFor="let tank of station.fuelTanks" [tank]="tank"></tank-info>
+    </div>
+    <div class="no-tanks" *ngIf="station.fuelTanks!.length == 0">
+        This station haven't tanks yet...
     </div>
 </div>

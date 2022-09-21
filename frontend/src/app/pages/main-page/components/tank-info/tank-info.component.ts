@@ -18,8 +18,23 @@ export class TankInfoComponent implements OnInit, OnDestroy {
   rulerIcon = faRulerVertical;
   flaskIcon = faFlask;
   temperatureIcon = faTemperatureFull;
-  progress: number | undefined;
   minutesFromUpdate: number | undefined;
+
+  public get progress(): number {
+    return Math.round((this.tank.currentAmount / (this.tank.capacity / 100)) * 100) / 100;
+  }
+
+  public get h(): number {
+    return this.tank.levelTransactions![0] != null ? this.tank.levelTransactions![0].height : 0;
+  }
+
+  public get d(): number {
+    return this.tank.levelTransactions![0] != null ? this.tank.levelTransactions![0].density : 0;
+  }
+
+  public get t(): number {
+    return this.tank.levelTransactions![0] != null ? this.tank.levelTransactions![0].temperature : 0;
+  }
   
   timerSubscription?: Subscription; 
 
@@ -31,8 +46,6 @@ export class TankInfoComponent implements OnInit, OnDestroy {
         this.updateTime();
       }) 
     ).subscribe(); 
-    
-    this.progress = this.tank.currentAmount / (this.tank.capacity / 100)
   }
 
   ngOnDestroy(): void { 
@@ -47,7 +60,10 @@ export class TankInfoComponent implements OnInit, OnDestroy {
   }
 
   updateTime() {
-    this.minutesFromUpdate = Math.round((new Date().getTime() - new Date(this.tank.levelTransactions![0].transactionTime).getTime()) / 60000);
+    if (this.tank.levelTransactions![0])
+    {
+      this.minutesFromUpdate = Math.round((new Date().getTime() - new Date(this.tank.levelTransactions![0].transactionTime).getTime()) / 60000);
+    }   
   }
 
 }

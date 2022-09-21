@@ -27,7 +27,7 @@
                         <fa-icon [icon]="rulerIcon"></fa-icon>
                     </div>
                     <div class="tank-value" *ngIf="tank.levelTransactions">
-                        {{tank.levelTransactions![0].height}}
+                        {{h}}
                     </div>
                 </div>
                 <div class="value-icon-container">
@@ -35,7 +35,7 @@
                         <fa-icon [icon]="flaskIcon"></fa-icon>
                     </div>
                     <div class="tank-value" *ngIf="tank.levelTransactions">
-                        {{tank.levelTransactions![0].density | density}}
+                        {{d}}
                     </div>
                 </div>
                 <div class="value-icon-container" *ngIf="tank.levelTransactions">
@@ -43,7 +43,7 @@
                         <fa-icon [icon]="temperatureIcon"></fa-icon>
                     </div>
                     <div class="tank-value">
-                        {{tank.levelTransactions![0].temperature}}
+                        {{t}}
                     </div>
                 </div>
             </div>
