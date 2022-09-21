@@ -1,8 +1,11 @@
 <div class="level-transactions-container">
-    <div class="transactions-header" *ngIf="transactions">
-        <div class="time-from-update" >
+    <div class="transactions-header">
+        <div class="time-from-update" *ngIf="transactions!.length != 0; else elseBlock">
             Last update: <i [ngClass]="{'outdated': minutesFromLastTransaction>10}">{{minutesFromLastTransaction | timeFromUpdate}}</i>
         </div>
+        <ng-template #elseBlock>
+            <div class="time-from-update"> <i>No info yet!</i> </div>
+         </ng-template>
     </div>
     <div class="transactions-body">
         <div class="table-columns">
@@ -13,6 +16,9 @@
             <div class="column-value column">Volume</div>
             <div class="column-time column">Time</div>
         </div>
+        <div class="no-items" *ngIf="transactions!.length == 0">
+            No items
+         </div>
         <level-transaction *ngFor="let item of transactions" [transaction]="item"></level-transaction>
     </div>
 </div>

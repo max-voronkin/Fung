@@ -13,9 +13,9 @@ export class LevelTransactionsTableComponent implements OnInit {
 
   constructor() { }
   ngOnInit(): void {
-    if (this.transactions)
+    if (this.transactions!.length != 0)
     {
-      this.minutesFromLastTransaction = Math.round((new Date().getTime() - new Date(this.transactions[0].transactionTime).getTime()) / 60000);
+      this.minutesFromLastTransaction = Math.round((new Date().getTime() - new Date(this.transactions![0].transactionTime).getTime()) / 60000);
     }
   }
 
