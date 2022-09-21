@@ -20,6 +20,11 @@ namespace Fung.BLL.Services
                 .OrderByDescending(t => t.TransactionTime)
                 .FirstOrDefaultAsync();
 
+            if (lastTransaction is null)
+            {
+                return new List<LevelIndicatorTransactionDTO>();
+            }
+
             var transactions = await context.LevelIndicatorTransactions
                 .Where(t => t.FuelTankId == tankId)
                 .OrderByDescending(t => t.TransactionTime)
