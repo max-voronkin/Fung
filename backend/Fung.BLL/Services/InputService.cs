@@ -1,23 +1,22 @@
 ﻿using AutoMapper;
 using Fung.BLL.Exceptions;
+using Fung.BLL.Hubs;
 using Fung.BLL.Services.Abstract;
 using Fung.COMMON.DTO.FuelTank;
 using Fung.COMMON.DTO.LevelIndicator;
 using Fung.COMMON.Entities;
 using Fung.DAL;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fung.BLL.Services
 {
     public class InputService : BaseService
     {
-        public InputService(DataContext context, IMapper mapper) : base(context, mapper)
+        private readonly IHubContext<LastLevelTransactionHub> tankHub;
+        public InputService(DataContext context, IMapper mapper, IHubContext<LastLevelTransactionHub> tankHub) : base(context, mapper)
         {
+            this.tankHub = tankHub;
         }
 
         public async Task CreateLevelTransaction(string token, LevelIndicatorTransactionCreateDTO newTransactionDTO)
@@ -42,6 +41,8 @@ namespace Fung.BLL.Services
 
             await context.LevelIndicatorTransactions.AddAsync(transaction);
             await context.SaveChangesAsync();
+
+            await tankHub.Clients.Groups(tank.Id.ToString()).SendAsync("NewTransaction", mapper.Map<LevelIndicatorTransactionDTO>(transaction));
         }
 
         public async Task<FuelTankDTO> CreateTank(string token, FuelTankCreateDTO newTankDTO)
