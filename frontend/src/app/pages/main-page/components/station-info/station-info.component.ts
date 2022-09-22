@@ -13,16 +13,10 @@ export class StationInfoComponent implements OnInit {
 
   @Input() public station: Station = {} as Station;
   refreshIcon = faArrowRotateRight;
-  private unsubscribe$ = new Subject<void>();
   
-  constructor(private stationService: StationService) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  refreshStation() {
-    this.stationService.GetStation(this.station.id).pipe(takeUntil(this.unsubscribe$))
-      .subscribe((resp) => this.station = resp.body!);
   }
 
 }
