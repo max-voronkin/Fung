@@ -1,4 +1,5 @@
-﻿using Fung.BLL.JWT;
+﻿using Fung.BLL.Hubs;
+using Fung.BLL.JWT;
 using Fung.BLL.MappingProfiles;
 using Fung.BLL.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -78,6 +79,8 @@ namespace Fung_API.ConfigurationExtensions
             services.AddScoped<TankService>();
             services.AddScoped<LevelTransactionService>();
             services.AddScoped<InputService>();
+
+            services.AddScoped<LastLevelTransactionHub>();
 
         }
 
