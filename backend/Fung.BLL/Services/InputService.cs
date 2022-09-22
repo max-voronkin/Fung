@@ -13,10 +13,10 @@ namespace Fung.BLL.Services
 {
     public class InputService : BaseService
     {
-        private readonly IHubContext<LastLevelTransactionHub> tankHub;
-        public InputService(DataContext context, IMapper mapper, IHubContext<LastLevelTransactionHub> tankHub) : base(context, mapper)
+        private readonly IHubContext<LastLevelTransactionHub> lastTransactionHub;
+        public InputService(DataContext context, IMapper mapper, IHubContext<LastLevelTransactionHub> hub) : base(context, mapper)
         {
-            this.tankHub = tankHub;
+            lastTransactionHub = hub;
         }
 
         public async Task CreateLevelTransaction(string token, LevelIndicatorTransactionCreateDTO newTransactionDTO)
@@ -42,7 +42,7 @@ namespace Fung.BLL.Services
             await context.LevelIndicatorTransactions.AddAsync(transaction);
             await context.SaveChangesAsync();
 
-            await tankHub.Clients.Groups(tank.Id.ToString()).SendAsync("NewTransaction", mapper.Map<LevelIndicatorTransactionDTO>(transaction));
+            await lastTransactionHub.Clients.Groups(tank.Id.ToString()).SendAsync("NewTransaction", mapper.Map<LevelIndicatorTransactionDTO>(transaction));
         }
 
         public async Task<FuelTankDTO> CreateTank(string token, FuelTankCreateDTO newTankDTO)
