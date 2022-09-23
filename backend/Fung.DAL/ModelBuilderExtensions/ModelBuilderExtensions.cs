@@ -10,12 +10,14 @@ namespace Fung.DAL.ModelBuilderExtensions
         public static void Seed(this ModelBuilder builder)
         {
             var users = GenerateUsers();
+            var settings = GenerateSettings(users);
             var stations = GenereteStations(users);
             var fuelTanks = GenereteFuelTanks(stations.First());
             var remaingTransactions = GenereteRemainings(fuelTanks);
             var levelTransactions = GenereteLevelindicator(fuelTanks);
 
             builder.Entity<User>().HasData(users);
+            builder.Entity<Settings>().HasData(settings);
             builder.Entity<Station>().HasData(stations);
             builder.Entity<FuelTank>().HasData(fuelTanks);
             builder.Entity<RemainingTransactions>().HasData(remaingTransactions);
@@ -34,6 +36,18 @@ namespace Fung.DAL.ModelBuilderExtensions
                 .RuleFor(u => u.Password, (f, u) => SecurityHelper.HashPassword("11111111", Convert.FromBase64String(u.Salt)));
 
             return usersFaker.Generate(3);
+        }
+
+        private static ICollection<Settings> GenerateSettings(ICollection<User> users)
+        {
+            int Id = 1;
+            List<Settings> settings = new List<Settings>();
+            foreach (var user in users)
+            {
+                settings.Add(new Settings() {Id = Id++, UserId = user.Id });
+            }
+
+            return settings;
         }
 
         private static ICollection<Station> GenereteStations(ICollection<User> users)
