@@ -20,6 +20,7 @@ namespace Fung.DAL
             modelBuilder.ApplyConfiguration(new RemainingTransactionsConfiguration());
             modelBuilder.ApplyConfiguration(new LevelIndicatorTransactionsConfiguration());
             modelBuilder.ApplyConfiguration(new FuelTankConfiguration());
+            modelBuilder.ApplyConfiguration(new SettingsConfiguration());
 
             modelBuilder.Seed();
         }
@@ -30,6 +31,7 @@ namespace Fung.DAL
         public DbSet<LevelIndicatorTransactions> LevelIndicatorTransactions { get; set; } = null!;
         public DbSet<FuelTank> FuelTanks { get; set; } = null!;
         public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
+        public DbSet<Settings> Settings { get; set; } = null!;
 
     }
 }

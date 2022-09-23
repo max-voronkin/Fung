@@ -9,5 +9,6 @@
         public bool IsEmailConfirmed { get; set; } = false;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public ICollection<Station>? Stations { get; set; }
+        public Settings? Settings { get; set; }
     }
 }
