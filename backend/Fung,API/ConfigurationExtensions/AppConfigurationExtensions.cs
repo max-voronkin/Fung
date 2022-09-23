@@ -93,6 +93,7 @@ namespace Fung_API.ConfigurationExtensions
                 conf.AddProfile<FuelTankMappingProfile>();
                 conf.AddProfile<LevelIndicatorMappingProfile>();
                 conf.AddProfile<RemainingTransactionsMappingProfile>();
+                conf.AddProfile<SettingsMappingProfile>();
             },
             Assembly.GetExecutingAssembly());
         }
