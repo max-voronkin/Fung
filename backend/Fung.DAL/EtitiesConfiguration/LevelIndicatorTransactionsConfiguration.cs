@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Fung.DAL.EtitiesConfiguration
 {
-    public class LevelIndicatorTransactionsConfiguration : IEntityTypeConfiguration<RemainingTransactions>
+    public class LevelIndicatorTransactionsConfiguration : IEntityTypeConfiguration<LevelIndicatorTransactions>
     {
-        public void Configure(EntityTypeBuilder<RemainingTransactions> builder)
+        public void Configure(EntityTypeBuilder<LevelIndicatorTransactions> builder)
         {
             builder.HasKey(t => t.Id);
         }
