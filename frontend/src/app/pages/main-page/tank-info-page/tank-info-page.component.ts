@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { faBook, faChartLine, faFlask, faL, faRulerVertical, faTemperatureFull } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { TankService } from 'src/app/services/tank.service';
+import { environment } from 'src/environments/environment';
 import { FuelTankInfoDTO } from 'src/models/DTO/FuelTank/fuel-tank-infoDTO';
+import { LevelTransaction } from 'src/models/Entities/level-transaction';
 
 @Component({
   selector: 'app-tank-info-page',
@@ -29,8 +32,18 @@ export class TankInfoPageComponent implements OnInit {
   flaskIcon = faFlask;
   temperatureIcon = faTemperatureFull;
 
+  private hubConnection!: HubConnection;
+
+  public newTransactionSubject :Subject<LevelTransaction> = new Subject<LevelTransaction>();
+
   public get volumeInPercentage(): number {
-    return Math.round(this.tank.currentAmount / (this.tank.capacity / 100));
+    if (this.tank.levelTransactions == undefined)
+    return 0;
+    return this.tank.levelTransactions[0] != null ? Math.round((this.currentVolume / (this.tank.capacity / 100)) * 100) / 100 : 0;
+  }
+
+  public get currentVolume(): number {
+    return this.tank.levelTransactions![0] != null ? this.tank.levelTransactions![0].volume : 0;
   }
 
   public get gradientStyle() {
@@ -54,37 +67,62 @@ export class TankInfoPageComponent implements OnInit {
       this.tankId = params.get('id') as unknown as number;
     });
 
+    this.getTankInfo();
+    this.bookTransactions = true;
+    this.registerHub();
+  }
+
+  public getTankInfo(): void {
     this.spinner = !this.spinner;
     this.tankService.GetTank(this.tankId)
       .pipe(takeUntil(this.unsubscribe$))
         .subscribe((resp) => {
           this.tank = resp.body!
-          this.spinner = !this.spinner;
-          this.bookTransactions = true;
+          this.spinner = !this.spinner;   
         });
   }
 
-  bookButtonClick() {
+  bookButtonClick(): void {
     this.levelTransactions = false;
     this.bookTransactions = true;
     this.graphRepresentation = false;
   }
 
-  rulerButtonClick() {
+  rulerButtonClick(): void {
     this.levelTransactions = true;
     this.bookTransactions = false;
     this.graphRepresentation = false;
   }
 
-  graphButtonClick() {
+  graphButtonClick(): void {
     this.levelTransactions = false;
     this.bookTransactions = false;
     this.graphRepresentation = true;
   }
 
-  toggleUnits()
-  {
+  toggleUnits(): void {
     this.displayValueInPercentage = !this.displayValueInPercentage;
+  }
+
+  public registerHub(): void {
+    this.hubConnection = new HubConnectionBuilder().withUrl(`${environment.apiUrl}/communication/levelTransaction`).build();
+    this.hubConnection.start()
+      .then(() => this.hubConnection.invoke('SetConnectionAsync', Number(this.tankId)))
+      .catch((err) => {
+      console.log(err);     
+    });
+
+    this.hubConnection.on('NewTransaction', (newTransaction: LevelTransaction) => {
+      if (newTransaction)
+      {
+        this.tank.levelTransactions!.unshift(newTransaction);
+        this.emitNewTransactionEvent(newTransaction);
+      }
+    });    
+  }
+
+  public emitNewTransactionEvent(transaction: LevelTransaction): void {
+    this.newTransactionSubject.next(transaction);
   }
 
 }

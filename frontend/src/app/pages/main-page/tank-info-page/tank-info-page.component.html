@@ -17,7 +17,7 @@
                         {{volumeInPercentage}}%                     
                     </div>
                     <div class="volume-liters value" *ngIf="!displayValueInPercentage">
-                        {{tank.currentAmount}}/{{tank.capacity}}
+                        {{currentVolume | volume}}/{{tank.capacity | volume}}
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
         <div class="transactions">
             <level-transactions-table *ngIf="levelTransactions" [transactions]="tank.levelTransactions"></level-transactions-table>
             <book-transactions-table *ngIf="bookTransactions" [transactions]="tank.remainingTransactions"></book-transactions-table>
-            <level-charts *ngIf="graphRepresentation" [tankCapacity]="tank.capacity" [tankId]="tank.id"></level-charts>
+            <level-charts *ngIf="graphRepresentation" [tankCapacity]="tank.capacity" [tankId]="tank.id" [newTransactionEvent]="newTransactionSubject.asObservable()"></level-charts>
         </div>         
     </div>
 </div>

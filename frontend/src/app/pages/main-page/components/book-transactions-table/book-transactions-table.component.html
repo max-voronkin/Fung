@@ -1,6 +1,6 @@
 <div class="book-transactions-container">
     <div class="transactions-header">
-        <div class="time-from-update" *ngIf="transactions!.length != 0; else elseBlock">
+        <div class="time-from-update" *ngIf="transactions?.length != 0; else elseBlock">
             Last update: <i [ngClass]="{'outdated': minutesFromLastTransaction>10}">{{minutesFromLastTransaction | timeFromUpdate}}</i>
         </div>
         <ng-template #elseBlock>
@@ -13,7 +13,7 @@
             <div class="column-value column">Value</div>
             <div class="column-time column">Time</div>
         </div>
-         <div class="no-items" *ngIf="transactions!.length == 0">
+         <div class="no-items" *ngIf="transactions?.length == 0">
             No items
          </div>
         <book-transaction *ngFor="let item of transactions" [transaction]="item"></book-transaction>
