@@ -3,8 +3,8 @@
             <fung-dropdown width="15%" height="30px" minWidth="150px" [options]="typeOptions" class="dropdown" (onSelect)="changeType($event)"></fung-dropdown>
             <fung-dropdown width="10%" height="30px" minWidth="140px" [options]="periodOptions" class="dropdown" (onSelect)="changeTime($event)"></fung-dropdown>
         </div>
-        <volume-chart *ngIf="selectedType?.value === 0" [tankCapacity]="tankCapacity"></volume-chart>
-        <height-chart *ngIf="selectedType?.value === 1"></height-chart>
-        <density-chart *ngIf="selectedType?.value === 2"></density-chart>
+        <volume-chart *ngIf="selectedType?.value === 0" [tankCapacity]="tankCapacity" [newTransactionEvent]="newTransactionEvent"></volume-chart>
+        <height-chart *ngIf="selectedType?.value === 1" [newTransactionEvent]="newTransactionEvent"></height-chart>
+        <density-chart *ngIf="selectedType?.value === 2" [newTransactionEvent]="newTransactionEvent"></density-chart>
     </div>
   

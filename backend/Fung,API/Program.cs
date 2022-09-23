@@ -1,3 +1,4 @@
+using Fung.BLL.Hubs;
 using Fung.DAL;
 using Fung_API.ConfigurationExtensions;
 using Fung_API.Middleware;
@@ -21,6 +22,9 @@ namespace Fung_API
             //Logger
             builder.Logging.ClearProviders();
             builder.Logging.AddNLog();
+
+            //SignalR
+            builder.Services.AddSignalR();
 
             //DB
             builder.Services.AddDbContext<DataContext>(
@@ -47,13 +51,23 @@ namespace Fung_API
             // Configure the HTTP request pipeline.
             app.UseMiddleware<LogerMiddleware>(app.Logger);
 
-
             app.UseCors(builder => builder
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .WithExposedHeaders("Token-Expired")
                 .AllowCredentials()
                 .WithOrigins("http://localhost:4200"));
+
+            app.UseRouting();
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(cfg =>
+            {
+                cfg.MapControllers();
+                cfg.MapHub<LastLevelTransactionHub>("/communication/levelTransaction");
+            });
 
 
 
@@ -63,10 +77,7 @@ namespace Fung_API
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
 
 
             app.MapControllers();

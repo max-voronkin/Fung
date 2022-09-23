@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 import { DropdownOption } from 'src/app/shared/fung-dropdown/fung-dropdown.component';
+import { LevelTransaction } from 'src/models/Entities/level-transaction';
 import { DensityChartComponent } from '../charts/density-chart/density-chart.component';
 import { HeightChartComponent } from '../charts/height-chart/height-chart.component';
 import { VolumeChartComponent } from '../charts/volume-chart/volume-chart.component';
@@ -13,6 +15,7 @@ export class LevelChartsComponent implements OnInit, AfterViewInit {
 
   @Input() public tankCapacity!: number;
   @Input() public tankId!: number;
+  @Input() public newTransactionEvent!: Observable<LevelTransaction>;
 
   @ViewChild(VolumeChartComponent) volumeChart?: VolumeChartComponent;
   @ViewChild(HeightChartComponent) heightChart?: HeightChartComponent;
@@ -68,7 +71,6 @@ export class LevelChartsComponent implements OnInit, AfterViewInit {
 
   changeTime(option: DropdownOption): void {
     this.selectedTime = option;
-    //this.volumeChart?.updateChart(this.tankId, this.selectedTime.value);
     if (this.selectedType!.value === 0)
     {
       this.volumeChart?.updateChart(this.tankId, this.selectedTime!.value);

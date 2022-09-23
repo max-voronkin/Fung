@@ -9,16 +9,15 @@ import { RemainingTransaction } from 'src/models/Entities/remaining-transaction'
 export class BookTransactionsTableComponent implements OnInit {
 
   @Input() public transactions?: Array<RemainingTransaction>;
-  public minutesFromLastTransaction!: number;
+  
+  public get minutesFromLastTransaction(): number { 
+    return this.transactions != null ? Math.round((new Date().getTime() - new Date(this.transactions![0].transactionTime).getTime()) / 60000) : 0;
+  }
   
   constructor() { }
 
   ngOnInit(): void {
-    if (this.transactions!.length != 0)
-    {
-      this.minutesFromLastTransaction = Math.round((new Date().getTime() - new Date(this.transactions![0].transactionTime).getTime()) / 60000);
-    }
-    
+
   }
 
 }

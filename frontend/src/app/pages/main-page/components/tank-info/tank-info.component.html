@@ -11,7 +11,7 @@
             <div class="last-update" *ngIf="!minutesFromUpdate">
                 <i>No info yet!</i>
             </div>
-            <fa-icon class="info-icon" [icon]="infoIcon" (click)="redirectToTankInfo()"></fa-icon>
+            <fa-icon [icon]="infoIcon" class="info-icon" (click)="redirectToTankInfo()"></fa-icon>
         </div>
     </div>
     <div class="values-container">
@@ -44,6 +44,6 @@
         <div class="progress">
             {{progress+'%'}}
         </div>
-        <progress class="progress-bar" [value]="tank.currentAmount" [max]="tank.capacity"></progress>
+        <progress class="progress-bar" [value]="currentAmount" [max]="tank.capacity"></progress>
     </div>
 </div>

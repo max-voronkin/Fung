@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { Chart } from 'chart.js';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { VolumePipe } from 'src/app/pipes/volume.pipe';
 import { LevelTransactionService } from 'src/app/services/level-transaction.service';
 import { LevelTransaction } from 'src/models/Entities/level-transaction';
@@ -15,6 +15,9 @@ export class VolumeChartComponent implements OnInit, OnDestroy {
 
   public transactions: Array<LevelTransaction> = [];
   @Input() public tankCapacity!: number;
+  @Input() public newTransactionEvent!: Observable<LevelTransaction>;
+  private newTransactionSubscription!: Subscription;
+  
   public tankId!: number;
   public hours!: number;
   public spinner: boolean = false;
@@ -28,6 +31,7 @@ export class VolumeChartComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.chart.destroy();
+    this.newTransactionSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -54,6 +58,9 @@ export class VolumeChartComponent implements OnInit, OnDestroy {
         }
     }
     })
+
+    this.newTransactionSubscription = this.newTransactionEvent.subscribe((transaction) => this.pushToChart(transaction))
+    
   }
 
   updateChart(tankId: number, hours: number): void {
@@ -71,6 +78,12 @@ export class VolumeChartComponent implements OnInit, OnDestroy {
       this.chart.data.datasets[0].data.push(...this.transactions.map(t => this.volumePipe.transform(t.volume)).reverse());
       this.chart.update();
     })
+  }
+
+  pushToChart(t: LevelTransaction): void {
+    this.chart.data.labels?.push(this.datePipe.transform(t.transactionTime, 'd/M/yy, h:mm'));
+    this.chart.data.datasets[0].data.push(this.volumePipe.transform(t.volume));
+    this.chart.update();
   }
 
 }
