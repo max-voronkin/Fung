@@ -30,6 +30,22 @@ namespace Fung.BLL.Services
             await context.Users.AddAsync(user);
             await context.SaveChangesAsync();
 
+            var settings = new Settings(user.Id);
+            await context.Settings.AddAsync(settings);
+
+            await context.SaveChangesAsync();
+
+            return mapper.Map<UserDTO>(user);
+        }
+
+        public async Task<UserDTO> GetUserByIdAsync(int id)
+        {
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            if (user is null)
+            {
+                throw new NotFoundException(nameof(User), id);
+            }
+
             return mapper.Map<UserDTO>(user);
         }
     }
