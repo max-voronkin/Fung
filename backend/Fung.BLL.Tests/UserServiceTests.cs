@@ -47,6 +47,7 @@ namespace Fung.BLL.Tests
             await Assert.ThrowsAsync<UserAlreadyExistsException>(() => userService.CreateUser(newUser));
         }
         #endregion
+
         #region GetUserById
         [Fact]
         public async Task GetUserById_WhenUserExist_ThenUsersCountOne()
