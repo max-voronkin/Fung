@@ -6,6 +6,7 @@ import { AuthUserDTO } from 'src/models/DTO/User/user-authDTO';
 import { UserLoginDTO } from 'src/models/DTO/User/user-loginDTO';
 import { UserRegisterDTO } from 'src/models/DTO/User/user-registerDTO';
 import { RevokeUserDTO } from 'src/models/DTO/User/user-revokeDTO';
+import { DataService } from './data.service';
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -14,7 +15,7 @@ import { HttpService } from './http.service';
 export class AuthService {
   public routePrefix = '/api/auth';
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private dataService: DataService) { }
 
   private _handleAuthResponse(observable: Observable<HttpResponse<AuthUserDTO>>) {
     return observable.pipe(
@@ -52,7 +53,8 @@ private _setTokens(tokens: AuthUserDTO) {
     let token : RevokeUserDTO = { refreshToken : JSON.parse(localStorage.getItem('refreshToken')!)};
 
     this.httpService.postRequest(`${this.routePrefix}/revoke`, token).subscribe();
-
+    this.dataService.clear();
+    
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
   }
