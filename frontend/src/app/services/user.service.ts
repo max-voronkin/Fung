@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/models/Entities/user';
+import { HttpService } from './http.service';
 import { JwtService } from './jwt.service';
 
 @Injectable({
@@ -7,20 +8,26 @@ import { JwtService } from './jwt.service';
 })
 export class UserService {
 
-  constructor(private jwtService: JwtService) { }
+  constructor(private jwtService: JwtService, private httpService: HttpService) { }
 
-  public getUser() {
-    const accessToken = JSON.parse(localStorage.getItem('accessToken')!);
+  public routePrefix = '/api/user';
 
-    if (accessToken)
-    {
+  // public getUser() {
+  //   const accessToken = JSON.parse(localStorage.getItem('accessToken')!);
+
+  //   if (accessToken)
+  //   {
       
-      let info : any = this.jwtService.DecodeToken(accessToken);
-      let user = {} as User;
-      user.email = info.email;
-      user.id = info.userId;
-      return user;
-    }
-    return null;
+  //     let info : any = this.jwtService.DecodeToken(accessToken);
+  //     let user = {} as User;
+  //     user.email = info.email;
+  //     user.id = info.userId;
+  //     return user;
+  //   }
+  //   return null;
+  // }
+
+  public getUserFromToken() {
+    return this.httpService.getFullRequest<User>(`${this.routePrefix}/fromToken`);
   }
 }
