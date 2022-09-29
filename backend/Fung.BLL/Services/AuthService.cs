@@ -2,6 +2,7 @@
 using Fung.BLL.Exceptions;
 using Fung.BLL.JWT;
 using Fung.BLL.Services.Abstract;
+using Fung.COMMON.DTO.Settings;
 using Fung.COMMON.DTO.User;
 using Fung.COMMON.Entities;
 using Fung.COMMON.Security;
@@ -37,7 +38,12 @@ namespace Fung.BLL.Services
                 throw new InvalidLoginCredentialsException();
             }
 
+            var settings = await context.Settings.FirstOrDefaultAsync(s => s.UserId == user.Id);
+
             AuthUserDTO authUser = GenerateAccessToken(user.Id, user.Email);
+            authUser.User = mapper.Map<UserDTO>(user);
+            authUser.Settings = mapper.Map<SettingsDTO>(settings);
+
             var refreshToken = await context.RefreshTokens.FirstOrDefaultAsync(t => t.UserId == user.Id);
             if (refreshToken is not null)
             {
@@ -96,6 +102,8 @@ namespace Fung.BLL.Services
         {
             var createdUser = await userService.CreateUser(registerDTO);
             AuthUserDTO userTokens = GenerateAccessToken(createdUser.Id, createdUser.Email);
+            userTokens.User = mapper.Map<UserDTO>(createdUser);
+            userTokens.Settings = mapper.Map<SettingsDTO>(await context.Settings.FirstOrDefaultAsync(s => s.UserId == createdUser.Id));
 
             var s = new RefreshToken()
             {
