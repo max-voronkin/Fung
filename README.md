@@ -13,6 +13,7 @@ Fung is a Fuel accounting system. It`s purpose to accumulate information in one 
 erDiagram
 User ||--o{ Station : Id_UserId
 User ||--o{ RefreshToken : Id_UserId
+User ||--|| Settings : Id_UserId
 User {
   Id int PK
   Email string
@@ -65,6 +66,13 @@ RefreshToken {
   Id int PK
   Token string
   Expires datetime
+  UserId int FK
+}
+
+Settings {
+  Id int PK
+  HeightUnits int
+  VolumeUnits int
   UserId int FK
 }
 ```
