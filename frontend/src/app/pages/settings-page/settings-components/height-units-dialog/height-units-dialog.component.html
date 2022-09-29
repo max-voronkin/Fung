@@ -1,0 +1,11 @@
+<div class="height-checkbox-container">
+    <div class="option">
+        <mat-checkbox [checked]="selected === 0" (change)="onChange(0)" >Meter</mat-checkbox>
+    </div>
+    <div class="option">
+        <mat-checkbox [checked]="selected === 1" (change)="onChange(1)" >Centimeter</mat-checkbox>
+    </div>
+    <div class="option">
+        <mat-checkbox [checked]="selected === 2" (change)="onChange(2)" >Millimeter</mat-checkbox>
+    </div> 
+</div>

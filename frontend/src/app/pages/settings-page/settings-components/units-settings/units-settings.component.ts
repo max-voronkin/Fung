@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { Settings } from 'src/models/Entities/settings';
+import { HeightUnitsDialogComponent } from '../height-units-dialog/height-units-dialog.component';
+import { VolumeUnitsDialogComponent } from '../volume-units-dialog/volume-units-dialog.component';
 
 @Component({
   selector: 'units-settings',
@@ -9,18 +13,42 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 export class UnitsSettingsComponent implements OnInit {
 
   caretRightIcon = faCaretRight;
+
+  @Input() public settings!: Settings;
   
-  constructor() { }
+  constructor(private dialogHeight: MatDialog, private dialogVolume: MatDialog) { }
 
   ngOnInit(): void {
   }
 
   onHeightUnitsClick(): void {
-    alert('In development')
+    let dialogRef = this.dialogHeight.open(HeightUnitsDialogComponent, {
+      data: this.settings,
+      panelClass: 'mat-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res != undefined)
+      {
+        console.log(res);
+      }
+    });
+
   }
   
   onVolumeUnitsClick(): void {
-    alert('In development')
+    let dialogRef = this.dialogVolume.open(VolumeUnitsDialogComponent, {
+      data: this.settings,
+      panelClass: 'mat-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res != undefined)
+      {
+        console.log(res);
+      }
+    });
+
   }
 
 }

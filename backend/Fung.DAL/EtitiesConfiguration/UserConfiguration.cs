@@ -20,6 +20,10 @@ namespace Fung.DAL.EtitiesConfiguration
             builder.HasMany<RefreshToken>()
                 .WithOne()
                 .HasForeignKey(s => s.UserId);
+
+            builder.HasOne<Settings>(s => s.Settings)
+                .WithOne(s => s.User)
+                .HasForeignKey<Settings>(s => s.UserId);
         }
     }
 }

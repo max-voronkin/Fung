@@ -9,6 +9,8 @@ import { SettingsMenuItemComponent } from './settings-components/settings-menu-i
 import { CreateStationDialogComponent } from './settings-components/create-station-dialog/create-station-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StationInfoDialogComponent } from './settings-components/station-info-dialog/station-info-dialog.component';
+import { HeightUnitsDialogComponent } from './settings-components/height-units-dialog/height-units-dialog.component';
+import { VolumeUnitsDialogComponent } from './settings-components/volume-units-dialog/volume-units-dialog.component';
 
 
 
@@ -20,7 +22,9 @@ import { StationInfoDialogComponent } from './settings-components/station-info-d
     UnitsSettingsComponent,
     SettingsMenuItemComponent,
     CreateStationDialogComponent,
-    StationInfoDialogComponent
+    StationInfoDialogComponent,
+    HeightUnitsDialogComponent,
+    VolumeUnitsDialogComponent
   ],
   imports: [
     CommonModule,

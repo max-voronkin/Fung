@@ -79,6 +79,7 @@ namespace Fung_API.ConfigurationExtensions
             services.AddScoped<TankService>();
             services.AddScoped<LevelTransactionService>();
             services.AddScoped<InputService>();
+            services.AddScoped<SettingsService>();
 
             services.AddScoped<LastLevelTransactionHub>();
 
@@ -93,6 +94,7 @@ namespace Fung_API.ConfigurationExtensions
                 conf.AddProfile<FuelTankMappingProfile>();
                 conf.AddProfile<LevelIndicatorMappingProfile>();
                 conf.AddProfile<RemainingTransactionsMappingProfile>();
+                conf.AddProfile<SettingsMappingProfile>();
             },
             Assembly.GetExecutingAssembly());
         }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { Subject, takeUntil } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
+import { Settings } from 'src/models/Entities/settings';
 import { User } from 'src/models/Entities/user';
 
 @Component({
@@ -11,12 +13,28 @@ export class SettingsPageComponent implements OnInit {
 
   public spinner = false;
 
-  public currentUser!: User | null;
+  public currentUser!: User;
+  public settings!: Settings;
 
-  constructor(private userService: UserService) { }
+  private unsubscribe$ = new Subject<void>();
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.userService.getUser();
+    this.getUser();
+    this.getSettings();
+  }
+
+  public getUser(): void {
+    this.dataService.getUser().pipe(
+      takeUntil(this.unsubscribe$))
+      .subscribe((user) => this.currentUser = user);
+  }
+
+  public getSettings(): void {
+    this.dataService.getSettings().pipe(
+      takeUntil(this.unsubscribe$))
+      .subscribe((settings) => this.settings = settings);
   }
 
 }
