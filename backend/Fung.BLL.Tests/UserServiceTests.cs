@@ -62,8 +62,13 @@ namespace Fung.BLL.Tests
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            var returnedUser = await context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
+            var returnedUser = await userService.GetUserByIdAsync(user.Id);
             Assert.NotNull(returnedUser);
+        }
+        [Fact]
+        public async Task GetUserById_WhenUserDontExist_TheNotFoundExceptionThrown()
+        {
+            await Assert.ThrowsAsync<NotFoundException>(() => userService.GetUserByIdAsync(1));
         }
         #endregion
     }
