@@ -35,6 +35,11 @@ namespace Fung.BLL.Services
                     .ThenInclude(ft => ft.RemainingTransactions!.OrderByDescending(r => r.TransactionTime).Take(1))
                 .FirstOrDefaultAsync(s => s.Id == stationId);
 
+            if (station is null)
+            {
+                throw new NotFoundException(nameof(Station), stationId);
+            }
+
             return mapper.Map<StationDTO>(station);
 
         }
