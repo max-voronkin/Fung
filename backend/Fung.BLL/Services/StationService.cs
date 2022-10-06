@@ -56,10 +56,7 @@ namespace Fung.BLL.Services
             await context.SaveChangesAsync();
 
             var createdStation = await context.Stations.FirstOrDefaultAsync(s => s.Id == station.Id);
-            if (createdStation is null)
-            {
-                throw new NotFoundException(nameof(Station));
-            }
+
             return mapper.Map<StationDTO>(createdStation);
         }
 
