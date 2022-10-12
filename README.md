@@ -1,5 +1,10 @@
 # Fung
-Fung is a Fuel accounting system. It`s purpose to accumulate information in one place.
+Fung is a fuel accounting system. Its goal is to accumulate information from fuel stations in one place, instead of an impressive number of report files, which makes it faster and easier to get the information you need. The data are statistics of fuel residues and indicators of level gauges in real-time.
+
+The system consists of three parts:
+- Server (for storing information)
+- Front (to access information)
+- WPF Application (for transmitting data from the station)
 
 ## Applications
 
