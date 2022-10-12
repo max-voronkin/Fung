@@ -28,48 +28,57 @@ namespace Fung_API.Middleware
                 {
                     // there is should be my custom exceptions 
                     case InvalidLoginCredentialsException e:
-                        await HandleInvalidCredentialException(httpContext, e);
+                        await HandleInvalidCredentialExceptionAsync(httpContext, e);
                         break;
                     case UserAlreadyExistsException e:
-                        await HandleUserAlreadyExistsException(httpContext, e);
+                        await HandleUserAlreadyExistsExceptionAsync(httpContext, e);
                         break;
                     case InvalidTokenException e:
-                        await HandleInvalidTokenException(httpContext, e);
+                        await HandleInvalidTokenExceptionAsync(httpContext, e);
+                        break;
+                    case NotFoundException e:
+                        await HandleNotFoundExceptionAsync(httpContext, e);
                         break;
                     default:
-                        await HandleAnyException(httpContext, exception);
+                        await HandleAnyExceptionAsync(httpContext, exception);
                         break;
                 }
             }
         }
 
-        private async Task HandleAnyException(HttpContext context, Exception ex)
+        private async Task HandleAnyExceptionAsync(HttpContext context, Exception ex)
         {
             logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
             await CreateExceptionAsync(context);
         }
-        private async Task HandleInvalidCredentialException(HttpContext context, InvalidLoginCredentialsException ex)
+        private async Task HandleInvalidCredentialExceptionAsync(HttpContext context, InvalidLoginCredentialsException ex)
         {
             logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
             await CreateExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message, ErrorCode.InvalidLoginCredentials);
         }
 
-        private async Task HandleUserAlreadyExistsException(HttpContext context, UserAlreadyExistsException ex)
+        private async Task HandleUserAlreadyExistsExceptionAsync(HttpContext context, UserAlreadyExistsException ex)
         {
             logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
             await CreateExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message, ErrorCode.UserAlreadyExists);
         }
 
-        private async Task HandleInvalidTokenException(HttpContext context, InvalidTokenException ex)
+        private async Task HandleInvalidTokenExceptionAsync(HttpContext context, InvalidTokenException ex)
         {
             logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
             await CreateExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message, ErrorCode.InvalidToken);
         }
 
+        private async Task HandleNotFoundExceptionAsync(HttpContext context, NotFoundException ex)
+        {
+            logger.LogError($"Type: [{ex.GetType()}] {ex.Message}");
+            await CreateExceptionAsync(context, HttpStatusCode.NotFound, ex.Message, ErrorCode.NotFound);
+        }
+
         private async Task CreateExceptionAsync(HttpContext context, HttpStatusCode statusCode = HttpStatusCode.InternalServerError,
             string errorMessage = "Not provided", ErrorCode errorCode = ErrorCode.Generic)
         {
-            object errorBody = new { error = errorMessage, errorCode = errorCode};
+            object errorBody = new { error = errorMessage, errorCode = errorCode };
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
             await context.Response.WriteAsync(JsonConvert.SerializeObject(errorBody));
