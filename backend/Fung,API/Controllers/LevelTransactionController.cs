@@ -19,9 +19,9 @@ namespace Fung_API.Controllers
         }
 
         [HttpGet("{id}/{hours}")]
-        public async Task<List<LevelIndicatorTransactionDTO>> GetTransactionsByTimePeriodAsync(int id, int hours)
+        public async Task<ActionResult<ICollection<LevelIndicatorTransactionDTO>>> GetTransactionsByTimePeriodAsync(int id, int hours)
         {
-            return await levelService.GetTransactionsByTimePeriodAsync(id, hours);
+            return Ok(await levelService.GetTransactionsByTimePeriodAsync(id, hours));
         }
 
     }

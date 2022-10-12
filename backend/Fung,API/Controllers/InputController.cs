@@ -23,9 +23,9 @@ namespace Fung_API.Controllers
         }
 
         [HttpPost("tank/{token}")]
-        public async Task<FuelTankDTO> CreateTankAsync(string token, [FromBody] FuelTankCreateDTO newTankDTO)
+        public async Task<ActionResult<FuelTankDTO>> CreateTankAsync(string token, [FromBody] FuelTankCreateDTO newTankDTO)
         {
-            return await inputService.CreateTankAsync(token, newTankDTO);
+            return Created("", await inputService.CreateTankAsync(token, newTankDTO));
         }
     }
 }

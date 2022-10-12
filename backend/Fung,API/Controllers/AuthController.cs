@@ -34,7 +34,7 @@ namespace Fung_API.Controllers
         [HttpPost("refresh")]
         public async Task<ActionResult<AuthUserDTO>> RefreshAsync([FromBody] UserRefreshDTO refreshDTO)
         {
-            return await authService.RefreshTokenAsync(refreshDTO);
+            return Ok(await authService.RefreshTokenAsync(refreshDTO));
         }
 
         //api/auth/revoke
