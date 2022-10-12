@@ -15,7 +15,7 @@ namespace Fung.BLL.Services
         {
         }
 
-        public async Task<UserDTO> CreateUser(UserRegisterDTO newUser)
+        public async Task<UserDTO> CreateUserAsync(UserRegisterDTO newUser)
         {
             if (await context.Users.FirstOrDefaultAsync(u => u.Email == newUser.Email) is not null)
             {

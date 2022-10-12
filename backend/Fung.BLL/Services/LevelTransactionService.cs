@@ -13,7 +13,7 @@ namespace Fung.BLL.Services
         {
         }
 
-        public async Task<List<LevelIndicatorTransactionDTO>> GetTransactionsByTimePeriod(int tankId, int hours)
+        public async Task<List<LevelIndicatorTransactionDTO>> GetTransactionsByTimePeriodAsync(int tankId, int hours)
         {
             var lastTransaction = await context.LevelIndicatorTransactions
                 .Where(t => t.FuelTankId == tankId)

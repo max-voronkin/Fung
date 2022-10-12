@@ -23,7 +23,7 @@ namespace Fung.BLL.Tests
         [Fact]
         public async Task GetStations_WhenThereIsNoStations_ThenResultCountZero()
         {
-            var result = await stationService.GetStations(1);
+            var result = await stationService.GetStationsAsync(1);
             Assert.True(result.Count == 0);
         }
 
@@ -32,7 +32,7 @@ namespace Fung.BLL.Tests
         {
             var station = await CreateStationAsync();
 
-            var result = await stationService.GetStations(station.UserId);
+            var result = await stationService.GetStationsAsync(station.UserId);
             Assert.True(result.Count == 1);
         }
         #endregion
@@ -41,7 +41,7 @@ namespace Fung.BLL.Tests
         [Fact]
         public async Task GetStation_WhenThereIsNoStation_ThenThrowsNotFoundException()
         {
-            await Assert.ThrowsAsync<NotFoundException>(() => stationService.GetStation(1));
+            await Assert.ThrowsAsync<NotFoundException>(() => stationService.GetStationAsync(1));
         }
 
         [Fact]
@@ -49,7 +49,7 @@ namespace Fung.BLL.Tests
         {
             var station = await CreateStationAsync();
 
-            var result = await stationService.GetStations(station.UserId);
+            var result = await stationService.GetStationsAsync(station.UserId);
             Assert.True(result.Count == 1);
         }
         #endregion
@@ -65,7 +65,7 @@ namespace Fung.BLL.Tests
                 UserId = 1
             };
 
-            var result = await stationService.CreateStation(newStationDTO);
+            var result = await stationService.CreateStationAsync(newStationDTO);
 
             Assert.NotNull(result);
             Assert.Equal(newStationDTO.Name, result.Name);
@@ -79,7 +79,7 @@ namespace Fung.BLL.Tests
         {
             var station = await CreateStationAsync();
 
-            await stationService.DeleteStation(station.Id);
+            await stationService.DeleteStationAsync(station.Id);
 
             var result = await context.Stations.FirstOrDefaultAsync(s => s.Id == station.Id);
             Assert.Null(result);
@@ -88,7 +88,7 @@ namespace Fung.BLL.Tests
         [Fact]
         public async Task DeleteStation_WhenStationDoesNotExist_ThenThrowsNotFoundException()
         {
-            await Assert.ThrowsAsync<NotFoundException>(() => stationService.DeleteStation(1));
+            await Assert.ThrowsAsync<NotFoundException>(() => stationService.DeleteStationAsync(1));
         }
         #endregion
 

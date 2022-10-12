@@ -21,7 +21,7 @@ namespace Fung.BLL.Tests
         public async Task GetTransactionsByTimePeriod_WhenNoData_ThenEmptyListReturned()
         {
             var tank = await CreateTankAsync();
-            var result = await levelService.GetTransactionsByTimePeriod(tank.Id, 1);
+            var result = await levelService.GetTransactionsByTimePeriodAsync(tank.Id, 1);
             Assert.True(result.Count == 0);
         }
 
@@ -41,7 +41,7 @@ namespace Fung.BLL.Tests
             context.LevelIndicatorTransactions.Add(transaction);
             await context.SaveChangesAsync();
 
-            var result = await levelService.GetTransactionsByTimePeriod(tank.Id, 1);
+            var result = await levelService.GetTransactionsByTimePeriodAsync(tank.Id, 1);
             Assert.True(result.Count == 1);
         }
 
@@ -71,7 +71,7 @@ namespace Fung.BLL.Tests
             context.LevelIndicatorTransactions.Add(transaction2);
             await context.SaveChangesAsync();
 
-            var result = await levelService.GetTransactionsByTimePeriod(tank.Id, 1);
+            var result = await levelService.GetTransactionsByTimePeriodAsync(tank.Id, 1);
             Assert.True(result.Count == 1);
         }
 
@@ -101,7 +101,7 @@ namespace Fung.BLL.Tests
             context.LevelIndicatorTransactions.Add(transaction2);
             await context.SaveChangesAsync();
 
-            var result = await levelService.GetTransactionsByTimePeriod(tank.Id, 1);
+            var result = await levelService.GetTransactionsByTimePeriodAsync(tank.Id, 1);
             Assert.True(result.Count == 2);
         }
         #endregion

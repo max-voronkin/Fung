@@ -1,5 +1,4 @@
-﻿using Fung.BLL.Exceptions;
-using Fung.BLL.Services;
+﻿using Fung.BLL.Services;
 using Fung.COMMON.DTO.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,30 +18,30 @@ namespace Fung_API.Controllers
 
         // api/auth/login
         [HttpPost("login")]
-        public async Task<ActionResult<AuthUserDTO>> Login([FromBody] UserLoginDTO loginDto)
+        public async Task<ActionResult<AuthUserDTO>> LoginAsync([FromBody] UserLoginDTO loginDto)
         {
-            return Ok(await authService.Autorize(loginDto));
+            return Ok(await authService.AutorizeAsync(loginDto));
         }
 
         // api/auth/register
         [HttpPost("register")]
-        public async Task<ActionResult<AuthUserDTO>> Register([FromBody] UserRegisterDTO registerDTO)
+        public async Task<ActionResult<AuthUserDTO>> RegisterAsync([FromBody] UserRegisterDTO registerDTO)
         {
-            return Ok(await authService.Register(registerDTO));
+            return Ok(await authService.RegisterAsync(registerDTO));
         }
 
         // api/auth/refresh
         [HttpPost("refresh")]
-        public async Task<ActionResult<AuthUserDTO>> Refresh([FromBody] UserRefreshDTO refreshDTO)
+        public async Task<ActionResult<AuthUserDTO>> RefreshAsync([FromBody] UserRefreshDTO refreshDTO)
         {
-            return await authService.RefreshToken(refreshDTO);
+            return Ok(await authService.RefreshTokenAsync(refreshDTO));
         }
 
         //api/auth/revoke
         [HttpPost("revoke")]
-        public async Task Revoke([FromBody] UserRevokeDTO token)
+        public async Task RevokeAsync([FromBody] UserRevokeDTO token)
         {
-            await authService.RevokeToken(token);
+            await authService.RevokeTokenAsync(token);
         }
     }
 }

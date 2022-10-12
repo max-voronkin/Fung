@@ -3,7 +3,6 @@ using Fung.BLL.Services;
 using Fung.COMMON.DTO.User;
 using Fung.COMMON.Entities;
 using Fung.DAL;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace Fung.BLL.Tests
@@ -28,7 +27,7 @@ namespace Fung.BLL.Tests
                 Password = "StrongPassword"
             };
 
-            var createdUser = await userService.CreateUser(newUser);
+            var createdUser = await userService.CreateUserAsync(newUser);
             Assert.NotNull(createdUser);
 
             Assert.True(context.Users.ToList().Count == 1, $"Expected 1 user, but was {context.Users.ToList().Count}");
@@ -42,9 +41,9 @@ namespace Fung.BLL.Tests
                 Email = "test@gmail.com",
                 Password = "StrongPassword"
             };
-            await userService.CreateUser(newUser);
+            await userService.CreateUserAsync(newUser);
 
-            await Assert.ThrowsAsync<UserAlreadyExistsException>(() => userService.CreateUser(newUser));
+            await Assert.ThrowsAsync<UserAlreadyExistsException>(() => userService.CreateUserAsync(newUser));
         }
         #endregion
 

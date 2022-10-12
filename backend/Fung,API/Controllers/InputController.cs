@@ -16,16 +16,16 @@ namespace Fung_API.Controllers
         }
 
         [HttpPost("level/{token}")]
-        public async Task<IActionResult> PostLevelTransaction(string token, [FromBody] LevelIndicatorTransactionCreateDTO newTransactionDTO)
+        public async Task<IActionResult> PostLevelTransactionAsync(string token, [FromBody] LevelIndicatorTransactionCreateDTO newTransactionDTO)
         {
-            await inputService.CreateLevelTransaction(token, newTransactionDTO);
+            await inputService.CreateLevelTransactionAsync(token, newTransactionDTO);
             return Ok();
         }
 
         [HttpPost("tank/{token}")]
-        public async Task<FuelTankDTO> CreateTank(string token, [FromBody] FuelTankCreateDTO newTankDTO)
+        public async Task<ActionResult<FuelTankDTO>> CreateTankAsync(string token, [FromBody] FuelTankCreateDTO newTankDTO)
         {
-            return await inputService.CreateTank(token, newTankDTO);
+            return Created("", await inputService.CreateTankAsync(token, newTankDTO));
         }
     }
 }
