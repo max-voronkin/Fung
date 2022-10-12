@@ -13,7 +13,7 @@ namespace Fung.BLL.Services
         {
         }
 
-        public async Task<FuelTankInfoDTO> GetTank(int tankId)
+        public async Task<FuelTankInfoDTO> GetTankAsync(int tankId)
         {
             var tank = await context.FuelTanks
                 .Include(t => t.LevelTransactions!.OrderByDescending(l => l.TransactionTime).Take(50))

@@ -19,7 +19,7 @@ namespace Fung.BLL.Services
             lastTransactionHub = hub;
         }
 
-        public async Task CreateLevelTransaction(string token, LevelIndicatorTransactionCreateDTO newTransactionDTO)
+        public async Task CreateLevelTransactionAsync(string token, LevelIndicatorTransactionCreateDTO newTransactionDTO)
         {
             var station = await context.Stations
                 .Include(s => s.FuelTanks)
@@ -45,7 +45,7 @@ namespace Fung.BLL.Services
             await lastTransactionHub.Clients.Groups(tank.Id.ToString()).SendAsync("NewTransaction", mapper.Map<LevelIndicatorTransactionDTO>(transaction));
         }
 
-        public async Task<FuelTankDTO> CreateTank(string token, FuelTankCreateDTO newTankDTO)
+        public async Task<FuelTankDTO> CreateTankAsync(string token, FuelTankCreateDTO newTankDTO)
         {
             var station = await context.Stations.FirstOrDefaultAsync(s => s.Token == token);
             if (station is null)

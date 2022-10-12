@@ -14,7 +14,7 @@ namespace Fung.BLL.Services
         {
         }
 
-        public async Task<ICollection<StationDTO>> GetStations(int userId)
+        public async Task<ICollection<StationDTO>> GetStationsAsync(int userId)
         {
             var stations = await context.Stations.Where(s => s.UserId == userId)
                 .Include(s => s.FuelTanks!)
@@ -26,7 +26,7 @@ namespace Fung.BLL.Services
             return mapper.Map<ICollection<StationDTO>>(stations);
         }
 
-        public async Task<StationDTO> GetStation(int stationId)
+        public async Task<StationDTO> GetStationAsync(int stationId)
         {
             var station = await context.Stations
                 .Include(s => s.FuelTanks!)
@@ -39,7 +39,7 @@ namespace Fung.BLL.Services
 
         }
 
-        public async Task<StationDTO> CreateStation(StationCreateDTO newStationDTO)
+        public async Task<StationDTO> CreateStationAsync(StationCreateDTO newStationDTO)
         {
             var station = new Station()
             {
@@ -58,7 +58,7 @@ namespace Fung.BLL.Services
             return mapper.Map<StationDTO>(createdStation);
         }
 
-        public async Task DeleteStation(int stationId)
+        public async Task DeleteStationAsync(int stationId)
         {
             var station = await context.Stations.FirstOrDefaultAsync(s => s.Id == stationId);
             if (station is null)

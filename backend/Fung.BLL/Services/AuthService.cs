@@ -100,7 +100,7 @@ namespace Fung.BLL.Services
 
         public async Task<AuthUserDTO> RegisterAsync(UserRegisterDTO registerDTO)
         {
-            var createdUser = await userService.CreateUser(registerDTO);
+            var createdUser = await userService.CreateUserAsync(registerDTO);
             AuthUserDTO userTokens = GenerateAccessToken(createdUser.Id, createdUser.Email);
             userTokens.User = mapper.Map<UserDTO>(createdUser);
             userTokens.Settings = mapper.Map<SettingsDTO>(await context.Settings.FirstOrDefaultAsync(s => s.UserId == createdUser.Id));
