@@ -30,7 +30,7 @@ namespace Fung.BLL.Services
             };
         }
 
-        public async Task<AuthUserDTO> Autorize(UserLoginDTO loginDTO)
+        public async Task<AuthUserDTO> AutorizeAsync(UserLoginDTO loginDTO)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.Email == loginDTO.Email);
             if (user is null || !SecurityHelper.ValidatePassword(loginDTO.Password, user.Password, user.Salt))
@@ -59,7 +59,7 @@ namespace Fung.BLL.Services
             return authUser;
         }
 
-        public async Task<AuthUserDTO> RefreshToken(UserRefreshDTO refreshDTO)
+        public async Task<AuthUserDTO> RefreshTokenAsync(UserRefreshDTO refreshDTO)
         {
             var userId = jwtFactory.GetUserIdFromToken(refreshDTO.AccessToken, refreshDTO.SigningKey);
             var user = await context.Users.FirstOrDefaultAsync(u => u.Id == userId);
@@ -98,7 +98,7 @@ namespace Fung.BLL.Services
             };
         }
 
-        public async Task<AuthUserDTO> Register(UserRegisterDTO registerDTO)
+        public async Task<AuthUserDTO> RegisterAsync(UserRegisterDTO registerDTO)
         {
             var createdUser = await userService.CreateUser(registerDTO);
             AuthUserDTO userTokens = GenerateAccessToken(createdUser.Id, createdUser.Email);
@@ -116,7 +116,7 @@ namespace Fung.BLL.Services
             return userTokens;
         }
 
-        public async Task RevokeToken(UserRevokeDTO token)
+        public async Task RevokeTokenAsync(UserRevokeDTO token)
         {
             var tokenEntity = await context.RefreshTokens.FirstOrDefaultAsync(t => t.Token == token.RefreshToken);
             if (tokenEntity is not null)
