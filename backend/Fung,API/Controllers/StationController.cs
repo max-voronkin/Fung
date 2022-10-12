@@ -18,22 +18,22 @@ namespace Fung_API.Controllers
         }
 
         [HttpGet]
-        public async Task<ICollection<StationDTO>> GetStationsAsync()
+        public async Task<ActionResult<ICollection<StationDTO>>> GetStationsAsync()
         {
             var userId = this.GetUserIdFromToken();
-            return await stationService.GetStationsAsync(userId);
+            return Ok(await stationService.GetStationsAsync(userId));
         }
 
         [HttpGet("{id}")]
-        public async Task<StationDTO> GetStationAsync(int id)
+        public async Task<ActionResult<StationDTO>> GetStationAsync(int id)
         {
-            return await stationService.GetStationAsync(id);
+            return Ok(await stationService.GetStationAsync(id));
         }
 
         [HttpPost]
-        public async Task<StationDTO> CreateStationAsync([FromBody] StationCreateDTO newStationDTO)
+        public async Task<ActionResult<StationDTO>> CreateStationAsync([FromBody] StationCreateDTO newStationDTO)
         {
-            return await stationService.CreateStationAsync(newStationDTO);
+            return Ok(await stationService.CreateStationAsync(newStationDTO));
         }
 
         [HttpDelete("{stationId}")]

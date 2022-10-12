@@ -15,9 +15,9 @@ namespace Fung_API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<FuelTankInfoDTO> GetTankAsync(int id)
+        public async Task<ActionResult<FuelTankInfoDTO>> GetTankAsync(int id)
         {
-            return await tankService.GetTankAsync(id);
+            return Ok(await tankService.GetTankAsync(id));
         }
     }
 }
