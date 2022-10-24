@@ -1,4 +1,4 @@
-﻿using Fung.BLL.Exceptions;
+﻿
 using Fung.COMMON.Security;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -41,12 +41,6 @@ namespace Fung.BLL.JWT
         public int GetUserIdFromToken(string accessToken, string signingKey)
         {
             var claimsPrincipal = GetPrincipalFromToken(accessToken, signingKey);
-
-            if (claimsPrincipal == null)
-            {
-                throw new InvalidTokenException();
-            }
-
             return int.Parse(claimsPrincipal.Claims.First(c => c.Type == "userId").Value);
         }
 
