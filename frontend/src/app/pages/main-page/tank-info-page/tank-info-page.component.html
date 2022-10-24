@@ -35,7 +35,7 @@
                         <fa-icon [icon]="flaskIcon"></fa-icon>
                     </div>
                     <div class="tank-value" *ngIf="tank.levelTransactions">
-                        {{d}}
+                        {{d | density}}
                     </div>
                 </div>
                 <div class="value-icon-container" *ngIf="tank.levelTransactions">
