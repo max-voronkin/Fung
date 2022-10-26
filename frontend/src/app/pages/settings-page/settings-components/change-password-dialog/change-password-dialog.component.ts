@@ -2,7 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { ErrorNotificationService } from 'src/app/services/error-notification.service';
+import { UserService } from 'src/app/services/user.service';
 import { UserChangePasswordDTO } from 'src/models/DTO/User/user-changePasswordDTO';
 import { RegisterFormValidationConstants } from 'src/models/validation-settings/register-form-validation';
 
@@ -24,7 +26,7 @@ export class ChangePasswordDialogComponent implements OnInit {
 
   public changePasswordDTO: UserChangePasswordDTO = {} as UserChangePasswordDTO;
   
-  constructor(@Inject(MAT_DIALOG_DATA) public userId: number, private dialogRef: MatDialogRef<ChangePasswordDialogComponent>) {
+  constructor(private dialogRef: MatDialogRef<ChangePasswordDialogComponent>, private userService: UserService, private notificationService: ErrorNotificationService) {
     this.oldPassControl = new FormControl(this.changePasswordDTO.password, [
       Validators.required
     ]);
@@ -84,7 +86,14 @@ export class ChangePasswordDialogComponent implements OnInit {
     this.markAllControlsAsDirty();
     if (this.passForm.valid)
     {
-      alert('Ok');
+      this.changePasswordDTO.password = this.oldPassControl.value;
+      this.changePasswordDTO.newPassword =  this.newPassControl.value;
+      this.userService.updatePassword(this.changePasswordDTO)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(resp => {
+            this.notificationService.showInfoMessage('Your password has changed!');
+            this.dialogRef.close();
+        });
     }
   }
 
