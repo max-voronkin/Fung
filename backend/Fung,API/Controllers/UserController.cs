@@ -23,5 +23,12 @@ namespace Fung_API.Controllers
         {
             return Ok(await _userService.GetUserByIdAsync(this.GetUserIdFromToken()));
         }
+
+        [HttpPut("updatePassword")]
+        public async Task<IActionResult> ChangeUserPasswordAsync([FromBody] UserChangePasswordDTO changePasswordDTO)
+        {
+            await _userService.ChangeUserPasswordAsync(changePasswordDTO, this.GetUserIdFromToken());
+            return Ok();
+        }
     }
 }

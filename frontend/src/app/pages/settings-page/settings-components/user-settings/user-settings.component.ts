@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/models/Entities/user';
+import { ChangePasswordDialogComponent } from '../change-password-dialog/change-password-dialog.component';
 
 @Component({
   selector: 'user-settings',
@@ -9,17 +11,20 @@ import { User } from 'src/models/Entities/user';
 })
 export class UserSettingsComponent implements OnInit {
 
-  @Input() public user!: User | null;
+  @Input() public user!: User;
 
   caretRightIcon = faCaretRight;
 
-  constructor() { }
+  constructor(private changePassDialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
   onChangePasswordClick(): void {
-    alert('In development');
+    this.changePassDialog.open(ChangePasswordDialogComponent, {
+      data: this.user.id,
+      panelClass: 'mat-dialog'
+    });
   }
 
 }
