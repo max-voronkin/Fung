@@ -48,5 +48,19 @@ namespace Fung.BLL.Services
 
             return mapper.Map<UserDTO>(user);
         }
+
+        public async Task ChangeUserPasswordAsync(UserChangePasswordDTO dto, int userId)
+        {
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (!SecurityHelper.ValidatePassword(dto.Password, user!.Password, user.Salt))
+            {
+                throw new InvalidLoginCredentialsException();
+            }
+            var salt = SecurityHelper.GetRandomBytes();
+            user.Salt = Convert.ToBase64String(salt);
+            user.Password = SecurityHelper.HashPassword(dto.NewPassword, salt);
+
+            await context.SaveChangesAsync();    
+        }
     }
 }
