@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StationInfoDialogComponent } from './settings-components/station-info-dialog/station-info-dialog.component';
 import { HeightUnitsDialogComponent } from './settings-components/height-units-dialog/height-units-dialog.component';
 import { VolumeUnitsDialogComponent } from './settings-components/volume-units-dialog/volume-units-dialog.component';
+import { ChangePasswordDialogComponent } from './settings-components/change-password-dialog/change-password-dialog.component';
 
 
 
@@ -24,7 +25,8 @@ import { VolumeUnitsDialogComponent } from './settings-components/volume-units-d
     CreateStationDialogComponent,
     StationInfoDialogComponent,
     HeightUnitsDialogComponent,
-    VolumeUnitsDialogComponent
+    VolumeUnitsDialogComponent,
+    ChangePasswordDialogComponent
   ],
   imports: [
     CommonModule,
