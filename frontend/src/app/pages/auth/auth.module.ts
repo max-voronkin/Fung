@@ -5,6 +5,7 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ForgotPasswordDialogComponent } from './forgot-password-dialog/forgot-password-dialog.component';
 
 
 
@@ -12,7 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     RegisterPageComponent,
     AuthPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    ForgotPasswordDialogComponent
   ],
   imports: [
     CommonModule,
