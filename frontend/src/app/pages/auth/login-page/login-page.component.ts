@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEnvelope, faKey, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
@@ -7,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { EventService } from 'src/app/services/event.service';
 import { UserLoginDTO } from 'src/models/DTO/User/user-loginDTO';
 import { RegisterFormValidationConstants } from 'src/models/validation-settings/register-form-validation';
+import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
   selector: 'app-login-page',
@@ -28,7 +30,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   public passwordControl: FormControl;
 
   constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService,
-    private eventService: EventService) {
+    private eventService: EventService, private forgotPassDialog: MatDialog) {
     
     this.emailControl = new FormControl(this.loginUser.email, [
       Validators.required,
@@ -72,6 +74,12 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.eventService.userLoggedIn());
     }
+  }
+
+  onForgotPasswordClick() : void {
+    this.forgotPassDialog.open(ForgotPasswordDialogComponent, {
+      panelClass: 'mat-dialog'
+    });
   }
 
   get emailError() : string {
