@@ -130,5 +130,24 @@ namespace Fung.BLL.Services
             }
         }
 
+        public async Task<bool> CreateResetTokenAsync(string email)
+        {
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (user is null)
+            {
+                return false;
+            }
+
+            var resetToken = new Token()
+            {
+                UserId = user.Id,
+                Type = TokenType.Reset,
+                Value = jwtFactory.GenerateResetToken(user.Id, user.Email)
+            };
+            context.Tokens.Add(resetToken);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
     }
 }
