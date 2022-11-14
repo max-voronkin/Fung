@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserForgotPasswordDTO } from 'src/models/DTO/User/user-forgotPasswordDTO';
 import { RegisterFormValidationConstants } from 'src/models/validation-settings/register-form-validation';
 
@@ -15,12 +16,14 @@ export class ForgotPasswordDialogComponent implements OnInit {
 
   exitIcon = faXmark;
   unsubscribe$ = new Subject<void>();
+  isSuccess = false;
+  isFail = false;
 
   public forgotPasswordDTO: UserForgotPasswordDTO = {} as UserForgotPasswordDTO;
   public passForm: FormGroup = new FormGroup({});
   public emailControl: FormControl;
   
-  constructor(private dialogRef: MatDialogRef<ForgotPasswordDialogComponent>) { 
+  constructor(private dialogRef: MatDialogRef<ForgotPasswordDialogComponent>, private authService: AuthService) { 
     this.emailControl = new FormControl(this.forgotPasswordDTO.email, [
       Validators.required,
       Validators.email,
@@ -54,7 +57,18 @@ export class ForgotPasswordDialogComponent implements OnInit {
     this.emailControl.markAsDirty();
     if (this.passForm.valid)
     {
-      alert('Submitted')
+      let s = this.authService.requestResetPassword(this.emailControl.value)
+        .pipe(takeUntil(this.unsubscribe$))
+          .subscribe((resp) => {
+            if (resp.body === true)
+            {
+              this.isSuccess = true;
+            }
+            else
+            {
+              this.isFail = true;
+            }
+          })
     }
   }
 
