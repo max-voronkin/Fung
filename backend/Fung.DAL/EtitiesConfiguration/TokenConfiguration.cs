@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Fung.DAL.EtitiesConfiguration
 {
-    internal class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
+    internal class TokenConfiguration : IEntityTypeConfiguration<Token>
     {
-        public void Configure(EntityTypeBuilder<RefreshToken> builder)
+        public void Configure(EntityTypeBuilder<Token> builder)
         {
             builder.HasKey(t => t.Id);
 

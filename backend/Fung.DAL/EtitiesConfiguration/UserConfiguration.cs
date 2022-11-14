@@ -17,7 +17,7 @@ namespace Fung.DAL.EtitiesConfiguration
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany<RefreshToken>()
+            builder.HasMany<Token>()
                 .WithOne()
                 .HasForeignKey(s => s.UserId);
 
