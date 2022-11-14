@@ -43,5 +43,12 @@ namespace Fung_API.Controllers
         {
             await authService.RevokeTokenAsync(token);
         }
+
+        //api/auth/reset
+        [HttpGet("reset/{email}")]
+        public async Task<ActionResult<bool>> RequestResetPasswordAsync(string email)
+        {
+            return Ok(true);
+        }
     }
 }
