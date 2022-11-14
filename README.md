@@ -13,11 +13,12 @@ The system consists of three parts:
 - [Frontend](./frontend) — [Angular 14](https://angular.io/).
 
 ### DB Schema
+[dbdiagram.io](https://dbdiagram.io/d/62fe6a1cc2d9cf52fad335c9)
 
 ```mermaid
 erDiagram
 User ||--o{ Station : Id_UserId
-User ||--o{ RefreshToken : Id_UserId
+User ||--o{ Token : Id_UserId
 User ||--|| Settings : Id_UserId
 User {
   Id int PK
@@ -67,11 +68,12 @@ Remaining_Transactions {
   FuelTankId int FK
 }
 
-RefreshToken {
+Token {
   Id int PK
-  Token string
+  Value string
   Expires datetime
   UserId int FK
+  Type int
 }
 
 Settings {
