@@ -38,6 +38,22 @@ namespace Fung.BLL.JWT
             return jwtTokenHandler.WriteToken(token);
         }
 
+        public string GenerateResetToken(int id, string email)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.Key));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+{
+                 new Claim(JwtRegisteredClaimNames.Email, email),
+                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                 new Claim("userId", id.ToString())
+             };
+
+            var token = new JwtSecurityToken(null, null, claims,expires: DateTime.Now.AddMinutes(15), signingCredentials: credentials);
+            return jwtTokenHandler.WriteToken(token);
+        }
+
         public int GetUserIdFromToken(string accessToken, string signingKey)
         {
             var claimsPrincipal = GetPrincipalFromToken(accessToken, signingKey);
