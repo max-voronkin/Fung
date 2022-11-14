@@ -5,6 +5,7 @@ using Fung.BLL.Services.Abstract;
 using Fung.COMMON.DTO.Settings;
 using Fung.COMMON.DTO.User;
 using Fung.COMMON.Entities;
+using Fung.COMMON.Enums;
 using Fung.COMMON.Security;
 using Fung.DAL;
 using Microsoft.EntityFrameworkCore;
@@ -44,15 +45,16 @@ namespace Fung.BLL.Services
             authUser.User = mapper.Map<UserDTO>(user);
             authUser.Settings = mapper.Map<SettingsDTO>(settings);
 
-            var refreshToken = await context.RefreshTokens.FirstOrDefaultAsync(t => t.UserId == user.Id);
+            var refreshToken = await context.Tokens.FirstOrDefaultAsync(t => t.UserId == user.Id  && t.Type == TokenType.Refresh);
             if (refreshToken is not null)
             {
-                context.RefreshTokens.Remove(refreshToken);
+                context.Tokens.Remove(refreshToken);
             }
-            context.RefreshTokens.Add(new RefreshToken
+            context.Tokens.Add(new Token
             {
-                Token = authUser.RefreshToken,
-                UserId = user.Id
+                Value = authUser.RefreshToken,
+                UserId = user.Id,
+                Type = TokenType.Refresh
             });
             await context.SaveChangesAsync();
 
@@ -69,7 +71,7 @@ namespace Fung.BLL.Services
                 throw new NotFoundException(nameof(User), userId);
             }
 
-            var rToken = await context.RefreshTokens.FirstOrDefaultAsync(t => t.Token == refreshDTO.RefreshToken);
+            var rToken = await context.Tokens.FirstOrDefaultAsync(t => t.Value == refreshDTO.RefreshToken);
             if (rToken is null)
             {
                 throw new InvalidTokenException("Invalid refresh token");
@@ -83,11 +85,12 @@ namespace Fung.BLL.Services
             var accessToken = jwtFactory.GenerateAccessToken(user.Id, user.Email);
             var refreshToken = jwtFactory.GenerateRefreshToken();
 
-            context.RefreshTokens.Remove(rToken);
-            context.RefreshTokens.Add(new RefreshToken
+            context.Tokens.Remove(rToken);
+            context.Tokens.Add(new Token
             {
-                Token = refreshToken,
-                UserId = user.Id
+                Value = refreshToken,
+                UserId = user.Id,
+                Type = TokenType.Refresh
             });
             await context.SaveChangesAsync();
 
@@ -105,23 +108,24 @@ namespace Fung.BLL.Services
             userTokens.User = mapper.Map<UserDTO>(createdUser);
             userTokens.Settings = mapper.Map<SettingsDTO>(await context.Settings.FirstOrDefaultAsync(s => s.UserId == createdUser.Id));
 
-            var s = new RefreshToken()
+            var rToken = new Token()
             {
                 UserId = createdUser.Id,
-                Token = userTokens.RefreshToken
+                Value = userTokens.RefreshToken,
+                Type = TokenType.Refresh
             };
 
-            context.RefreshTokens.Add(s);
+            context.Tokens.Add(rToken);
             await context.SaveChangesAsync();
             return userTokens;
         }
 
         public async Task RevokeTokenAsync(UserRevokeDTO token)
         {
-            var tokenEntity = await context.RefreshTokens.FirstOrDefaultAsync(t => t.Token == token.RefreshToken);
+            var tokenEntity = await context.Tokens.FirstOrDefaultAsync(t => t.Value == token.RefreshToken);
             if (tokenEntity is not null)
             {
-                context.RefreshTokens.Remove(tokenEntity);
+                context.Tokens.Remove(tokenEntity);
                 await context.SaveChangesAsync();
             }
         }
