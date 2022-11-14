@@ -79,4 +79,8 @@ private _setTokens(tokens: AuthUserDTO) {
       })
     );
   }
+
+  public requestResetPassword(email: string) {
+    return this.httpService.getFullRequest<boolean>(`${this.routePrefix}/reset/${email}`);
+  }
 }
