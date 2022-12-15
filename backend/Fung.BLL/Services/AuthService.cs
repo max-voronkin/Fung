@@ -130,12 +130,12 @@ namespace Fung.BLL.Services
             }
         }
 
-        public async Task<bool> CreateResetTokenAsync(string email)
+        public async Task<Token> CreateResetTokenAsync(string email)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
             if (user is null)
             {
-                return false;
+                throw new InvalidLoginCredentialsException();
             }
 
             var resetToken = new Token()
@@ -146,7 +146,7 @@ namespace Fung.BLL.Services
             };
             context.Tokens.Add(resetToken);
             await context.SaveChangesAsync();
-            return true;
+            return resetToken;
         }
 
     }
