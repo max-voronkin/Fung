@@ -11,6 +11,7 @@ using System.Text;
 using SendGrid.Extensions.DependencyInjection;
 using Fung.BLL.Email;
 using Fung.BLL.Services.Email;
+using Mailjet.Client;
 
 namespace Fung_API.ConfigurationExtensions
 {
@@ -84,7 +85,7 @@ namespace Fung_API.ConfigurationExtensions
             services.AddScoped<LevelTransactionService>();
             services.AddScoped<InputService>();
             services.AddScoped<SettingsService>();
-            services.AddScoped<IEmailService, SendGirdEmailService>();
+            services.AddScoped<IEmailService, MailJetEmailService>();
 
             services.AddScoped<LastLevelTransactionHub>();
 
@@ -144,14 +145,33 @@ namespace Fung_API.ConfigurationExtensions
             var emailOptions = new EmailOptions();
             configuration.GetSection("EmailOptions").Bind(emailOptions);
             services.AddSingleton(emailOptions);
-            //services.Configure<EmailOptions>(configuration.GetSection(nameof(EmailOptions)));
 
-            var options = new SendGridOptions();
-            configuration.GetSection(nameof(SendGridOptions)).Bind(options);
-            services.AddSendGrid(opt =>
+            #region SendGrid
+
+            //var options = new SendGridOptions();
+            //configuration.GetSection(nameof(SendGridOptions)).Bind(options);
+            //services.AddSendGrid(opt =>
+            //{
+            //    opt.ApiKey = options.ApiKey;
+            //});
+
+            #endregion
+
+            #region MailJet 
+
+            var mailJetOptions = new MailJetOptions();
+            var section = configuration.GetSection("MailJetOptions");
+            section.Bind(mailJetOptions);
+            services.AddSingleton(mailJetOptions);
+
+            services.AddHttpClient<IMailjetClient, MailjetClient>(client =>
             {
-                opt.ApiKey = options.ApiKey;
+                client.SetDefaultSettings();
+                client.UseBasicAuthentication(mailJetOptions.ApiKey, mailJetOptions.ApiSecret);
             });
+            services.Configure<MailJetOptions>(section);
+
+            #endregion
         }
     }
 }
