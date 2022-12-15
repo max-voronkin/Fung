@@ -36,6 +36,9 @@ namespace Fung_API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //Email services
+            builder.Services.ConfigureEmailServices(builder.Configuration);
+
             var app = builder.Build();
 
             //DB

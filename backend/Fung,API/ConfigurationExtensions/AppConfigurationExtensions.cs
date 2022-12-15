@@ -1,12 +1,16 @@
 ﻿using Fung.BLL.Hubs;
 using Fung.BLL.JWT;
 using Fung.BLL.MappingProfiles;
+using Fung.BLL.Options;
 using Fung.BLL.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using SendGrid.Extensions.DependencyInjection;
+using Fung.BLL.Email;
+using Fung.BLL.Services.Email;
 
 namespace Fung_API.ConfigurationExtensions
 {
@@ -80,6 +84,7 @@ namespace Fung_API.ConfigurationExtensions
             services.AddScoped<LevelTransactionService>();
             services.AddScoped<InputService>();
             services.AddScoped<SettingsService>();
+            services.AddScoped<IEmailService, SendGirdEmailService>();
 
             services.AddScoped<LastLevelTransactionHub>();
 
@@ -131,6 +136,21 @@ namespace Fung_API.ConfigurationExtensions
                 });
 
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fung.API", Version = "v1" });
+            });
+        }
+
+        public static void ConfigureEmailServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            var emailOptions = new EmailOptions();
+            configuration.GetSection("EmailOptions").Bind(emailOptions);
+            services.AddSingleton(emailOptions);
+            //services.Configure<EmailOptions>(configuration.GetSection(nameof(EmailOptions)));
+
+            var options = new SendGridOptions();
+            configuration.GetSection(nameof(SendGridOptions)).Bind(options);
+            services.AddSendGrid(opt =>
+            {
+                opt.ApiKey = options.ApiKey;
             });
         }
     }
