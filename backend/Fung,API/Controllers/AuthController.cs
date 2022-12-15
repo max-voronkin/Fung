@@ -1,4 +1,7 @@
-﻿using Fung.BLL.Services;
+﻿using Fung.BLL.Email;
+using Fung.BLL.Exceptions;
+using Fung.BLL.Services;
+using Fung.BLL.Services.Email;
 using Fung.COMMON.DTO.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +14,11 @@ namespace Fung_API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AuthService authService;
-        public AuthController(AuthService authService)
+        private readonly IEmailService emailService;
+        public AuthController(AuthService authService, IEmailService emailService)
         {
             this.authService = authService;
+            this.emailService = emailService;
         }
 
         // api/auth/login
@@ -48,6 +53,15 @@ namespace Fung_API.Controllers
         [HttpGet("reset/{email}")]
         public async Task<ActionResult<bool>> RequestResetPasswordAsync(string email)
         {
+            try
+            {
+                var token = await authService.CreateResetTokenAsync(email);
+                await emailService.SendEmailAsync(email, token);
+            }
+            catch (InvalidLoginCredentialsException)
+            {
+                return Ok(false);
+            }
             return Ok(true);
         }
     }
