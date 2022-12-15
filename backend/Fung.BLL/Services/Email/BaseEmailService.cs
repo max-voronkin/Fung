@@ -41,7 +41,7 @@ namespace Fung.BLL.Email
         {
             return token.Type switch
             {
-                TokenType.Reset => options.PasswordResetEndpoint,
+                TokenType.Reset => emailOptions.PasswordResetEndpoint,
                 _ => ""
             };
         }
@@ -55,7 +55,7 @@ namespace Fung.BLL.Email
                 case TokenType.Refresh:
                     break;
                 case TokenType.Reset:
-                    string link = $"{options.Host}{GetEndpoint(token)}?token={token.Value}";
+                    string link = $"{emailOptions.Host}{GetEndpoint(token)}?token={token.Value}";
                     args.Add("link", link);
                     break;
                 default:
